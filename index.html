@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A股每日复盘 · Daily Market Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --border: #e6e8ec;
+    --text: #1a1f2c;
+    --text-dim: #5c6472;
+    --text-mute: #8a91a0;
+    --up: #c8202b;
+    --up-soft: #fdecec;
+    --down: #1a8754;
+    --down-soft: #e8f4ee;
+    --accent: #1f3a5f;
+    --accent-hover: #16294a;
+    --shadow: 0 1px 2px rgba(20, 27, 45, 0.04), 0 2px 8px rgba(20, 27, 45, 0.04);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+      "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: var(--accent);
+    color: #fff;
+    border-bottom: 3px solid var(--up);
+  }
+  .topbar-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .brand .logo-mark {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: var(--up);
+    transform: translateY(3px);
+    margin-right: 2px;
+  }
+  .brand .zh { font-size: 18px; }
+  .brand .en { font-size: 12px; color: #b7c2d4; letter-spacing: 1px; text-transform: uppercase; }
+
+  .ticker {
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: #b7c2d4;
+  }
+  .ticker .up { color: #ff8a8a; }
+  .ticker .down { color: #7fd3a8; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 24px 20px;
+  }
+  .hero h1 {
+    font-size: 26px;
+    margin: 0 0 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .hero p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 720px;
+  }
+
+  /* ---------- Stat strip ---------- */
+  .stats {
+    max-width: 1120px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.5px;
+  }
+  .stat .value {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .value.up { color: var(--up); }
+  .stat .value.down { color: var(--down); }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar {
+    max-width: 1120px;
+    margin: 28px auto 12px;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .toolbar .title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-left: 3px solid var(--up);
+    padding-left: 10px;
+  }
+  .toolbar .spacer { flex: 1; }
+  .toolbar select,
+  .toolbar input {
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--panel);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+  }
+  .toolbar input { width: 200px; }
+  .toolbar select:focus,
+  .toolbar input:focus { border-color: var(--accent); }
+
+  /* ---------- Content ---------- */
+  .content {
+    max-width: 1120px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+  }
+  .year-group { margin-top: 18px; }
+  .year-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .year-header .year {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .year-header .count {
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+
+  .month-group { margin-bottom: 22px; }
+  .month-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin: 6px 0 8px;
+    letter-spacing: 1px;
+  }
+  .month-label::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 12px;
+    background: var(--up);
+    margin-right: 8px;
+    transform: translateY(1px);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+    transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+    display: block;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-1px);
+    border-color: var(--up);
+    box-shadow: 0 2px 4px rgba(200,32,43,0.06), 0 6px 16px rgba(20,27,45,0.06);
+  }
+  .card .date {
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .card .weekday {
+    font-size: 11px;
+    color: var(--text-mute);
+    margin-left: 6px;
+  }
+  .card .title {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .card .arrow {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    color: var(--text-mute);
+    font-size: 12px;
+  }
+  .card:hover .arrow { color: var(--up); }
+
+  .empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 14px;
+    background: var(--panel);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+  }
+  .empty code {
+    background: #eef0f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    padding: 18px 24px;
+    color: var(--text-mute);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer .disclaimer { max-width: 900px; margin: 0 auto; }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .toolbar input { width: 140px; }
+    .hero h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="logo-mark"></span>
+      <span class="zh">A股每日复盘</span>
+      <span class="en">A-Share Daily Review</span>
+    </div>
+    <div class="ticker" id="ticker">
+      SH <span class="up">▲</span> · SZ <span class="up">▲</span> · CYB <span class="down">▼</span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>市场复盘 · 数据留痕 · 逐日更新</h1>
+  <p>本站每日发布 A 股市场复盘报告，按年份与月份归档。点击卡片进入当日完整复盘页面。仅供研究参考，不构成投资建议。</p>
+</section>
+
+<section class="stats" id="stats">
+  <div class="stat"><div class="label">最新复盘</div><div class="value" id="stat-latest">—</div></div>
+  <div class="stat"><div class="label">累计报告</div><div class="value" id="stat-total">—</div></div>
+  <div class="stat"><div class="label">覆盖年份</div><div class="value" id="stat-years">—</div></div>
+  <div class="stat"><div class="label">本月更新</div><div class="value" id="stat-month">—</div></div>
+</section>
+
+<section class="toolbar">
+  <div class="title">复盘归档</div>
+  <div class="spacer"></div>
+  <select id="filter-year"><option value="">全部年份</option></select>
+  <select id="filter-month">
+    <option value="">全部月份</option>
+    <option value="01">1月</option><option value="02">2月</option><option value="03">3月</option>
+    <option value="04">4月</option><option value="05">5月</option><option value="06">6月</option>
+    <option value="07">7月</option><option value="08">8月</option><option value="09">9月</option>
+    <option value="10">10月</option><option value="11">11月</option><option value="12">12月</option>
+  </select>
+  <input id="filter-search" type="search" placeholder="搜索日期，如 2026-08" />
+</section>
+
+<main class="content" id="content">
+  <div class="empty" id="empty-state">
+    正在加载复盘目录…
+  </div>
+</main>
+
+<footer>
+  <div class="disclaimer">
+    本站内容仅为市场数据整理与个人复盘记录，不构成任何投资建议。投资有风险，入市需谨慎。<br/>
+    © <span id="year"></span> A股每日复盘 · Powered by Gitee Pages
+  </div>
+</footer>
+
+<script>
+/**
+ * 数据来源：reports.json
+ * 结构示例：
+ * {
+ *   "reports": [
+ *     { "date": "2026-08-19", "title": "沪指小幅收涨，两市成交…", "path": "reports/2026/08/2026-08-19.html" },
+ *     ...
+ *   ]
+ * }
+ *
+ * 每日新增复盘时，只需把 HTML 放入 reports/YYYY/MM/ 目录，并在 reports.json 中追加一条记录即可。
+ */
+
+const WEEKDAYS = ['周日','周一','周二','周三','周四','周五','周六'];
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const state = {
+  all: [],
+  year: '',
+  month: '',
+  q: ''
+};
+
+async function loadManifest() {
+  try {
+    const res = await fetch('reports.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('manifest not found');
+    const data = await res.json();
+    return Array.isArray(data.reports) ? data.reports : [];
+  } catch (e) {
+    return null;
+  }
+}
+
+function parseDate(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+  if (!m) return null;
+  return { y: m[1], m: m[2], d: m[3], iso: s };
+}
+
+function renderStats(list) {
+  if (!list.length) {
+    document.getElementById('stat-latest').textContent = '—';
+    document.getElementById('stat-total').textContent = '0';
+    document.getElementById('stat-years').textContent = '0';
+    document.getElementById('stat-month').textContent = '0';
+    return;
+  }
+  const sorted = [...list].sort((a,b) => b.date.localeCompare(a.date));
+  const latest = sorted[0];
+  const years = new Set(list.map(r => r.date.slice(0,4)));
+  const now = new Date();
+  const ym = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const thisMonth = list.filter(r => r.date.startsWith(ym)).length;
+
+  const el = document.getElementById('stat-latest');
+  el.textContent = latest.date;
+  el.classList.add('up');
+  document.getElementById('stat-total').textContent = list.length;
+  document.getElementById('stat-years').textContent = years.size;
+  document.getElementById('stat-month').textContent = thisMonth;
+}
+
+function populateYearFilter(list) {
+  const sel = document.getElementById('filter-year');
+  const years = [...new Set(list.map(r => r.date.slice(0,4)))].sort((a,b) => b.localeCompare(a));
+  for (const y of years) {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y + '年';
+    sel.appendChild(opt);
+  }
+}
+
+function applyFilters() {
+  return state.all.filter(r => {
+    if (state.year && !r.date.startsWith(state.year)) return false;
+    if (state.month && r.date.slice(5,7) !== state.month) return false;
+    if (state.q) {
+      const q = state.q.toLowerCase();
+      if (!r.date.toLowerCase().includes(q) &&
+          !(r.title || '').toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function renderList() {
+  const container = document.getElementById('content');
+  const list = applyFilters();
+
+  if (!list.length) {
+    container.innerHTML = `<div class="empty">
+      未找到匹配的复盘记录。<br/>
+      如需发布新的复盘页面，请将 HTML 放入 <code>reports/YYYY/MM/</code>，并在 <code>reports.json</code> 中追加索引。
+    </div>`;
+    return;
+  }
+
+  const sorted = [...list].sort((a,b) => b.date.localeCompare(a.date));
+  const byYear = new Map();
+  for (const r of sorted) {
+    const y = r.date.slice(0,4), m = r.date.slice(5,7);
+    if (!byYear.has(y)) byYear.set(y, new Map());
+    const ym = byYear.get(y);
+    if (!ym.has(m)) ym.set(m, []);
+    ym.get(m).push(r);
+  }
+
+  let html = '';
+  for (const [y, months] of byYear) {
+    const total = [...months.values()].reduce((s,arr) => s + arr.length, 0);
+    html += `<div class="year-group">
+      <div class="year-header">
+        <span class="year">${y}</span>
+        <span class="count">· ${total} 份复盘</span>
+      </div>`;
+    const monthKeys = [...months.keys()].sort((a,b) => b.localeCompare(a));
+    for (const m of monthKeys) {
+      const arr = months.get(m);
+      html += `<div class="month-group">
+        <div class="month-label">${parseInt(m,10)}月 · ${arr.length} 条</div>
+        <div class="cards">`;
+      for (const r of arr) {
+        const wd = weekdayOf(r.date);
+        const safeTitle = escapeHtml(r.title || '每日复盘');
+        html += `<a class="card" href="${encodeURI(r.path)}">
+          <span class="arrow">›</span>
+          <div><span class="date">${r.date}</span><span class="weekday">${wd}</span></div>
+          <div class="title">${safeTitle}</div>
+        </a>`;
+      }
+      html += `</div></div>`;
+    }
+    html += `</div>`;
+  }
+  container.innerHTML = html;
+}
+
+function weekdayOf(iso) {
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d.getTime())) return '';
+  return WEEKDAYS[d.getDay()];
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function bindFilters() {
+  document.getElementById('filter-year').addEventListener('change', e => {
+    state.year = e.target.value; renderList();
+  });
+  document.getElementById('filter-month').addEventListener('change', e => {
+    state.month = e.target.value; renderList();
+  });
+  document.getElementById('filter-search').addEventListener('input', e => {
+    state.q = e.target.value.trim(); renderList();
+  });
+}
+
+(async function init() {
+  const manifest = await loadManifest();
+  if (manifest === null) {
+    document.getElementById('content').innerHTML = `<div class="empty">
+      未找到 <code>reports.json</code>。<br/><br/>
+      请在仓库根目录创建 <code>reports.json</code>，格式示例：<br/>
+      <pre style="text-align:left;display:inline-block;margin-top:10px;background:#eef0f4;padding:10px;border-radius:4px;font-size:12px;">{
+  "reports": [
+    { "date": "2026-08-19",
+      "title": "沪指小幅收涨…",
+      "path": "reports/2026/08/2026-08-19.html" }
+  ]
+}</pre>
+    </div>`;
+    renderStats([]);
+    return;
+  }
+  state.all = manifest.filter(r => parseDate(r.date) && r.path);
+  populateYearFilter(state.all);
+  renderStats(state.all);
+  bindFilters();
+  renderList();
+})();
+</script>
+</body>
+</html>
