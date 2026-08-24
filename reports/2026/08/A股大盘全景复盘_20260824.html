@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026年8月24日</title>
+<style>
+:root{--red:#e63946;--red-light:#fce4e6;--green:#2a9d4f;--green-light:#e3f5e9;--bg:#f5f6f8;--card-bg:#fff;--text-primary:#1a1a2e;--text-secondary:#5a5a72;--text-muted:#8e8ea0;--border:#e8e8ef;--blue:#2563eb;--blue-light:#eff4ff;--orange:#f59e0b;--orange-light:#fef3e2;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-hover:0 4px 20px rgba(0,0,0,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.navbar .logo{font-size:17px;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:8px}
+.navbar .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{text-decoration:none;color:var(--text-secondary);font-size:13px;padding:6px 12px;border-radius:6px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{background:var(--bg);color:var(--text-primary)}
+.mode-toggle{display:flex;background:var(--bg);border-radius:8px;padding:3px;flex-shrink:0}
+.mode-toggle button{border:none;background:transparent;padding:5px 14px;font-size:12px;cursor:pointer;border-radius:6px;color:var(--text-secondary);transition:all .2s}
+.mode-toggle button.active{background:#fff;color:var(--text-primary);box-shadow:0 1px 4px rgba(0,0,0,.1);font-weight:600}
+.container{max-width:1100px;margin:0 auto;padding:76px 20px 40px}
+.header{text-align:center;margin-bottom:28px}
+.header h1{font-size:28px;font-weight:800;margin-bottom:6px;background:linear-gradient(135deg,#1a1a2e,#4a4a6a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .meta{font-size:13px;color:var(--text-muted);display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.data-badge{display:inline-block;background:var(--green-light);color:var(--green);font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600}
+.card{background:var(--card-bg);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:box-shadow .3s}
+.card:hover{box-shadow:var(--shadow-hover)}
+.card-title{font-size:18px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--bg)}
+.card-title .icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.card-title .icon.idx{background:linear-gradient(135deg,#667eea,#764ba2)}
+.card-title .icon.sent{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.card-title .icon.sec{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.card-title .icon.nb{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+.card-title .icon.main{background:linear-gradient(135deg,#10b981,#059669)}
+.card-title .icon.stage{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.card-title .icon.sum{background:linear-gradient(135deg,#ef4444,#f97316)}
+.highlight-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:18px}
+.highlight-box{background:var(--bg);border-radius:10px;padding:14px;text-align:center}
+.highlight-box .label{font-size:12px;color:var(--text-muted);margin-bottom:4px}
+.highlight-box .value{font-size:24px;font-weight:800}
+.highlight-box .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+.index-table{width:100%;border-collapse:collapse;font-size:14px}
+.index-table th{background:var(--bg);padding:10px 12px;text-align:center;font-weight:600;color:var(--text-secondary);font-size:12px;border-bottom:2px solid var(--border)}
+.index-table td{padding:12px;text-align:center;border-bottom:1px solid var(--border)}
+.index-table tr:last-child td{border-bottom:none}
+.index-table .name{font-weight:600;text-align:left;padding-left:16px}
+.index-table .price{font-weight:700;font-family:"SF Mono","Monaco",monospace}
+.chg-red{color:var(--red);font-weight:700}
+.chg-green{color:var(--green);font-weight:700}
+.rhythm{background:var(--bg);border-radius:10px;padding:16px;margin-top:16px;font-size:13px;color:var(--text-secondary);line-height:1.8}
+.rhythm strong{color:var(--text-primary)}
+.thermometer{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.temp-gauge{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.temp-gauge.cold{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.temp-gauge .label-small{font-size:11px;font-weight:400;opacity:.9;margin-top:2px}
+.temp-info{flex:1;min-width:200px}
+.temp-info .rating{font-size:22px;font-weight:800;margin-bottom:4px;color:var(--blue)}
+.temp-info .desc{font-size:13px;color:var(--text-secondary);line-height:1.7}
+.dist-bar{display:flex;height:32px;border-radius:8px;overflow:hidden;margin:12px 0;font-size:12px;font-weight:600}
+.dist-bar .up{background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center}
+.dist-bar .flat{background:#d1d5db;color:#fff;display:flex;align-items:center;justify-content:center}
+.dist-bar .down{background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center}
+.dist-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:16px}
+.dist-labels span{display:flex;align-items:center;gap:4px}
+.dist-labels .dot{width:8px;height:8px;border-radius:50%}
+.limit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px}
+.limit-item{background:var(--bg);border-radius:8px;padding:12px;text-align:center}
+.limit-item .num{font-size:22px;font-weight:800}
+.limit-item .num.red{color:var(--red)}
+.limit-item .num.green{color:var(--green)}
+.limit-item .num.orange{color:var(--orange)}
+.limit-item .txt{font-size:11px;color:var(--text-muted);margin-top:2px}
+.ladder{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ladder-step{background:var(--red-light);border:1px solid #f5c2c7;border-radius:8px;padding:8px 14px;text-align:center;min-width:70px}
+.ladder-step .height{font-size:16px;font-weight:800;color:var(--red)}
+.ladder-step .count{font-size:11px;color:var(--text-secondary)}
+.ladder-step.empty{background:var(--bg);border-color:var(--border)}
+.ladder-step.empty .height{color:var(--text-muted)}
+.sector-list{margin-bottom:16px}
+.sector-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.sector-item:last-child{border-bottom:none}
+.sector-name{width:110px;flex-shrink:0;font-weight:600}
+.sector-bar-wrap{flex:1;height:22px;background:var(--bg);border-radius:4px;position:relative;overflow:hidden}
+.sector-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;font-weight:600;transition:width .6s ease}
+.sector-bar.red{background:linear-gradient(90deg,#f87171,var(--red))}
+.sector-bar.green{background:linear-gradient(90deg,#4ade80,var(--green))}
+.sector-pct{width:55px;text-align:right;font-weight:700;font-family:monospace;flex-shrink:0}
+.sector-fund{width:80px;text-align:right;font-size:11px;color:var(--text-muted);flex-shrink:0}
+.sector-leader{width:90px;text-align:right;font-size:11px;color:var(--text-secondary);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sector-section-title{font-size:14px;font-weight:700;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+.sector-section-title .tag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
+.tag.red{background:var(--red-light);color:var(--red)}
+.tag.green{background:var(--green-light);color:var(--green)}
+.rotation-summary{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 16px;margin-top:14px;font-size:13px;color:var(--text-secondary);line-height:1.8}
+.rotation-summary strong{color:var(--blue)}
+.nb-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px}
+.nb-card{border-radius:10px;padding:16px;text-align:center}
+.nb-card.total{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff}
+.nb-card.hgt{background:var(--green-light)}
+.nb-card.sgt{background:var(--green-light)}
+.nb-card .nb-label{font-size:12px;opacity:.8;margin-bottom:4px}
+.nb-card .nb-value{font-size:26px;font-weight:800}
+.nb-card .nb-unit{font-size:12px;opacity:.7}
+.flow-timeline{display:flex;align-items:stretch;gap:0;margin:16px 0;border-radius:10px;overflow:hidden}
+.flow-phase{flex:1;padding:14px 10px;text-align:center;font-size:12px}
+.flow-phase .phase-name{font-weight:700;margin-bottom:4px}
+.flow-phase .phase-val{font-size:15px;font-weight:800}
+.flow-phase.morning{background:#fef3c7;color:#92400e}
+.flow-phase.noon{background:#dbeafe;color:#1e40af}
+.flow-phase.afternoon{background:#fce7f3;color:#9d174d}
+.theme-block{margin-bottom:16px}
+.theme-block .theme-title{font-size:15px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.theme-block .theme-title .badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.badge.hot{background:var(--red-light);color:var(--red)}
+.badge.warm{background:var(--orange-light);color:var(--orange)}
+.badge.cold{background:#e0e7ff;color:#4f46e5}
+.badge.risk{background:#fee2e2;color:#dc2626}
+.theme-block .theme-content{font-size:13px;color:var(--text-secondary);line-height:1.8;padding-left:12px;border-left:2px solid var(--border)}
+.style-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:4px 6px 4px 0}
+.style-tag.value{background:#dbeafe;color:#1e40af}
+.style-tag.growth{background:#fce7f3;color:#9d174d}
+.style-tag.theme{background:var(--orange-light);color:var(--orange)}
+.style-tag.weight{background:#e0e7ff;color:#4f46e5}
+.stage-banner{background:linear-gradient(135deg,#1e40af,#3b82f6);border-radius:12px;padding:20px;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.stage-banner .stage-label{font-size:13px;opacity:.85}
+.stage-banner .stage-name{font-size:24px;font-weight:800}
+.stage-banner .stage-desc{font-size:13px;opacity:.9;flex:1;min-width:200px}
+.factor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:14px 0}
+.factor-card{background:var(--bg);border-radius:8px;padding:14px}
+.factor-card .factor-title{font-size:13px;font-weight:700;margin-bottom:6px}
+.factor-card .factor-title.drive{color:var(--green)}
+.factor-card .factor-title.conflict{color:var(--red)}
+.factor-card .factor-text{font-size:12px;color:var(--text-secondary);line-height:1.7}
+.outlook{background:var(--bg);border-radius:10px;padding:16px;margin-top:14px}
+.outlook h4{font-size:14px;margin-bottom:8px}
+.outlook ul{padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:2}
+.conclusion{background:linear-gradient(135deg,#1a1a2e,#2d2d4a);border-radius:12px;padding:24px;color:#fff;text-align:center;margin-bottom:16px}
+.conclusion .conc-text{font-size:17px;font-weight:600;line-height:1.8}
+.disclaimer{background:var(--bg);border-radius:10px;padding:16px;font-size:12px;color:var(--text-muted);line-height:1.8;border:1px dashed var(--border)}
+.disclaimer strong{color:var(--text-secondary)}
+body.compact .detail-only{display:none!important}
+body.compact .card{padding:16px;margin-bottom:12px}
+body.compact .card-title{font-size:15px;margin-bottom:10px;padding-bottom:8px}
+@media(max-width:768px){.navbar{padding:0 12px}.nav-links{display:none}.container{padding:68px 12px 30px}.header h1{font-size:22px}.card{padding:16px}.highlight-row{grid-template-columns:repeat(2,1fr)}.highlight-box .value{font-size:20px}.index-table{font-size:12px}.index-table th,.index-table td{padding:8px 6px}.sector-name{width:80px;font-size:12px}.sector-leader{display:none}.sector-fund{width:60px;font-size:10px}.flow-timeline{flex-direction:column}.temp-gauge{width:90px;height:90px;font-size:16px}.mode-toggle button{padding:4px 10px;font-size:11px}}
+html{scroll-behavior:smooth}
+.footer{text-align:center;padding:20px;font-size:11px;color:var(--text-muted)}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="logo"><span class="dot"></span>A股全景复盘</div>
+<div class="nav-links">
+<a href="#index">指数概览</a><a href="#sentiment">情绪温度</a><a href="#sector">板块轮动</a><a href="#northbound">北向资金</a><a href="#theme">主线研判</a><a href="#stage">行情阶段</a><a href="#summary">总结</a>
+</div>
+<div class="mode-toggle">
+<button class="active" onclick="setMode('detail')">详细</button>
+<button onclick="setMode('compact')">精简</button>
+</div>
+</nav>
+<div class="container">
+<div class="header">
+<h1>A股大盘全景复盘</h1>
+<div class="meta">
+<span>📅 2026年8月24日 星期一</span>
+<span><span class="data-badge">收盘数据 · 已收盘</span></span>
+<span>📊 数据来源：同花顺/老虎证券/财联社</span>
+</div>
+</div>
+
+<div class="card" id="index">
+<div class="card-title"><span class="icon idx">指</span>大盘指数概览</div>
+<div class="highlight-row">
+<div class="highlight-box"><div class="label">两市全天成交额</div><div class="value" style="color:var(--text-primary)">2.01<span style="font-size:14px">万亿</span></div><div class="sub">较上周五放量1282亿 (+6.8%)</div></div>
+<div class="highlight-box"><div class="label">上周五成交</div><div class="value" style="color:var(--text-primary)">1.88<span style="font-size:14px">万亿</span></div><div class="sub">缩量整理</div></div>
+<div class="highlight-box"><div class="label">上涨/下跌家数</div><div class="value" style="color:var(--red)">1460<span style="font-size:14px">/</span><span style="color:var(--green);font-size:18px">3965</span></div><div class="sub">跌多涨少，普跌格局</div></div>
+<div class="highlight-box"><div class="label">涨停/跌停</div><div class="value" style="color:var(--red)">48<span style="font-size:14px">/</span><span style="color:var(--green);font-size:18px">11</span></div><div class="sub">赚钱效应低迷</div></div>
+</div>
+<table class="index-table">
+<thead><tr><th>指数名称</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr></thead>
+<tbody>
+<tr><td class="name">上证指数</td><td class="price">3,882.01</td><td class="chg-green">-0.59%</td><td>3,902.70</td><td>3,910.24</td><td>3,855.35</td><td>9,520.39亿</td></tr>
+<tr><td class="name">深证成指</td><td class="price">13,794.29</td><td class="chg-green">-2.13%</td><td>14,118.02</td><td>14,118.15</td><td>13,616.75</td><td>10,554.17亿</td></tr>
+<tr><td class="name">创业板指</td><td class="price">3,431.89</td><td class="chg-green">-3.21%</td><td>3,550.25</td><td>3,551.51</td><td>3,376.64</td><td>5,085.83亿</td></tr>
+<tr><td class="name">科创50</td><td class="price">1,602.34</td><td class="chg-green">-3.10%</td><td>1,651.88</td><td>1,651.96</td><td>1,575.28</td><td>938.33亿</td></tr>
+<tr><td class="name">沪深300</td><td class="price">4,563.13</td><td class="chg-green">-1.21%</td><td>4,620.95</td><td>4,621.39</td><td>4,527.49</td><td>5,904.26亿</td></tr>
+</tbody>
+</table>
+<div class="rhythm detail-only">
+<strong>全天运行节奏：</strong>今日三大指数开盘涨跌不一，沪指微低开0.06%，深成指、创业板指分别高开0.17%、0.13%。开盘后指数短暂冲高即遇阻回落，<strong>创业板指领跌</strong>，医药生物（CRO/创新药）和算力硬件（CPO/光模块）两大方向集体下挫，拖累创业板指盘中一度跌超4%，最低触及3376点。科创50同步走弱，最低1575点。沪指相对抗跌，银行、煤炭等权重板块护盘，最低下探3855点。午后指数维持低位震荡，尾盘略有企稳但未能收复失地。全天呈现<strong>"高开冲高—单边下行—低位震荡"</strong>的放量下跌格局，成交较上周五放量6.8%，显示抛压较重，市场信心不足。
+</div>
+</div>
+
+<div class="card" id="sentiment">
+<div class="card-title"><span class="icon sent">情</span>市场情绪温度计</div>
+<div class="thermometer">
+<div class="temp-gauge cold">偏冷<span class="label-small">赚钱效应</span></div>
+<div class="temp-info">
+<div class="rating">偏冷 / 放量调整</div>
+<div class="desc">今日全市场仅1460只个股上涨，下跌家数高达3965只，下跌占比约73%，涨停仅48家，跌停11家。创业板指重挫3.21%，科创50跌3.10%，科技成长方向集体杀跌。虽然黄金、煤炭等防御板块逆势走强，但难以扭转整体弱势格局。放量下跌显示资金出逃意愿较强，市场情绪处于"偏冷"阶段，短线赚钱效应低迷。</div>
+</div>
+</div>
+<div class="detail-only">
+<div style="font-size:13px;font-weight:600;margin-bottom:6px;">涨跌分布</div>
+<div class="dist-bar">
+<div class="up" style="width:27%">1460家</div>
+<div class="flat" style="width:1%"></div>
+<div class="down" style="width:72%">3965家</div>
+</div>
+<div class="dist-labels">
+<span><span class="dot" style="background:var(--red)"></span>上涨 1460家 (27%)</span>
+<span><span class="dot" style="background:#d1d5db"></span>平盘 约75家 (1%)</span>
+<span><span class="dot" style="background:var(--green)"></span>下跌 3965家 (72%)</span>
+</div>
+</div>
+<div class="limit-grid">
+<div class="limit-item"><div class="num red">48</div><div class="txt">自然涨停</div></div>
+<div class="limit-item"><div class="num green">11</div><div class="txt">跌停家数</div></div>
+<div class="limit-item"><div class="num orange">~22</div><div class="txt">炸板家数</div></div>
+<div class="limit-item"><div class="num" style="color:var(--text-primary)">~31%</div><div class="txt">炸板率</div></div>
+</div>
+<div class="detail-only">
+<div style="font-size:13px;font-weight:600;margin-bottom:6px;">连板梯队</div>
+<div class="ladder">
+<div class="ladder-step"><div class="height">9板</div><div class="count">1家</div></div>
+<div class="ladder-step"><div class="height">6板</div><div class="count">2家</div></div>
+<div class="ladder-step"><div class="height">5板</div><div class="count">1家</div></div>
+<div class="ladder-step"><div class="height">4板</div><div class="count">1家</div></div>
+<div class="ladder-step"><div class="height">3板</div><div class="count">2家</div></div>
+<div class="ladder-step"><div class="height">2板</div><div class="count">5-7家</div></div>
+</div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:8px;">最高连板高度：风范股份16天9板（特高压/电网设备），梯队分散且多为趋势连板形态。澳洋健康9天6板、神奇制药8天6板、哈森股份6天5板，汉森制药4连板，深中华A、中关村3连板。炸板率约31%，较上周明显上升，短线情绪偏弱，高位股分歧加大。</div>
+</div>
+</div>
+
+<div class="card" id="sector">
+<div class="card-title"><span class="icon sec">板</span>板块轮动图谱</div>
+<div class="sector-section-title"><span class="tag red">涨幅TOP</span>领涨板块</div>
+<div class="sector-list">
+<div class="sector-item"><div class="sector-name">煤炭采选</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:85%">+4.2%</div></div><div class="sector-pct chg-red">+4.2%</div><div class="sector-fund">+35亿</div><div class="sector-leader">上海能源</div></div>
+<div class="sector-item"><div class="sector-name">贵金属</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:78%">+3.8%</div></div><div class="sector-pct chg-red">+3.8%</div><div class="sector-fund">+28亿</div><div class="sector-leader">深中华A</div></div>
+<div class="sector-item"><div class="sector-name">黄金概念</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:72%">+3.5%</div></div><div class="sector-pct chg-red">+3.5%</div><div class="sector-fund">+25亿</div><div class="sector-leader">四川黄金</div></div>
+<div class="sector-item"><div class="sector-name">航运港口</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:55%">+2.6%</div></div><div class="sector-pct chg-red">+2.6%</div><div class="sector-fund">+12亿</div><div class="sector-leader">中谷物流</div></div>
+<div class="sector-item"><div class="sector-name">农业种业</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:48%">+2.3%</div></div><div class="sector-pct chg-red">+2.3%</div><div class="sector-fund">+10亿</div><div class="sector-leader">登海种业</div></div>
+<div class="sector-item detail-only"><div class="sector-name">银行</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:35%">+1.5%</div></div><div class="sector-pct chg-red">+1.5%</div><div class="sector-fund">+18亿</div><div class="sector-leader">工商银行</div></div>
+<div class="sector-item detail-only"><div class="sector-name">锂电池</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:28%">+1.2%</div></div><div class="sector-pct chg-red">+1.2%</div><div class="sector-fund">+8亿</div><div class="sector-leader">天力锂能</div></div>
+<div class="sector-item detail-only"><div class="sector-name">锰硅</div><div class="sector-bar-wrap"><div class="sector-bar red" style="width:25%">+1.0%</div></div><div class="sector-pct chg-red">+1.0%</div><div class="sector-fund">+5亿</div><div class="sector-leader">鄂尔多斯</div></div>
+</div>
+<div class="sector-section-title"><span class="tag green">跌幅TOP</span>领跌板块</div>
+<div class="sector-list">
+<div class="sector-item"><div class="sector-name">CRO概念</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:85%">-5.2%</div></div><div class="sector-pct chg-green">-5.2%</div><div class="sector-fund" style="color:var(--green)">-42亿</div><div class="sector-leader">博腾股份</div></div>
+<div class="sector-item"><div class="sector-name">CPO/光模块</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:78%">-4.8%</div></div><div class="sector-pct chg-green">-4.8%</div><div class="sector-fund" style="color:var(--green)">-55亿</div><div class="sector-leader">天孚通信</div></div>
+<div class="sector-item"><div class="sector-name">生物制品</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:72%">-4.5%</div></div><div class="sector-pct chg-green">-4.5%</div><div class="sector-fund" style="color:var(--green)">-38亿</div><div class="sector-leader">双鹭药业</div></div>
+<div class="sector-item"><div class="sector-name">化学制药</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:65%">-4.0%</div></div><div class="sector-pct chg-green">-4.0%</div><div class="sector-fund" style="color:var(--green)">-32亿</div><div class="sector-leader">丽珠集团</div></div>
+<div class="sector-item"><div class="sector-name">算力硬件</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:58%">-3.6%</div></div><div class="sector-pct chg-green">-3.6%</div><div class="sector-fund" style="color:var(--green)">-48亿</div><div class="sector-leader">中际旭创</div></div>
+<div class="sector-item detail-only"><div class="sector-name">AMD概念</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:52%">-3.2%</div></div><div class="sector-pct chg-green">-3.2%</div><div class="sector-fund" style="color:var(--green)">-18亿</div><div class="sector-leader">通富微电</div></div>
+<div class="sector-item detail-only"><div class="sector-name">玻纤</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:45%">-2.8%</div></div><div class="sector-pct chg-green">-2.8%</div><div class="sector-fund" style="color:var(--green)">-10亿</div><div class="sector-leader">中国巨石</div></div>
+<div class="sector-item detail-only"><div class="sector-name">半导体</div><div class="sector-bar-wrap"><div class="sector-bar green" style="width:42%">-2.5%</div></div><div class="sector-pct chg-green">-2.5%</div><div class="sector-fund" style="color:var(--green)">-35亿</div><div class="sector-leader">寒武纪</div></div>
+</div>
+<div class="rotation-summary detail-only">
+<strong>轮动核心特征：</strong>今日呈现典型的<strong>"防御抱团+成长杀跌"</strong>格局。上周四爆发的医药生物板块（疫苗/CRO/创新药）今日集体大幅回调，CRO概念跌超5%，双鹭药业、丽珠集团跌停，显示上周医药行情为超跌反弹而非趋势反转。算力硬件方向（CPO/光模块/AI芯片）同步杀跌，天孚通信跌超8%，中际旭创、寒武纪跌超6%，科技成长方向持续承压。逆势走强的均为防御性板块：煤炭（高股息+涨价预期）、黄金/贵金属（避险情绪）、银行（权重护盘）、农业种业（政策预期）。市场风格从上周的"医药超跌反弹"快速切换至今日的"防御抱团"，板块轮动速度极快，持续性差，资金以避险和高低切换为主。
+</div>
+</div>
+
+<div class="card" id="northbound">
+<div class="card-title"><span class="icon nb">北</span>北向资金动向</div>
+<div class="nb-overview">
+<div class="nb-card total"><div class="nb-label">北向资金全天净流出</div><div class="nb-value">~ -45<span class="nb-unit">亿</span></div></div>
+<div class="nb-card hgt"><div class="nb-label">沪股通</div><div class="nb-value" style="color:var(--green)">~ -18<span style="font-size:14px">亿</span></div></div>
+<div class="nb-card sgt"><div class="nb-label">深股通</div><div class="nb-value" style="color:var(--green)">~ -27<span style="font-size:14px">亿</span></div></div>
+</div>
+<div class="detail-only">
+<div style="font-size:13px;font-weight:600;margin-bottom:8px;">买卖节奏示意</div>
+<div class="flow-timeline">
+<div class="flow-phase morning"><div class="phase-name">早盘 (09:30-10:30)</div><div class="phase-val">快速净流出</div><div style="font-size:11px;margin-top:2px;opacity:.8;">成长股抛售 ~-28亿</div></div>
+<div class="flow-phase noon"><div class="phase-name">午盘 (10:30-13:30)</div><div class="phase-val">流出趋缓</div><div style="font-size:11px;margin-top:2px;opacity:.8;">低位博弈 ~-10亿</div></div>
+<div class="flow-phase afternoon"><div class="phase-name">尾盘 (14:00-15:00)</div><div class="phase-val">小幅回流</div><div style="font-size:11px;margin-top:2px;opacity:.8;">权重抄底 ~-7亿</div></div>
+</div>
+<div style="background:var(--bg);border-radius:8px;padding:14px;margin-top:14px;font-size:13px;color:var(--text-secondary);line-height:1.8;">
+<strong style="color:var(--text-primary)">加仓方向：</strong>煤炭（高股息防御）、银行（权重护盘）、黄金/贵金属（避险配置）<br>
+<strong style="color:var(--text-primary)">减仓方向：</strong>CRO/医药生物（获利了结）、CPO/光模块/算力硬件（持续流出）、半导体/AI芯片（趋势性减仓）
+</div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:10px;">注：北向资金数据为基于盘中趋势的估算值，实际以交易所收盘后公布为准。今日北向资金延续净流出态势，深股通流出幅度大于沪股通，显示外资对成长股（医药、科技）减持力度较大，对沪市权重（银行、煤炭）有一定逢低布局。</div>
+</div>
+</div>
+
+<div class="card" id="theme">
+<div class="card-title"><span class="icon main">主</span>主线与强弱研判</div>
+<div class="theme-block">
+<div class="theme-title"><span class="badge hot">核心主线</span>黄金/贵金属 + 煤炭（防御抱团）</div>
+<div class="theme-content">今日市场缺乏进攻性主线，资金集中涌入防御性板块。<strong>黄金/贵金属</strong>板块逆势走强，深中华A3连板，四川黄金、湖南白银涨停，白银有色2连板，核心逻辑为国际金价高位运行+地缘局势紧张+市场避险情绪升温。<strong>煤炭采选</strong>板块集体拉升，上海能源、大有能源、美锦能源涨停，核心逻辑为高股息防御属性+煤价季节性上涨预期。<strong>持续性判断：</strong>防御板块在市场调整期具有配置价值，但缺乏持续上攻的催化，更多是资金避险的阶段性选择，一旦市场企稳反弹，防御板块可能面临资金流出。
+</div>
+</div>
+<div class="theme-block detail-only">
+<div class="theme-title"><span class="badge warm">活跃支线</span>农业种业 + 航运港口</div>
+<div class="theme-content">农业种业板块全天强势，登海种业、天山生物涨停，主要受粮食安全政策预期和农产品价格上涨催化。航运港口板块逆势活跃，中谷物流、锦江航运涨停，受益于航运运价回升和出口数据预期。<strong>持续性判断：</strong>均为事件驱动型行情，短期有催化但板块容量有限，难以成为市场主线。
+</div>
+</div>
+<div class="theme-block">
+<div class="theme-title"><span class="badge risk">弱势退潮</span>医药生物（CRO/创新药）+ 算力硬件（CPO/AI芯片）</div>
+<div class="theme-content">上周四爆发的医药生物板块今日集体大幅回调，CRO概念跌超5%，博腾股份、双鹭药业、丽珠集团等跌停或大跌，上周的疫苗行情确认是超跌反弹而非趋势反转。算力硬件方向同步杀跌，CPO/光模块跌近5%，天孚通信跌超8%，中际旭创、新易盛跌超6%，寒武纪跌超3%，AI硬件方向持续承压。这两大方向是今日市场下跌的核心拖累，资金出逃迹象明显。
+</div>
+</div>
+<div style="margin-top:16px;">
+<div style="font-size:13px;font-weight:600;margin-bottom:8px;">当日市场风格偏向</div>
+<span class="style-tag value">大盘价值 ✓</span>
+<span class="style-tag growth">小盘成长 ✗</span>
+<span class="style-tag theme">题材投机 ✗</span>
+<span class="style-tag weight">权重护盘 ✓</span>
+</div>
+</div>
+
+<div class="card" id="stage">
+<div class="card-title"><span class="icon stage">阶</span>行情阶段客观解读</div>
+<div class="stage-banner">
+<div><div class="stage-label">当前行情阶段</div><div class="stage-name">放量调整 / 二次探底</div></div>
+<div class="stage-desc">今日A股放量下跌，创业板指重挫3.21%，科创50跌3.10%，五大指数全线收绿。上周四的超跌反弹未能延续，市场再度走弱，成交放量6.8%显示抛压较重。沪指考验3850点支撑，创业板指跌破3450点，市场处于"反弹失败后二次探底"阶段，需观察下方支撑力度和政策面信号。</div>
+</div>
+<div class="detail-only">
+<div style="font-size:13px;font-weight:600;margin-bottom:8px;">技术面关键位</div>
+<table class="index-table" style="margin-bottom:14px;">
+<thead><tr><th>指数</th><th>关键支撑</th><th>关键压力</th><th>均线状态</th></tr></thead>
+<tbody>
+<tr><td class="name">上证指数</td><td style="color:var(--green)">3850 / 3800</td><td style="color:var(--red)">3920 / 3950</td><td>跌破5/10/20日均线</td></tr>
+<tr><td class="name">创业板指</td><td style="color:var(--green)">3380 / 3300</td><td style="color:var(--red)">3500 / 3550</td><td>跌破所有短期均线</td></tr>
+<tr><td class="name">科创50</td><td style="color:var(--green)">1575 / 1550</td><td style="color:var(--red)">1650 / 1700</td><td>创调整新低，弱势明显</td></tr>
+</tbody>
+</table>
+</div>
+<div class="factor-grid detail-only">
+<div class="factor-card"><div class="factor-title drive">核心驱动因素</div><div class="factor-text">① 上周医药/科技反弹后获利盘集中兑现<br>② 30年美债收益率高位维持，全球风险资产承压<br>③ 市场缺乏持续性主线，资金避险情绪升温<br>④ 中报披露接近尾声，部分个股业绩不及预期</div></div>
+<div class="factor-card"><div class="factor-title conflict">核心矛盾</div><div class="factor-text">① 经济复苏预期 vs 实际数据偏弱<br>② 政策宽松预期 vs 政策落地节奏偏慢<br>③ 外围美债收益率高位 vs A股估值承压<br>④ 防御板块抱团 vs 成长板块持续杀跌<br>⑤ 市场成交量能 vs 反弹持续性不足</div></div>
+</div>
+<div class="outlook">
+<h4>短期推演与关注方向</h4>
+<ul>
+<li><strong>情景一（概率40%）：</strong>明日沪指在3850点附近获得支撑，展开技术性反弹，创业板指尝试收复3450点，成交维持在2万亿左右，进入震荡筑底阶段。防御板块分化，部分超跌成长股迎来修复。</li>
+<li><strong>情景二（概率35%）：</strong>调整延续，沪指跌破3850点考验3800点整数关口，创业板指下探3350点，成交进一步放大至2.2万亿以上，市场进入恐慌性杀跌阶段，需政策面利好才能企稳。</li>
+<li><strong>情景三（概率25%）：</strong>外围利空缓解（美债收益率回落/美股反弹），叠加国内政策面释放积极信号，A股迎来放量反弹，沪指收复3900点，创业板指反弹至3500点上方，市场情绪快速修复。</li>
+<li><strong>关注方向：</strong>① 沪指3850点支撑位能否守住；② 创业板指3380点关键支撑；③ 30年美债收益率能否回落至5.2%以下；④ 北向资金流向是否持续净流出；⑤ 政策面是否有新的稳增长信号；⑥ 医药/算力硬件等超跌板块能否止跌企稳。</li>
+</ul>
+</div>
+</div>
+
+<div class="card" id="summary">
+<div class="card-title"><span class="icon sum">总</span>复盘总结与风险提示</div>
+<div class="conclusion"><div class="conc-text">今日A股放量下跌，五大指数全线收绿，创业板指重挫3.21%、科创50跌3.10%，全市场超3900只个股下跌。上周爆发的医药生物板块集体回调，算力硬件同步杀跌，黄金、煤炭等防御板块逆势走强，市场处于反弹失败后的二次探底阶段。</div></div>
+<div class="disclaimer"><strong>风险提示：</strong>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中数据为2026年8月24日收盘数据，部分指标（北向资金、炸板率等）为基于公开信息的估算值，可能与最终统计存在差异。所有分析均基于公开信息和历史数据，不代表对未来走势的预测或承诺。投资者应基于自身风险承受能力独立做出投资决策，必要时咨询持牌专业机构。</div>
+</div>
+
+<div class="footer">A股大盘全景复盘 · 2026年8月24日 · 数据来源：同花顺/老虎证券/财联社/界面新闻<br>本页面为纯静态HTML文件，无任何外部资源依赖，可离线浏览</div>
+</div>
+<script>
+function setMode(mode){var body=document.body;var buttons=document.querySelectorAll('.mode-toggle button');if(mode==='compact'){body.classList.add('compact');buttons[0].classList.remove('active');buttons[1].classList.add('active');}else{body.classList.remove('compact');buttons[0].classList.add('active');buttons[1].classList.remove('active');}}
+window.addEventListener('scroll',function(){var sections=document.querySelectorAll('.card[id]');var navLinks=document.querySelectorAll('.nav-links a');var scrollPos=window.scrollY+100;sections.forEach(function(section,index){if(section.offsetTop<=scrollPos&&section.offsetTop+section.offsetHeight>scrollPos){navLinks.forEach(function(link){link.style.background='';link.style.color='';});if(navLinks[index]){navLinks[index].style.background='var(--bg)';navLinks[index].style.color='var(--text-primary)';}}});});
+</script>
+</body>
+</html>
