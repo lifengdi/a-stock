@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商业航天&卫星通信板块每日复盘 2026-09-01</title>
+<style>
+:root{
+  --bg:#f4f6f9;--card:#ffffff;--text:#1a2332;--text2:#5a6a7e;--border:#e2e8f0;
+  --blue:#0a1628;--cyan:#00d4ff;--red:#e53935;--green:#2e7d32;--orange:#f57c00;
+  --shadow:0 2px 12px rgba(10,22,40,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+/* 导航 */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.nav-brand{color:#fff;font-weight:700;font-size:15px;letter-spacing:.5px;white-space:nowrap}
+.nav-brand span{color:var(--cyan)}
+.nav-links{display:flex;gap:4px;overflow-x:auto}
+.nav-links a{color:#b0c4de;text-decoration:none;padding:6px 10px;border-radius:4px;font-size:12px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{color:var(--cyan);background:rgba(0,212,255,.1)}
+.mode-btn{background:rgba(0,212,255,.15);color:var(--cyan);border:1px solid rgba(0,212,255,.4);padding:5px 14px;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;transition:all .2s}
+.mode-btn:hover{background:rgba(0,212,255,.25)}
+/* 主体 */
+.container{max-width:1200px;margin:0 auto;padding:68px 20px 40px}
+/* 头部 */
+.header{background:linear-gradient(135deg,var(--blue) 0%,#122845 100%);border-radius:12px;padding:28px 32px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(0,212,255,.12) 0%,transparent 70%);border-radius:50%}
+.header h1{font-size:24px;margin-bottom:8px;position:relative;z-index:1}
+.header h1 span{color:var(--cyan)}
+.header-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#8fa8c8;position:relative;z-index:1}
+.header-meta b{color:#e0ecf8;font-weight:600}
+.data-tag{display:inline-block;background:rgba(0,212,255,.2);color:var(--cyan);padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600}
+/* 核心指标条 */
+.kpi-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.kpi{background:var(--card);border-radius:10px;padding:16px;text-align:center;box-shadow:var(--shadow);border-top:3px solid var(--cyan)}
+.kpi.red{border-top-color:var(--red)}
+.kpi.green{border-top-color:var(--green)}
+.kpi-label{font-size:12px;color:var(--text2);margin-bottom:6px}
+.kpi-value{font-size:24px;font-weight:800}
+.kpi-sub{font-size:11px;color:var(--text2);margin-top:4px}
+.up{color:var(--red)}.down{color:var(--green)}
+/* 卡片 */
+.card{background:var(--card);border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:var(--blue);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.card-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--blue);color:var(--cyan);border-radius:8px;font-size:15px;font-weight:800;flex-shrink:0}
+.card-icon{font-size:20px}
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+th{background:var(--blue);color:#fff;padding:10px 8px;text-align:center;font-weight:600;font-size:12px}
+td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--border)}
+tr:hover td{background:#f0f7ff}
+/* 横向条形图 */
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}
+.bar-label{width:80px;text-align:right;flex-shrink:0;color:var(--text2);font-size:12px}
+.bar-track{flex:1;height:22px;background:#eef2f7;border-radius:4px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:700;color:#fff;transition:width .6s ease;min-width:fit-content;white-space:nowrap}
+.bar-fill.right{justify-content:flex-end}
+.bar-val{width:70px;flex-shrink:0;font-weight:700;font-size:12px}
+/* 三段式进度条 */
+.dist-bar{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:12px 0}
+.dist-seg{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+/* 资金柱状图 */
+.fund-chart{display:flex;align-items:flex-end;justify-content:space-around;height:160px;padding:20px 10px 0;gap:8px;border-bottom:2px solid var(--border);margin:16px 0}
+.fund-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;max-width:80px}
+.fund-bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;position:relative}
+.fund-bar.up{background:linear-gradient(180deg,#ff6659,var(--red))}
+.fund-bar.down{background:linear-gradient(0deg,#1b5e20,var(--green))}
+.fund-label{font-size:11px;color:var(--text2);text-align:center;margin-top:6px;white-space:nowrap}
+.fund-val{font-size:11px;font-weight:700;position:absolute;top:-18px;left:50%;transform:translateX(-50%);white-space:nowrap}
+/* 连板阶梯 */
+.ladder{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.ladder-row{display:flex;align-items:center;gap:12px}
+.ladder-height{width:50px;text-align:center;font-weight:800;color:#fff;padding:6px 0;border-radius:6px;font-size:13px;flex-shrink:0}
+.ladder-stocks{display:flex;flex-wrap:wrap;gap:6px}
+.stock-tag{background:#eef4fb;border:1px solid #c5d9ef;border-radius:4px;padding:4px 10px;font-size:12px;color:var(--blue)}
+.stock-tag b{color:var(--red)}
+/* 对比条形图 */
+.compare-row{margin:8px 0}
+.compare-name{font-size:12px;color:var(--text2);margin-bottom:3px;display:flex;justify-content:space-between}
+.compare-track{height:20px;background:#eef2f7;border-radius:4px;position:relative;overflow:hidden}
+.compare-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 6px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
+/* 归因标签 */
+.cause-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.cause-item{display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f8fafc;border-radius:8px;border-left:4px solid var(--cyan)}
+.cause-item.strong{border-left-color:var(--red)}
+.cause-item.mid{border-left-color:var(--orange)}
+.cause-item.weak{border-left-color:#90a4ae}
+.cause-level{font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.cause-level.strong{background:#ffebee;color:var(--red)}
+.cause-level.mid{background:#fff3e0;color:var(--orange)}
+.cause-level.weak{background:#eceff1;color:#546e7a}
+.cause-text{font-size:13px;line-height:1.5}
+.cause-text b{color:var(--blue)}
+/* 情景卡片 */
+.scenario{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.scenario-card{padding:16px;border-radius:10px;font-size:13px;line-height:1.6}
+.scenario-card.opt{background:#fff5f5;border:1px solid #ffcdd2}
+.scenario-card.neu{background:#f5f5f5;border:1px solid #e0e0e0}
+.scenario-card.pes{background:#f1f8e9;border:1px solid #c5e1a5}
+.scenario-title{font-weight:800;font-size:14px;margin-bottom:8px}
+/* 关键位 */
+.level-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.level-item{padding:14px;border-radius:8px;text-align:center}
+.level-item.support{background:#e8f5e9;border:1px solid #a5d6a7}
+.level-item.resist{background:#ffebee;border:1px solid #ef9a9a}
+.level-item h4{font-size:13px;color:var(--text2);margin-bottom:6px}
+.level-item p{font-size:20px;font-weight:800}
+/* 风险 */
+.risk-item{display:flex;gap:10px;padding:12px;background:#fff8e1;border-radius:8px;margin:8px 0;border-left:4px solid var(--orange)}
+.risk-icon{font-size:18px;flex-shrink:0}
+.risk-text{font-size:13px;line-height:1.6}
+/* 来源 */
+.source{font-size:11px;color:var(--text2);margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);line-height:1.8}
+/* 免责 */
+.disclaimer{background:var(--blue);color:#8fa8c8;padding:20px 24px;border-radius:12px;margin-top:20px;font-size:12px;line-height:1.8}
+.disclaimer h4{color:var(--cyan);margin-bottom:8px;font-size:14px}
+/* 精简模式 */
+body.compact .detail-text{display:none}
+body.compact .cause-list{grid-template-columns:1fr}
+body.compact .scenario{grid-template-columns:1fr}
+/* 响应式 */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .kpi-bar{grid-template-columns:repeat(2,1fr)}
+  .cause-list{grid-template-columns:1fr}
+  .scenario{grid-template-columns:1fr}
+  .level-box{grid-template-columns:1fr}
+  .header h1{font-size:18px}
+  .container{padding:62px 12px 30px}
+  .card{padding:16px}
+}
+.hidden{display:none!important}
+.section-anchor{scroll-margin-top:60px}
+</style>
+</head>
+<body>
+<!-- 导航 -->
+<nav class="nav">
+  <div class="nav-brand">🚀 商业航天<span>&</span>卫星通信 每日复盘</div>
+  <div class="nav-links">
+    <a href="#m1">①大盘环境</a>
+    <a href="#m2">②板块表现</a>
+    <a href="#m3">③领涨领跌</a>
+    <a href="#m4">④资金流向</a>
+    <a href="#m5">⑤异动归因</a>
+    <a href="#m6">⑥展望风险</a>
+  </div>
+  <button class="mode-btn" onclick="toggleMode()">精简/详细</button>
+</nav>
+
+<div class="container">
+<!-- 头部 -->
+<div class="header">
+  <h1>商业航天 <span>&</span> 卫星通信板块每日复盘</h1>
+  <div class="header-meta">
+    <span>数据截至：<b>2026-09-01 15:00（收盘）</b></span>
+    <span class="data-tag">收盘数据</span>
+    <span>报告类型：板块级日度复盘</span>
+  </div>
+</div>
+
+<!-- 核心KPI -->
+<div class="kpi-bar">
+  <div class="kpi green">
+    <div class="kpi-label">卫星通信指数(980018)</div>
+    <div class="kpi-value down">-1.31%</div>
+    <div class="kpi-sub">收盘 4336.60</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">相对沪深300超额收益</div>
+    <div class="kpi-value down">-1.01pct</div>
+    <div class="kpi-sub">沪深300 -0.30%</div>
+  </div>
+  <div class="kpi red">
+    <div class="kpi-label">板块涨停家数</div>
+    <div class="kpi-value up">1</div>
+    <div class="kpi-sub">内蒙一机 涨停</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-label">卫星通信成交额</div>
+    <div class="kpi-value">197.22亿</div>
+    <div class="kpi-sub down">环比缩量22.0%</div>
+  </div>
+</div>
+
+<!-- 模块1 -->
+<div class="card section-anchor" id="m1">
+  <div class="card-title"><span class="card-num">1</span>大盘环境与量能</div>
+  <table>
+    <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>成交额</th><th>日内节奏</th></tr>
+    <tr><td>上证指数</td><td>3,979.89</td><td class="down">-0.16%</td><td>9,443.08亿</td><td>低开→午前翻红→尾盘回落</td></tr>
+    <tr><td>深证成指</td><td>13,872.38</td><td class="down">-1.02%</td><td>10,890.95亿</td><td>低开超1%→全天弱势震荡</td></tr>
+    <tr><td>创业板指</td><td>3,393.43</td><td class="down">-1.32%</td><td>5,109.28亿</td><td>低开→低位震荡→尾盘走弱</td></tr>
+    <tr><td>科创50</td><td>1,647.53</td><td class="down">-2.19%</td><td>710.82亿</td><td>低开→持续下行→收近最低</td></tr>
+    <tr><td>沪深300</td><td>4,611.44</td><td class="down">-0.30%</td><td>5,357.08亿</td><td>低开→盘中翻红→尾盘微跌</td></tr>
+  </table>
+  <div class="detail-text">
+  <p style="margin:10px 0;font-size:13px"><b>指数运行节奏一句话：</b>早盘三大指数集体低开（深成指、创业板指低开超1%），午前窄幅震荡，午后沪指一度翻红但尾盘回落收跌，深市及科创全天弱势，成长风格显著承压。</p>
+  </div>
+  <!-- 指数涨跌幅条形图 -->
+  <div style="margin:16px 0 8px;font-weight:700;font-size:14px;color:var(--blue)">📊 五大指数涨跌幅对比</div>
+  <div class="bar-row"><span class="bar-label">上证指数</span><div class="bar-track"><div class="bar-fill down" style="width:15%;background:var(--green)">-0.16%</div></div></div>
+  <div class="bar-row"><span class="bar-label">深证成指</span><div class="bar-track"><div class="bar-fill down" style="width:47%;background:var(--green)">-1.02%</div></div></div>
+  <div class="bar-row"><span class="bar-label">创业板指</span><div class="bar-track"><div class="bar-fill down" style="width:60%;background:var(--green)">-1.32%</div></div></div>
+  <div class="bar-row"><span class="bar-label">科创50</span><div class="bar-track"><div class="bar-fill down" style="width:100%;background:var(--green)">-2.19%</div></div></div>
+  <div class="bar-row"><span class="bar-label">沪深300</span><div class="bar-track"><div class="bar-fill down" style="width:28%;background:var(--green)">-0.30%</div></div></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+    <div style="background:#f8fafc;padding:16px;border-radius:8px">
+      <div style="font-weight:700;margin-bottom:10px;color:var(--blue)">💰 两市成交与量能</div>
+      <div style="font-size:13px;line-height:2">
+        两市总成交额：<b style="font-size:18px">2.03万亿</b><br>
+        较昨日（2.13万亿）：<span class="down"><b>缩量976亿（-4.6%）</b></span><br>
+        量能评价：缩量调整，观望情绪升温
+      </div>
+    </div>
+    <div style="background:#f8fafc;padding:16px;border-radius:8px">
+      <div style="font-weight:700;margin-bottom:10px;color:var(--blue)">📈 市场广度与涨跌停</div>
+      <div style="font-size:13px;line-height:2">
+        上涨家数：<b class="up">超3,300家</b>（约61%）<br>
+        下跌家数：<b class="down">约2,000家</b>（约37%）<br>
+        涨停/跌停：<b class="up">83只</b> / <b>0只</b><br>
+        炸板/封板率：6只 / 93%
+      </div>
+    </div>
+  </div>
+  <!-- 涨跌分布进度条 -->
+  <div style="margin:14px 0 4px;font-size:12px;color:var(--text2)">全市场涨跌家数分布</div>
+  <div class="dist-bar">
+    <div class="dist-seg" style="width:61%;background:var(--red)">上涨 约61%</div>
+    <div class="dist-seg" style="width:37%;background:var(--green)">下跌 约37%</div>
+    <div class="dist-seg" style="width:2%;background:#90a4ae">平盘</div>
+  </div>
+  <div style="text-align:center;margin-top:14px;padding:10px;background:#fff3e0;border-radius:8px;font-size:14px">
+    🌡️ 全市场赚钱效应评级：<b style="color:var(--orange);font-size:16px">温和</b>
+    <span style="font-size:12px;color:var(--text2)">（个股涨多跌少但指数收跌，科技成长承压，结构性分化明显）</span>
+  </div>
+  <div class="source">数据来源：同花顺金融数据库、老虎证券行情、财联社、第一财经；数据截至2026-09-01 15:00收盘。涨跌家数为全市场（含北交所）统计口径。</div>
+</div>
+
+<!-- 模块2 -->
+<div class="card section-anchor" id="m2">
+  <div class="card-title"><span class="card-num">2</span>板块当日表现</div>
+  <table>
+    <tr><th>板块指数</th><th>代码</th><th>收盘价</th><th>涨跌幅</th><th>成交额</th><th>换手率</th><th>量比</th><th>超额收益*</th></tr>
+    <tr><td>卫星通信</td><td>980018</td><td>4,336.60</td><td class="down">-1.31%</td><td>197.22亿</td><td>1.74%</td><td>暂无</td><td class="down">-1.01pct</td></tr>
+    <tr><td>商业航天</td><td>886078</td><td>暂无</td><td>暂无</td><td>暂无</td><td>暂无</td><td>暂无</td><td>暂无</td></tr>
+  </table>
+  <div style="font-size:11px;color:var(--text2);margin-bottom:10px">*超额收益 = 板块涨跌幅 - 沪深300涨跌幅（-0.30%）。商业航天指数(886078)9月1日收盘数据暂未获取，8月31日收盘2,144.47点（+1.54%）。</div>
+
+  <div class="detail-text">
+  <div style="background:#f8fafc;padding:14px;border-radius:8px;margin:12px 0;font-size:13px;line-height:1.8">
+    <b>商业航天板块（中财网口径，14:55快照）：</b>板块共约369只成分股，上涨143家（38.8%），下跌226家（61.2%），日均涨幅-0.69%，平均换手率3.43%，总成交额约1,645.23亿元。板块整体表现弱于大盘。
+  </div>
+  </div>
+
+  <!-- 板块涨跌分布 -->
+  <div style="margin:14px 0 4px;font-size:12px;color:var(--text2)">商业航天板块个股涨跌分布（14:55快照）</div>
+  <div class="dist-bar">
+    <div class="dist-seg" style="width:38.8%;background:var(--red)">上涨 143家 (38.8%)</div>
+    <div class="dist-seg" style="width:61.2%;background:var(--green)">下跌 226家 (61.2%)</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
+    <div style="text-align:center;padding:14px;background:#fff5f5;border-radius:8px">
+      <div style="font-size:12px;color:var(--text2)">板块涨停</div>
+      <div style="font-size:28px;font-weight:800;color:var(--red)">1</div>
+      <div style="font-size:11px;color:var(--text2)">内蒙一机</div>
+    </div>
+    <div style="text-align:center;padding:14px;background:#f1f8e9;border-radius:8px">
+      <div style="font-size:12px;color:var(--text2)">板块跌停</div>
+      <div style="font-size:28px;font-weight:800;color:var(--green)">0</div>
+      <div style="font-size:11px;color:var(--text2)">—</div>
+    </div>
+    <div style="text-align:center;padding:14px;background:#e3f2fd;border-radius:8px">
+      <div style="font-size:12px;color:var(--text2)">板块炸板</div>
+      <div style="font-size:28px;font-weight:800;color:#1565c0">暂无</div>
+      <div style="font-size:11px;color:var(--text2)">—</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px">
+      <b>涨幅≥5%家数：</b>暂无精确统计（盘中至少4只：内蒙一机涨停、中无人机/长盈通/国科军工涨超5%）
+    </div>
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px">
+      <b>跌幅≤-5%家数：</b>至少2只（风华高科-6.98%、宇环数控-5.18%）
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:14px;padding:10px;background:#e8f5e9;border-radius:8px;font-size:14px">
+    🌡️ 板块赚钱效应评级：<b style="color:var(--green);font-size:16px">偏冷</b>
+    <span style="font-size:12px;color:var(--text2)">（弱于大盘：下跌家数占比61.2%，日均涨幅-0.69%，仅1只涨停）</span>
+  </div>
+  <div class="source">数据来源：同花顺金融数据库（卫星通信980018）、中财网（商业航天板块成分股14:55快照）。板块排名数据暂无。</div>
+</div>
+
+<!-- 模块3 -->
+<div class="card section-anchor" id="m3">
+  <div class="card-title"><span class="card-num">3</span>领涨领跌与连板梯队</div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--red);margin-bottom:8px">▲ 涨幅 TOP5</div>
+  <table>
+    <tr><th>排名</th><th>证券代码</th><th>证券简称</th><th>收盘价</th><th>涨跌幅</th><th>成交额</th><th>换手率</th><th>涨停/连板</th><th>异动原因</th></tr>
+    <tr><td>1</td><td>600967</td><td>内蒙一机</td><td>暂无</td><td class="up">涨停</td><td>暂无</td><td>暂无</td><td><b>首板</b></td><td>军工/航空航天制造，板块轮动</td></tr>
+    <tr><td>2</td><td>688297</td><td>中无人机</td><td>暂无</td><td class="up">+5%以上</td><td>暂无</td><td>暂无</td><td>—</td><td>无人机+商业航天，智神星首飞催化</td></tr>
+    <tr><td>3</td><td>688143</td><td>长盈通</td><td>暂无</td><td class="up">+5%以上</td><td>暂无</td><td>暂无</td><td>—</td><td>光纤环/航天配套，发射任务催化</td></tr>
+    <tr><td>4</td><td>688543</td><td>国科军工</td><td>暂无</td><td class="up">+5%以上</td><td>暂无</td><td>暂无</td><td>—</td><td>军工弹药，板块联动</td></tr>
+    <tr><td>5</td><td>000768</td><td>中航西飞</td><td>22.63</td><td class="up">+3.05%</td><td>10.80亿</td><td>1.72%</td><td>—</td><td>大飞机/航空航天龙头，资金防御配置</td></tr>
+  </table>
+  <div style="font-size:11px;color:var(--text2);margin-bottom:14px">注：中无人机、长盈通、国科军工为13:12盘中数据（涨超5%），收盘价暂未获取；内蒙一机涨停数据来自同花顺13:12报道。</div>
+
+  <!-- 领涨领跌对比图 -->
+  <div style="margin:10px 0 6px;font-weight:700;font-size:14px;color:var(--blue)">📊 领涨个股涨幅对比（盘中/收盘）</div>
+  <div class="compare-row"><div class="compare-name"><span>内蒙一机 600967</span><span class="up">涨停(+10%)</span></div><div class="compare-track"><div class="compare-fill" style="width:100%;background:var(--red)">涨停</div></div></div>
+  <div class="compare-row"><div class="compare-name"><span>中无人机 688297</span><span class="up">+5%以上</span></div><div class="compare-track"><div class="compare-fill" style="width:55%;background:var(--red)">+5%+</div></div></div>
+  <div class="compare-row"><div class="compare-name"><span>长盈通 688143</span><span class="up">+5%以上</span></div><div class="compare-track"><div class="compare-fill" style="width:55%;background:var(--red)">+5%+</div></div></div>
+  <div class="compare-row"><div class="compare-name"><span>国科军工 688543</span><span class="up">+5%以上</span></div><div class="compare-track"><div class="compare-fill" style="width:55%;background:var(--red)">+5%+</div></div></div>
+  <div class="compare-row"><div class="compare-name"><span>中航西飞 000768</span><span class="up">+3.05%</span></div><div class="compare-track"><div class="compare-fill" style="width:31%;background:var(--red)">+3.05%</div></div></div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--green);margin:20px 0 8px">▼ 跌幅 TOP5</div>
+  <table>
+    <tr><th>排名</th><th>证券代码</th><th>证券简称</th><th>收盘价</th><th>涨跌幅</th><th>成交额</th><th>换手率</th><th>异动原因</th></tr>
+    <tr><td>1</td><td>000636</td><td>风华高科</td><td>51.98</td><td class="down">-6.98%</td><td>53.26亿</td><td>8.75%</td><td>MLCC概念集体回调，电子板块资金流出</td></tr>
+    <tr><td>2</td><td>002903</td><td>宇环数控</td><td>30.20</td><td class="down">-5.18%</td><td>5.96亿</td><td>18.22%</td><td>高位回调，获利盘兑现</td></tr>
+    <tr><td>3</td><td>000962</td><td>东方钽业</td><td>54.64</td><td class="down">-3.79%</td><td>9.72亿</td><td>3.51%</td><td>小金属板块回落，航天材料概念降温</td></tr>
+    <tr><td>4</td><td>001229</td><td>魅视科技</td><td>38.02</td><td class="down">-3.06%</td><td>1.44亿</td><td>5.13%</td><td>小盘股调整，资金流出</td></tr>
+    <tr><td>5</td><td>000988</td><td>华工科技</td><td>101.70</td><td class="down">-2.91%</td><td>34.16亿</td><td>3.33%</td><td>激光/光电子板块回调，科技成长承压</td></tr>
+  </table>
+  <div style="font-size:11px;color:var(--text2);margin-bottom:14px">注：以上为中财网14:55快照数据，接近收盘。宇环数控(002903)名称根据证券代码匹配。</div>
+
+  <!-- 连板梯队 -->
+  <div style="font-weight:700;font-size:15px;color:var(--blue);margin:20px 0 10px">🪜 连板梯队</div>
+  <div class="ladder">
+    <div class="ladder-row">
+      <div class="ladder-height" style="background:#b71c1c">首板</div>
+      <div class="ladder-stocks">
+        <span class="stock-tag"><b>内蒙一机</b> 600967（军工/航空航天制造，板块轮动）</span>
+      </div>
+    </div>
+  </div>
+  <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;margin-top:10px">
+    <b>板块首板个股清单：</b>内蒙一机（600967）。当日全市场连板股主要集中在农业种植板块（万向德农6连板、新赛股份4连板、敦煌种业3连板），商业航天/卫星通信板块暂无2板及以上连板个股。
+  </div>
+  <div class="source">数据来源：同花顺财经、中财网（14:55快照）、财联社涨停分析。部分个股收盘价为盘中数据，已标注。</div>
+</div>
+
+<!-- 模块4 -->
+<div class="card section-anchor" id="m4">
+  <div class="card-title"><span class="card-num">4</span>资金流向</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div style="background:linear-gradient(135deg,#fff5f5,#ffebee);padding:18px;border-radius:10px;text-align:center;border:1px solid #ffcdd2">
+      <div style="font-size:13px;color:var(--text2)">电子板块主力资金（含卫星通信/商业航天核心标的）</div>
+      <div style="font-size:32px;font-weight:800;color:var(--green);margin:8px 0">-204.38亿</div>
+      <div style="font-size:12px;color:var(--text2)">净流出（财联社14:23数据）</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f1f8e9,#dcedc8);padding:18px;border-radius:10px;text-align:center;border:1px solid #c5e1a5">
+      <div style="font-size:13px;color:var(--text2)">卫星通信板块成交额环比</div>
+      <div style="font-size:32px;font-weight:800;color:var(--green);margin:8px 0">-22.0%</div>
+      <div style="font-size:12px;color:var(--text2)">197.22亿 vs 昨日252.89亿，缩量55.67亿</div>
+    </div>
+  </div>
+
+  <!-- 资金五档柱状图 -->
+  <div style="font-weight:700;font-size:14px;color:var(--blue);margin-bottom:4px">📊 资金分档流向（板块级）</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:8px">注：板块级分档资金数据暂无，以下为电子板块整体及核心标的参考数据。</div>
+  <div class="fund-chart">
+    <div class="fund-col">
+      <div class="fund-bar down" style="height:80px"><span class="fund-val down">-204亿</span></div>
+      <div class="fund-label">电子板块<br>主力净流出</div>
+    </div>
+    <div class="fund-col">
+      <div class="fund-bar down" style="height:30px"><span class="fund-val down">-4.85亿</span></div>
+      <div class="fund-label">中国卫星<br>3日主力净流出</div>
+    </div>
+    <div class="fund-col">
+      <div class="fund-bar up" style="height:12px"><span class="fund-val up">+931万</span></div>
+      <div class="fund-label">卫星ETF<br>3日主力净流入</div>
+    </div>
+    <div class="fund-col">
+      <div class="fund-bar up" style="height:18px"><span class="fund-val up">+3284万</span></div>
+      <div class="fund-label">卫星ETF<br>5日主力净流入</div>
+    </div>
+    <div class="fund-col">
+      <div class="fund-bar" style="height:6px;background:#90a4ae"><span class="fund-val" style="color:#546e7a">暂无</span></div>
+      <div class="fund-label">超大单/大单<br>分档数据</div>
+    </div>
+  </div>
+
+  <div class="detail-text">
+  <div style="margin-top:16px">
+    <div style="font-weight:700;font-size:14px;color:var(--blue);margin-bottom:8px">🔴 板块内主力资金净流入 TOP3</div>
+    <table>
+      <tr><th>排名</th><th>证券代码</th><th>证券简称</th><th>主力净流入</th><th>数据口径</th></tr>
+      <tr><td>1</td><td colspan="3" style="color:var(--text2)">暂无当日精确板块个股资金排名数据</td><td>—</td></tr>
+      <tr><td>2</td><td>159218</td><td>卫星ETF招商</td><td class="up">+931万（3日）</td><td>东方财富14:26</td></tr>
+      <tr><td>3</td><td>159218</td><td>卫星ETF招商</td><td class="up">+3284万（5日）</td><td>东方财富14:26</td></tr>
+    </table>
+  </div>
+  <div style="margin-top:14px">
+    <div style="font-weight:700;font-size:14px;color:var(--blue);margin-bottom:8px">🟢 板块内主力资金净流出 TOP3</div>
+    <table>
+      <tr><th>排名</th><th>证券代码</th><th>证券简称</th><th>主力净流出</th><th>数据口径</th></tr>
+      <tr><td>1</td><td>600118</td><td>中国卫星</td><td class="down">-4.85亿（3日）</td><td>东方财富13:53</td></tr>
+      <tr><td>2</td><td>600118</td><td>中国卫星</td><td class="down">-5.14亿（5日）</td><td>东方财富13:53</td></tr>
+      <tr><td>3</td><td colspan="3" style="color:var(--text2)">暂无其他当日精确净流出个股数据</td><td>—</td></tr>
+    </table>
+  </div>
+  </div>
+
+  <div style="margin-top:14px;padding:12px;background:#f8fafc;border-radius:8px;font-size:13px">
+    <b>北向资金对板块核心标的增减持：</b>暂无当日数据。中国卫星（600118）为沪股通标的，历史数据显示机构资金近期呈净流出态势。
+  </div>
+  <div class="source">数据来源：财联社（电子板块主力资金14:23）、东方财富网（个股/ETF资金流向）。板块级超大单/大单/中单/小单分档数据暂无，以电子板块整体及核心标的参考数据替代。</div>
+</div>
+
+<!-- 模块5 -->
+<div class="card section-anchor" id="m5">
+  <div class="card-title"><span class="card-num">5</span>当日异动归因</div>
+
+  <div class="cause-list">
+    <div class="cause-item strong">
+      <span class="cause-level strong">强</span>
+      <div class="cause-text"><b>事件冲击：</b>9月1日10:00，星河动力自主研发的中大型可重复使用液体运载火箭「智神星一号」遥一在酒泉东风商业航天创新试验区首飞成功，顺利进入预定轨道。该火箭全长52米，LEO运力5-7吨，标志着中国商业火箭迈入固液并举新阶段。受此催化，早盘航天板块一度活跃，中无人机盘中涨超8%。</div>
+    </div>
+    <div class="cause-item mid">
+      <span class="cause-level mid">中</span>
+      <div class="cause-text"><b>资金轮动：</b>电子板块主力资金净流出超204.38亿元，科技成长方向整体遭资金减持。商业航天/卫星通信板块作为电子与军工交叉赛道，受板块资金流出拖累明显。卫星通信成交额环比缩量22%，显示资金参与意愿下降。</div>
+    </div>
+    <div class="cause-item mid">
+      <span class="cause-level mid">中</span>
+      <div class="cause-text"><b>大盘联动：</b>深成指-1.02%、创业板指-1.32%、科创50-2.19%，成长风格全天显著承压。卫星通信指数-1.31%与创业板指跌幅接近，呈现明显的跟随大盘特征，而非独立行情。</div>
+    </div>
+    <div class="cause-item mid">
+      <span class="cause-level mid">中</span>
+      <div class="cause-text"><b>技术面：</b>卫星通信指数（980018）8月31日大涨4.34%，短期积累较多获利盘。9月1日指数低开后全天弱势，最低触及4296点，收于4336点，属于典型的大涨后获利回吐+技术性调整。</div>
+    </div>
+    <div class="cause-item weak">
+      <span class="cause-level weak">弱</span>
+      <div class="cause-text"><b>政策催化：</b>当日无新增重大商业航天/卫星通信政策出台。中长期政策背景仍为2026年政府工作报告"加快发展卫星互联网"及"十五五"规划低轨卫星互联网组网要求，但非当日直接催化。</div>
+    </div>
+    <div class="cause-item weak">
+      <span class="cause-level weak">弱</span>
+      <div class="cause-text"><b>融资动态：</b>9月1日，商业航天企业「星火传明」获财通资本数千万元投资，聚焦红外探测技术融合，该企业已有3颗卫星及载荷在轨运行。该事件对板块情绪有轻微正面影响，但非核心驱动。</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;padding:16px;background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;border-left:5px solid #1565c0">
+    <div style="font-weight:800;font-size:15px;color:#0d47a1;margin-bottom:8px">🎯 核心判断：跟随大盘/联动为主，非自身逻辑独立驱动</div>
+    <div style="font-size:13px;line-height:1.8;color:#1a2332">
+      虽然当日有「智神星一号」首飞成功这一重大行业利好（强事件催化），早盘板块也一度活跃（中无人机盘中涨超8%），但在<b>电子板块主力资金净流出超204亿</b>、<b>成长风格整体调整</b>（科创50-2.19%）、以及<b>前一日大涨4.34%后获利回吐</b>的三重压力下，板块最终收跌1.31%，与创业板指跌幅接近。智神星首飞的利好更多被解读为"利好出尽"或被大盘调整所对冲，板块未能走出独立行情。
+    </div>
+  </div>
+  <div class="source">数据来源：新华网、人民网、央视网（智神星一号首飞）、财联社（资金流向）、同花顺金融数据库（行情数据）、未来天玑（融资动态）。</div>
+</div>
+
+<!-- 模块6 -->
+<div class="card section-anchor" id="m6">
+  <div class="card-title"><span class="card-num">6</span>短期展望与风险提示</div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--blue);margin-bottom:10px">🔮 未来1-2个交易日情景推演</div>
+  <div class="scenario">
+    <div class="scenario-card opt">
+      <div class="scenario-title" style="color:var(--red)">乐观情景（概率约25%）</div>
+      智神星一号首飞成功持续发酵，叠加快舟十一号遥三等后续发射任务催化，市场情绪修复，板块迎来反弹。卫星通信指数有望回补4394点缺口，挑战4400整数关。
+    </div>
+    <div class="scenario-card neu">
+      <div class="scenario-title" style="color:#616161">中性情景（概率约50%）</div>
+      板块随大盘震荡整理，个股分化加剧。核心标的（中航西飞、中无人机等）获资金防御性配置，而高位题材股继续回调。卫星通信指数在4300-4400区间震荡，量能维持低位。
+    </div>
+    <div class="scenario-card pes">
+      <div class="scenario-title" style="color:var(--green)">悲观情景（概率约25%）</div>
+      电子板块资金持续流出，成长风格继续调整，叠加获利盘进一步兑现，板块下探考验4300点支撑。若4300点失守，可能触发技术性止损，卫星通信指数看向4250点。
+    </div>
+  </div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--blue);margin:20px 0 10px">📅 次日重点跟踪催化剂</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;display:flex;gap:8px">
+      <span style="font-size:18px">🚀</span>
+      <div><b>发射任务：</b>快舟十一号遥三火箭即将发往酒泉执行"一箭双星"任务，关注发射时间窗口及成功情况。</div>
+    </div>
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;display:flex;gap:8px">
+      <span style="font-size:18px">📜</span>
+      <div><b>政策窗口：</b>关注"十五五"规划卫星互联网组网相关政策细则，及低轨卫星频率协调进展。</div>
+    </div>
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;display:flex;gap:8px">
+      <span style="font-size:18px">📢</span>
+      <div><b>公司公告：</b>关注卫星制造/火箭产业链核心标的（中国卫星、航天电子等）的订单公告及产能进展。</div>
+    </div>
+    <div style="padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;display:flex;gap:8px">
+      <span style="font-size:18px">📊</span>
+      <div><b>技术关键位：</b>卫星通信指数4300点支撑（今日最低4296）、4400点压力（昨收4394），关注量能变化。</div>
+    </div>
+  </div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--blue);margin:20px 0 10px">📈 技术面关键支撑位与压力位（卫星通信指数980018）</div>
+  <div class="level-box">
+    <div class="level-item support">
+      <h4>🟢 关键支撑位</h4>
+      <p style="color:var(--green)">4,296 / 4,300</p>
+      <div style="font-size:12px;color:var(--text2);margin-top:6px">今日最低点4296，4300整数关口<br>若跌破则看向4250</div>
+    </div>
+    <div class="level-item resist">
+      <h4>🔴 关键压力位</h4>
+      <p style="color:var(--red)">4,394 / 4,400</p>
+      <div style="font-size:12px;color:var(--text2);margin-top:6px">昨日收盘价4394，4400整数关口<br>突破则打开上行空间</div>
+    </div>
+  </div>
+
+  <div style="font-weight:700;font-size:15px;color:var(--blue);margin:20px 0 10px">⚠️ 风险提示</div>
+  <div class="risk-item">
+    <span class="risk-icon">📉</span>
+    <div class="risk-text"><b>高位回调/获利回吐风险（高）：</b>卫星通信指数8月31日大涨4.34%，短期积累大量获利盘。9月1日已出现明显获利回吐（-1.31%），若后续大盘继续走弱，获利盘可能进一步涌出，加剧板块调整幅度。</div>
+  </div>
+  <div class="risk-item">
+    <span class="risk-icon">💸</span>
+    <div class="risk-text"><b>电子板块资金持续流出风险（中高）：</b>当日电子板块主力资金净流出超204亿元，科技成长方向遭资金大幅减持。商业航天/卫星通信板块作为电子与军工交叉赛道，若电子板块资金流出趋势延续，板块将持续承压。</div>
+  </div>
+  <div class="risk-item">
+    <span class="risk-icon">🌊</span>
+    <div class="risk-text"><b>主题退潮风险（中）：</b>智神星一号首飞成功这一重大利好未能推动板块上涨，反而出现"利好出尽"走势。若后续发射任务节奏放缓或不及预期，商业航天主题热度可能快速消退，资金转向其他热点。</div>
+  </div>
+
+  <div class="source">数据来源：同花顺金融数据库、财联社、新华网、证券时报。情景概率为基于当日市场环境的主观判断，仅供参考。</div>
+</div>
+
+<!-- 免责声明 -->
+<div class="disclaimer">
+  <h4>⚠️ 免责声明</h4>
+  <p>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。</p>
+  <p style="margin-top:8px">以上内容为AI自动生成或AI辅助生成，仅用于信息整理、投研辅助、教育交流或一般性分析参考，不构成对任何金融产品、交易策略或投资行为的推荐、邀约、承诺或保证，也不构成投资、法律、税务、会计等专业意见。相关内容可能基于公开信息、历史数据进行总结、归纳与推演，可能存在时效性不足、信息缺漏、事实误差或模型偏差，历史数据及情景假设均不代表未来表现。用户应基于自身风险承受能力独立作出判断，必要时咨询持牌专业机构。</p>
+</div>
+
+</div>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle('compact');
+}
+// 平滑滚动
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
