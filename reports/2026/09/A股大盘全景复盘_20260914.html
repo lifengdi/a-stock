@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026年9月14日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#e63946;--red-light:#fce4e6;--red-bg:rgba(230,57,70,0.08);
+  --green:#2a9d8f;--green-light:#e0f5f2;--green-bg:rgba(42,157,143,0.08);
+  --bg:#f5f6f8;--card:#ffffff;--text:#1a1a2e;--text2:#555770;--text3:#8b8da3;
+  --border:#e8e9ef;--accent:#c9a96e;--accent2:#8b6f47;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,26,46,0.97);backdrop-filter:blur(10px);box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{color:#fff;font-weight:700;font-size:16px;letter-spacing:1px;white-space:nowrap}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:4px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.nav-toggle{background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:600;transition:all .2s}
+.nav-toggle:hover{background:var(--accent2)}
+.container{max-width:1200px;margin:0 auto;padding:76px 20px 40px}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4a 100%);border-radius:12px;padding:32px 36px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(201,169,110,0.15) 0%,transparent 70%);border-radius:50%}
+.hero-date{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.hero-title{color:#fff;font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:1px}
+.hero-subtitle{color:rgba(255,255,255,0.65);font-size:14px;max-width:700px}
+.hero-tags{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.hero-tag{background:rgba(201,169,110,0.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid rgba(201,169,110,0.3)}
+.hero-kpi{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:20px}
+.hero-kpi-item{background:rgba(255,255,255,0.06);border-radius:8px;padding:12px 10px;text-align:center;border:1px solid rgba(255,255,255,0.08)}
+.hero-kpi-name{color:rgba(255,255,255,0.6);font-size:11px;margin-bottom:4px}
+.hero-kpi-val{color:#fff;font-size:18px;font-weight:800}
+.hero-kpi-chg{font-size:12px;font-weight:700;margin-top:2px}
+.card{background:var(--card);border-radius:12px;padding:28px 32px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border)}
+.card-title{font-size:19px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.card-title .num{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.card-badge{font-size:12px;padding:4px 10px;border-radius:4px;font-weight:600}
+.badge-red{background:var(--red-light);color:var(--red)}
+.badge-green{background:var(--green-light);color:var(--green)}
+.badge-gold{background:#fdf6e3;color:var(--accent2)}
+.index-table{width:100%;border-collapse:collapse;margin-top:8px}
+.index-table th{background:var(--bg);padding:10px 12px;font-size:13px;color:var(--text2);font-weight:600;text-align:center;border-bottom:2px solid var(--border)}
+.index-table td{padding:12px;text-align:center;border-bottom:1px solid var(--border);font-size:14px}
+.index-table tr:hover td{background:#fafbfc}
+.idx-name{font-weight:700;text-align:left!important;padding-left:16px!important}
+.idx-close{font-size:17px;font-weight:800}
+.idx-chg{font-weight:700;font-size:15px}
+.idx-vol{color:var(--text2);font-size:13px}
+.volume-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.vol-item{background:linear-gradient(135deg,#f8f9fb,#f0f1f5);border-radius:8px;padding:14px 16px;text-align:center}
+.vol-label{font-size:12px;color:var(--text3);margin-bottom:4px}
+.vol-value{font-size:20px;font-weight:800;color:var(--text)}
+.vol-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.emotion-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.emotion-card{background:var(--bg);border-radius:10px;padding:18px;text-align:center;border:1px solid var(--border)}
+.emotion-label{font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px}
+.emotion-value{font-size:30px;font-weight:800;margin-bottom:2px}
+.emotion-sub{font-size:11px;color:var(--text3)}
+.ratio-bar-wrap{margin:16px 0}
+.ratio-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;font-weight:600}
+.ratio-bar{height:28px;border-radius:6px;overflow:hidden;display:flex;background:var(--border)}
+.ratio-up{background:linear-gradient(90deg,var(--red),#f06070);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;min-width:40px}
+.ratio-flat{background:#b0b3c0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600}
+.ratio-down{background:linear-gradient(90deg,#3cb5a6,var(--green));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;min-width:40px}
+.limit-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.limit-box{border-radius:10px;padding:18px;text-align:center}
+.limit-up-box{background:var(--red-bg);border:1px solid rgba(230,57,70,0.2)}
+.limit-down-box{background:var(--green-bg);border:1px solid rgba(42,157,143,0.2)}
+.limit-num{font-size:36px;font-weight:800}
+.limit-label{font-size:13px;font-weight:600;margin-top:4px}
+.ladder-section{margin-top:20px}
+.ladder-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.ladder-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+.ladder-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.ladder-item{border-radius:8px;padding:12px 10px;text-align:center;border:1px solid var(--border)}
+.ladder-height{font-size:20px;font-weight:800;margin-bottom:4px}
+.ladder-count{font-size:12px;color:var(--text2)}
+.ladder-desc{font-size:11px;color:var(--text3);margin-top:4px}
+.blast-info{display:flex;align-items:center;gap:16px;margin-top:16px;background:var(--bg);border-radius:8px;padding:14px 18px}
+.blast-num{font-size:28px;font-weight:800;color:var(--red)}
+.blast-text{font-size:13px;color:var(--text2);flex:1}
+.sector-tabs{display:flex;gap:8px;margin-bottom:16px}
+.sector-tab{padding:6px 16px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);transition:all .2s}
+.sector-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sector-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sector-bar-name{width:110px;font-size:13px;font-weight:600;text-align:right;flex-shrink:0}
+.sector-bar-track{flex:1;height:24px;background:var(--bg);border-radius:4px;overflow:hidden}
+.sector-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:11px;font-weight:700}
+.sector-bar-fill.up{background:linear-gradient(90deg,var(--red),#f06070)}
+.sector-bar-fill.down{background:linear-gradient(90deg,#3cb5a6,var(--green))}
+.sector-bar-pct{width:55px;font-size:13px;font-weight:700;text-align:right;flex-shrink:0}
+.sector-bar-fund{width:90px;font-size:11px;color:var(--text3);text-align:right;flex-shrink:0}
+.sector-logic{margin-top:16px;background:var(--bg);border-radius:8px;padding:14px 18px}
+.sector-logic h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.sector-logic p{font-size:13px;color:var(--text2);line-height:1.7}
+.fund-section{margin-bottom:20px}
+.fund-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.fund-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+.fund-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.fund-bar-name{width:120px;font-size:13px;font-weight:600;text-align:right;flex-shrink:0}
+.fund-bar-track{flex:1;height:22px;background:var(--bg);border-radius:4px;overflow:hidden}
+.fund-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:11px;font-weight:700}
+.fund-bar-fill.in{background:linear-gradient(90deg,var(--red),#f06070)}
+.fund-bar-fill.out{background:linear-gradient(90deg,#3cb5a6,var(--green))}
+.fund-note{font-size:12px;color:var(--text3);margin-top:10px;padding:10px 14px;background:#fdf6e3;border-radius:6px;border-left:3px solid var(--accent)}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:20px}
+.tl-item::before{content:"";position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+.tl-time{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.tl-content{font-size:14px;color:var(--text2);line-height:1.7}
+.tl-content strong{color:var(--text)}
+.analysis-section{margin-bottom:18px}
+.analysis-h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.analysis-h3 .icon{width:22px;height:22px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.icon-red{background:var(--red)}
+.icon-gold{background:var(--accent)}
+.icon-green{background:var(--green)}
+.icon-blue{background:#4a90d9}
+.icon-purple{background:#8b5cf6}
+.analysis-text{font-size:14px;color:var(--text2);line-height:1.8;padding-left:30px}
+.analysis-text strong{color:var(--text)}
+.tag-inline{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;font-weight:600;margin-right:4px}
+.tag-red{background:var(--red-light);color:var(--red)}
+.tag-gold{background:#fdf6e3;color:var(--accent2)}
+.tag-green{background:var(--green-light);color:var(--green)}
+.tag-blue{background:#e8f0fe;color:#4a90d9}
+.support-table{width:100%;border-collapse:collapse;margin:12px 0}
+.support-table th{background:var(--bg);padding:10px;font-size:12px;color:var(--text2);font-weight:600;text-align:center;border-bottom:2px solid var(--border)}
+.support-table td{padding:10px;text-align:center;border-bottom:1px solid var(--border);font-size:13px}
+.support-table .sup{color:var(--green);font-weight:700}
+.support-table .res{color:var(--red);font-weight:700}
+.support-note{font-size:12px;color:var(--text3);margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:6px}
+.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.scenario-card{border-radius:10px;padding:18px;border:1px solid var(--border);text-align:center}
+.scenario-bull{background:var(--red-bg);border-color:rgba(230,57,70,0.2)}
+.scenario-neutral{background:#f8f9fb;border-color:var(--border)}
+.scenario-bear{background:var(--green-bg);border-color:rgba(42,157,143,0.2)}
+.scenario-label{font-size:14px;font-weight:700;margin-bottom:6px}
+.scenario-prob{font-size:32px;font-weight:800;margin-bottom:10px}
+.scenario-desc{font-size:12px;color:var(--text2);line-height:1.6;text-align:left}
+.scenario-falsify{font-size:11px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);text-align:left}
+.prob-bar{height:28px;border-radius:6px;overflow:hidden;display:flex;margin:12px 0}
+.prob-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.prob-legend{display:flex;gap:16px;font-size:12px;color:var(--text2);margin-bottom:8px;flex-wrap:wrap}
+.prob-legend span{display:flex;align-items:center;gap:4px}
+.prob-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.focus-list{padding-left:30px;font-size:14px;color:var(--text2);line-height:1.9}
+.focus-list li{margin-bottom:4px}
+.focus-list strong{color:var(--text)}
+.footer{text-align:center;padding:24px 20px;color:var(--text3);font-size:12px;line-height:1.8}
+.footer-risk{background:#fdf0f0;border:1px solid rgba(230,57,70,0.15);border-radius:8px;padding:14px 20px;margin-bottom:12px;color:#8b3a3a;font-size:12px;line-height:1.7}
+body.compact .detail-only{display:none!important}
+body.compact .card{padding:20px 24px}
+body.compact .analysis-text{font-size:13px}
+@media(max-width:768px){
+  .hero-kpi{grid-template-columns:repeat(3,1fr)}
+  .emotion-grid{grid-template-columns:repeat(2,1fr)}
+  .volume-overview{grid-template-columns:repeat(2,1fr)}
+  .ladder-grid{grid-template-columns:repeat(3,1fr)}
+  .scenario-grid{grid-template-columns:1fr}
+  .limit-compare{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-title{font-size:22px}
+  .card{padding:18px 16px}
+  .sector-bar-name{width:80px;font-size:12px}
+  .sector-bar-fund{display:none}
+  .index-table{font-size:12px}
+  .index-table th,.index-table td{padding:8px 6px}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">A股<span>全景复盘</span></div>
+    <div class="nav-links">
+      <a href="#index">指数</a><a href="#emotion">情绪</a><a href="#sector">板块</a><a href="#fund">资金</a><a href="#timeline">节奏</a><a href="#analysis">分析</a><a href="#outlook">推演</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleMode()">精简模式</button>
+  </div>
+</nav>
+<div class="container">
+
+<!-- 头部 -->
+<div class="hero">
+  <div class="hero-date">2026年9月14日 · 星期一 · 收盘复盘 · 数据截至15:00</div>
+  <div class="hero-title">A股大盘全景复盘</div>
+  <div class="hero-subtitle">缩量分化 · 沪指几乎平收 · 创业板跌1.1% · 个股涨多跌少 — 1.63万亿创年内次低，PCB午后持续走高，高位股集体退潮</div>
+  <div class="hero-tags">
+    <span class="hero-tag">缩量1.63万亿</span>
+    <span class="hero-tag">年内次低</span>
+    <span class="hero-tag">个股涨多跌少</span>
+    <span class="hero-tag">PCB午后走高</span>
+    <span class="hero-tag">高位股退潮</span>
+  </div>
+  <div class="hero-kpi">
+    <div class="hero-kpi-item"><div class="hero-kpi-name">上证指数</div><div class="hero-kpi-val">3885.33</div><div class="hero-kpi-chg down">-0.07%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">深证成指</div><div class="hero-kpi-val">13384.57</div><div class="hero-kpi-chg down">-0.64%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">创业板指</div><div class="hero-kpi-val">3285.58</div><div class="hero-kpi-chg down">-1.10%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">科创50</div><div class="hero-kpi-val">1528.27</div><div class="hero-kpi-chg down">-1.62%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">沪深300</div><div class="hero-kpi-val">4480.08</div><div class="hero-kpi-chg down">-0.67%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">两市成交</div><div class="hero-kpi-val">1.63万亿</div><div class="hero-kpi-chg down">缩量3427亿</div></div>
+  </div>
+</div>
+
+<!-- 模块1：五大核心指数 -->
+<div class="card" id="index">
+  <div class="card-header">
+    <div class="card-title"><span class="num">1</span>五大核心指数</div>
+    <span class="card-badge badge-green">缩量分化·沪指抗跌</span>
+  </div>
+  <table class="index-table">
+    <thead><tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr></thead>
+    <tbody>
+      <tr><td class="idx-name">上证指数</td><td class="idx-close">3888.11→3885.33</td><td class="idx-chg down">-0.07%</td><td>3867.02</td><td>3895.51</td><td>3867.02</td><td class="idx-vol">7792.81亿</td></tr>
+      <tr><td class="idx-name">深证成指</td><td class="idx-close">13384.57</td><td class="idx-chg down">-0.64%</td><td>13333.07</td><td>13502.25</td><td>13288.83</td><td class="idx-vol">8498.94亿</td></tr>
+      <tr><td class="idx-name">创业板指</td><td class="idx-close">3285.58</td><td class="idx-chg down">-1.10%</td><td>3279.31</td><td>3331.05</td><td>3262.49</td><td class="idx-vol">4006.76亿</td></tr>
+      <tr><td class="idx-name">科创50</td><td class="idx-close">1528.27</td><td class="idx-chg down">-1.62%</td><td>约1538</td><td>约1550</td><td>约1525</td><td class="idx-vol">610.08亿</td></tr>
+      <tr><td class="idx-name">沪深300</td><td class="idx-close">4480.08</td><td class="idx-chg down">-0.67%</td><td>4474.95</td><td>4504.49</td><td>4473.27</td><td class="idx-vol">3986.85亿</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px">备注：科创50今开/最高/最低为基于分时数据的估算值；北证50报1021.90跌0.15%，科创综指跌0.35%报1811.23。国证2000涨0.84%领涨宽基指数，中小盘明显强于大盘。</div>
+  <div class="volume-overview">
+    <div class="vol-item"><div class="vol-label">两市成交额</div><div class="vol-value">1.63万亿</div><div class="vol-sub">较上日缩量3427亿</div></div>
+    <div class="vol-item"><div class="vol-label">量能级别</div><div class="vol-value">年内次低</div><div class="vol-sub">仅高于4月7日1.63万亿</div></div>
+    <div class="vol-item"><div class="vol-label">沪市盘中最低</div><div class="vol-value">3867.02</div><div class="vol-sub">即今日开盘价</div></div>
+    <div class="vol-item"><div class="vol-label">风格分化</div><div class="vol-value">中小盘强</div><div class="vol-sub">国证2000+0.84%</div></div>
+  </div>
+</div>
+
+<!-- 模块2：市场情绪 -->
+<div class="card" id="emotion">
+  <div class="card-header">
+    <div class="card-title"><span class="num">2</span>市场情绪</div>
+    <span class="card-badge badge-red">缩量分化·个股涨多跌少</span>
+  </div>
+  <div class="emotion-grid">
+    <div class="emotion-card"><div class="emotion-label">上涨家数</div><div class="emotion-value up">3126</div><div class="emotion-sub">约58%个股上涨</div></div>
+    <div class="emotion-card"><div class="emotion-label">下跌家数</div><div class="emotion-value down">2224</div><div class="emotion-sub">约41%个股下跌</div></div>
+    <div class="emotion-card"><div class="emotion-label">涨停 / 跌停</div><div class="emotion-value">55 <span style="font-size:18px;color:var(--text3)">/</span> 18</div><div class="emotion-sub">财联社不含ST口径</div></div>
+    <div class="emotion-card"><div class="emotion-label">炸板率</div><div class="emotion-value" style="color:var(--red)">31%</div><div class="emotion-sub">封板率69%，30股炸板</div></div>
+  </div>
+  <div class="ratio-bar-wrap">
+    <div class="ratio-label"><span>上涨 3126家 (57.9%)</span><span>下跌 2224家 (41.2%)</span><span>平盘约50家 (0.9%)</span></div>
+    <div class="ratio-bar">
+      <div class="ratio-up" style="width:57.9%">58%</div>
+      <div class="ratio-flat" style="width:0.9%"></div>
+      <div class="ratio-down" style="width:41.2%">41%</div>
+    </div>
+  </div>
+  <div class="limit-compare">
+    <div class="limit-box limit-up-box">
+      <div class="limit-num up">55</div>
+      <div class="limit-label">涨停家数</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">连板11只，晋级率57%</div>
+    </div>
+    <div class="limit-box limit-down-box">
+      <div class="limit-num down">18</div>
+      <div class="limit-label">跌停家数</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">高位股集中退潮</div>
+    </div>
+  </div>
+  <div class="ladder-section detail-only">
+    <div class="ladder-title">连板梯队（财联社口径，不含ST）</div>
+    <div class="ladder-grid">
+      <div class="ladder-item" style="border-color:var(--red);background:var(--red-bg)">
+        <div class="ladder-height up">7板</div>
+        <div class="ladder-count">1只</div>
+        <div class="ladder-desc">广宇发展（重组）</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--accent2)">4板</div>
+        <div class="ladder-count">2只</div>
+        <div class="ladder-desc">超声电子6天4板、众泰汽车5天4板</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--text2)">3板</div>
+        <div class="ladder-count">1只</div>
+        <div class="ladder-desc">中新赛克（网络安全）</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--text3)">2板</div>
+        <div class="ladder-count">7只</div>
+        <div class="ladder-desc">双星新材、澳弘电子等</div>
+      </div>
+      <div class="ladder-item" style="background:var(--green-bg)">
+        <div class="ladder-height down">断板/负反馈</div>
+        <div class="ladder-count">多只</div>
+        <div class="ladder-desc">龙版传媒复牌一字跌停</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-top:10px">连板股总数11只（较上周五7只增加），三连板及以上4只。连板晋级率57.14%（上周五7只→今日4只晋级3板以上），情绪有所修复。但高位股退潮明显：龙版传媒复牌一字跌停，新农开发、敦煌种业、南宁百货、红棉股份跌停。国芳集团走出12天7板（非连续）。</div>
+  </div>
+  <div class="blast-info">
+    <div class="blast-num">31%</div>
+    <div class="blast-text">
+      <strong>炸板率31%（封板率69%）</strong>：今日30股封板未遂。午后精华制药、宝鼎科技、徐家汇等多只个股炸板，但PCB方向澳弘电子、电力方向三星电气午后新封涨停。整体情绪较上周五（炸板率31%、红盘率12%）有所修复，个股涨多跌少。
+    </div>
+  </div>
+</div>
+
+<!-- 模块3：板块轮动 -->
+<div class="card" id="sector">
+  <div class="card-header">
+    <div class="card-title"><span class="num">3</span>板块轮动</div>
+    <span class="card-badge badge-gold">PCB领涨·高位股退潮</span>
+  </div>
+  <div class="sector-tabs">
+    <button class="sector-tab active" onclick="switchSector(this,'up')">涨幅TOP10</button>
+    <button class="sector-tab" onclick="switchSector(this,'down')">跌幅TOP10</button>
+  </div>
+  <div id="sector-up">
+    <div class="sector-bar-row"><div class="sector-bar-name">PCB概念</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:85%">午后持续走高</div></div><div class="sector-bar-pct up">约+3%</div><div class="sector-bar-fund">多股涨停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">网络安全</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:70%">中新赛克3连板</div></div><div class="sector-bar-pct up">约+2.5%</div><div class="sector-bar-fund">永信至诚20cm</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">培育钻石</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:60%">黄河旋风涨停</div></div><div class="sector-bar-pct up">约+2.2%</div><div class="sector-bar-fund">超跌反弹</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">医药/CRO</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:55%">万邦医药20cm</div></div><div class="sector-bar-pct up">约+1.8%</div><div class="sector-bar-fund">防御属性</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">MLCC概念</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:50%">双星新材2连板</div></div><div class="sector-bar-pct up">约+1.6%</div><div class="sector-bar-fund">涨价延续</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">汽车产业链</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:45%">众泰汽车5天4板</div></div><div class="sector-bar-pct up">约+1.4%</div><div class="sector-bar-fund">十五五规划催化</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">复合铜箔</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:40%">康达新材涨停</div></div><div class="sector-bar-pct up">约+1.2%</div><div class="sector-bar-fund">新材料方向</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">新型烟草</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:35%">板块涨幅居前</div></div><div class="sector-bar-pct up">约+1.0%</div><div class="sector-bar-fund">政策预期</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">元件</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:30%">主力净流入30亿</div></div><div class="sector-bar-pct up">约+0.8%</div><div class="sector-bar-fund">净流入居首</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">通信设备</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:25%">板块涨幅居前</div></div><div class="sector-bar-pct up">约+0.6%</div><div class="sector-bar-fund">光通信延续</div></div>
+  </div>
+  <div id="sector-down" style="display:none">
+    <div class="sector-bar-row"><div class="sector-bar-name">种植业/农业</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:100%">高位股跌停</div></div><div class="sector-bar-pct down">约-3%</div><div class="sector-bar-fund">敦煌种业跌停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">国防军工</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:75%">板块跌幅居前</div></div><div class="sector-bar-pct down">约-2.2%</div><div class="sector-bar-fund">前日活跃回调</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">石油化工</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:65%">板块跌幅居前</div></div><div class="sector-bar-pct down">约-1.8%</div><div class="sector-bar-fund">油价回落</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">教育培训</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:55%">板块跌幅居前</div></div><div class="sector-bar-pct down">约-1.5%</div><div class="sector-bar-fund">题材退潮</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">AI算力/光模块</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:60%">高位分歧</div></div><div class="sector-bar-pct down">约-1.7%</div><div class="sector-bar-fund">前期热门调整</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">存储芯片</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:50%">高位分歧</div></div><div class="sector-bar-pct down">约-1.4%</div><div class="sector-bar-fund">获利回吐</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">高位人气股</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:80%">批量跌停</div></div><div class="sector-bar-pct down">约-4%</div><div class="sector-bar-fund">龙版传媒跌停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">AI漫剧/传媒</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:45%">龙版传媒复牌</div></div><div class="sector-bar-pct down">约-1.3%</div><div class="sector-bar-fund">一字跌停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">房地产</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:35%">板块走弱</div></div><div class="sector-bar-pct down">约-1.0%</div><div class="sector-bar-fund">持续低迷</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">贵金属</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:30%">延续回调</div></div><div class="sector-bar-pct down">约-0.8%</div><div class="sector-bar-fund">美元走强</div></div>
+  </div>
+  <div class="sector-logic detail-only">
+    <h4>领涨核心逻辑</h4>
+    <p><strong>PCB概念午后持续走高：</strong>建滔CCL涨价逻辑延续，超声电子6天4板，澳弘电子、嘉立创走出2连板，满坤科技、宝鼎科技、中京电子等多股涨停。PCB涨价+AI算力需求逻辑持续发酵，成为当前市场最明确的主线方向。<br>
+    <strong>网络安全：</strong>中新赛克一字3连板（DeepSeek V4.1发布+黄仁勋看好网络安全），永信至诚20cm涨停。AI+安全主题持续。<br>
+    <strong>医药/CRO：</strong>万邦医药、近岸蛋白双双20cm涨停，医药板块超跌反弹，防御属性凸显。<br>
+    <strong>汽车产业链：</strong>山子高科一字涨停，众泰汽车5天4板，安凯客车、海马汽车涨停——智能网联汽车"十五五"规划催化。<br>
+    <strong>培育钻石/MLCC：</strong>黄河旋风涨停，双星新材2连板——超跌反弹+涨价逻辑延续。</p>
+    <h4 style="margin-top:12px">领跌核心逻辑</h4>
+    <p><strong>高位人气股集体退潮：</strong>龙版传媒复牌一字跌停（前期AI漫剧7天6板龙头），新农开发、敦煌种业、南宁百货、红棉股份跌停。高位投机资金集中兑现。<br>
+    <strong>农业/种植业：</strong>上周五批量补跌后今日继续调整，新农开发、敦煌种业跌停，前期农业投机主线彻底退潮。<br>
+    <strong>国防军工：</strong>上周五逆势活跃的军工板块今日回调，前日获利盘兑现。<br>
+    <strong>AI算力/光模块/存储：</strong>前期热门科技方向高位分歧，资金从高位题材流向PCB低位补涨方向。</p>
+  </div>
+</div>
+
+<!-- 模块4：资金流向 -->
+<div class="card" id="fund">
+  <div class="card-header">
+    <div class="card-title"><span class="num">4</span>资金流向</div>
+    <span class="card-badge badge-red">电子行业获125亿净流入</span>
+  </div>
+  <div class="fund-section">
+    <div class="fund-title">电子行业获逾125亿元主力资金净流入（行业第一）</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:12px">Wind实时监测数据显示，电子行业获得逾125亿元主力资金净流入，机械设备紧随其后。元件板块主力资金净流入超30亿元，位居板块首位。</div>
+    <div class="fund-bar-row"><div class="fund-bar-name">电子行业(整体)</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:100%">+125亿</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">元件(细分)</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:25%">+30亿</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">机械设备</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:40%">净流入</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">医药生物</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:30%">净流入</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">通信设备</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:25%">净流入</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">农业/种植业</div><div class="fund-bar-track"><div class="fund-bar-fill out" style="width:70%">净流出</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">国防军工</div><div class="fund-bar-track"><div class="fund-bar-fill out" style="width:50%">净流出</div></div></div>
+  </div>
+  <div class="fund-section detail-only">
+    <div class="fund-title">资金风格特征</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8">
+      今日市场最显著的资金特征是<strong>电子行业独获125亿净流入</strong>——与上周五主力净流出410亿形成鲜明对比。资金从高位农业、军工方向撤出，集中流入PCB/元件/网络安全等科技硬件方向。黄白线分化明显，中小盘股走势较强（国证2000涨0.84%），大盘权重股拖累指数。全市场成交1.63万亿创年内次低，量能萎缩说明增量资金仍在观望，但存量资金在科技硬件方向抱团明显。
+    </div>
+  </div>
+  <div class="fund-note">
+    <strong>北向资金说明：</strong>自2024年8月起，交易所取消北向资金盘中实时披露，日度净买入金额于次一交易日公布。今日（9月14日）北向资金精确净买入数据暂未披露，以上资金分析基于主力资金/行业资金流向口径。待明日数据公布后可补充核对。
+  </div>
+</div>
+
+<!-- 模块5：全天走势 -->
+<div class="card" id="timeline">
+  <div class="card-header">
+    <div class="card-title"><span class="num">5</span>全天走势复盘</div>
+    <span class="card-badge badge-gold">低开高走·午后跳水·尾盘企稳</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:30 开盘 · 集体低开</div>
+      <div class="tl-content">上证指数低开0.54%报<strong>3867.02</strong>（即今日最低），深证成指低开0.38%报<strong>13333.07</strong>，创业板指低开1.28%报<strong>3279.31</strong>。受上周五外围市场波动及美联储议息前观望情绪影响，三大指数集体低开。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:30-10:30 早盘 · 低开高走</div>
+      <div class="tl-content">开盘后指数快速回升，沪指从3867点拉升至3890点上方，深成指最高反弹至<strong>13502.25</strong>，创业板指最高<strong>3331.05</strong>。PCB概念早盘即开始活跃，网络安全、医药板块同步走强。<strong>黄白线分化</strong>，中小盘股明显强于大盘权重。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30-11:30 上午 · 高位震荡</div>
+      <div class="tl-content">指数在高位维持震荡，沪指在3890附近窄幅波动。市场超3100只个股上涨，赚钱效应较好。PCB概念持续走高，满坤科技、超声电子、宝鼎科技、中京电子等多股涨停。培育钻石、复合铜箔方向活跃。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:00-14:00 午后 · 股指跳水</div>
+      <div class="tl-content">午后开盘后指数出现跳水，沪指从3890附近回落，创业板指跌幅扩大至1.1%。高位人气股开始下挫，龙版传媒复牌一字跌停，新农开发、敦煌种业等农业股跌停。AI算力、光模块等前期热门方向高位分歧。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:00-14:40 尾盘 · PCB引领企稳</div>
+      <div class="tl-content">午后PCB概念持续走高，<strong>澳弘电子、嘉立创走出2连板</strong>，泰金新能、威尔高涨超10%。电力方向三星电气新封涨停。指数在低位获得支撑，沪指跌幅收窄至0.07%附近。电子行业主力资金净流入超125亿。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:40-15:00 收盘 · 缩量企稳</div>
+      <div class="tl-content">尾盘指数维持低位震荡，沪指收于<strong>3885.33</strong>（-0.07%），深成指收<strong>13384.57</strong>（-0.64%），创业板指收<strong>3285.58</strong>（-1.10%），科创50收<strong>1528.27</strong>（-1.62%）。全天成交1.63万亿，缩量3427亿，创年内次低。</div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--text2);margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:6px">
+    <strong>整体形态：</strong>集体低开 → 早盘低开高走（沪指从3867反弹至3895）→ 午后跳水回落 → 尾盘PCB引领企稳。沪指几乎平收但创业板/科创跌幅较大，市场呈"指数弱、个股强"的分化格局。
+  </div>
+</div>
+
+<!-- 模块6：专业分析 -->
+<div class="card" id="analysis">
+  <div class="card-header">
+    <div class="card-title"><span class="num">6</span>专业深度分析</div>
+    <span class="card-badge badge-gold">缩量分化·PCB主线确立</span>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <div class="analysis-h3"><span class="icon icon-gold">位</span>关键技术位 · 支撑/压力一览</div>
+    <table class="support-table">
+      <thead><tr><th>指数</th><th>收盘</th><th>支撑位</th><th>距收盘</th><th>压力位</th><th>距收盘</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700">上证指数</td><td>3885.33</td><td class="sup">3867-3870</td><td>-0.5%~-0.4%</td><td class="res">3895-3910</td><td>+0.3%~+0.6%</td></tr>
+        <tr><td style="font-weight:700">深证成指</td><td>13384.57</td><td class="sup">13288-13300</td><td>-0.7%~-0.6%</td><td class="res">13500-13550</td><td>+0.9%~+1.2%</td></tr>
+        <tr><td style="font-weight:700">创业板指</td><td>3285.58</td><td class="sup">3262-3270</td><td>-0.7%~-0.5%</td><td class="res">3310-3330</td><td>+0.7%~+1.4%</td></tr>
+        <tr><td style="font-weight:700">科创50</td><td>1528.27</td><td class="sup">1520-1525</td><td>-0.5%~-0.2%</td><td class="res">1550-1560</td><td>+1.4%~+2.1%</td></tr>
+        <tr><td style="font-weight:700">沪深300</td><td>4480.08</td><td class="sup">4473-4480</td><td>-0.2%~0%</td><td class="res">4500-4510</td><td>+0.4%~+0.7%</td></tr>
+      </tbody>
+    </table>
+    <div class="support-note">口径说明：支撑位基于今日盘中实际低点设定（沪指最低3867即今日开盘价，形成"单针探底"形态）；压力位基于今日反弹高点及5日均线。沪指3867支撑若有效，则短期底部确认；若跌破则向下测试3852（上周五低点）。</div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-red">主</span>核心主线与持续性判断</div>
+    <div class="analysis-text">
+      经过上周五的恐慌深V后，今日市场在缩量中走出<strong>PCB/元件主线持续强化</strong>的格局。最明确的主线：<br>
+      <span class="tag-inline tag-red">PCB/覆铜板/元件线</span> 超声电子6天4板，澳弘电子、嘉立创2连板，满坤科技、宝鼎科技、中京电子涨停——建滔CCL第七轮涨价+7628电子布加速+AI算力需求，<strong>产业涨价逻辑持续验证</strong>。电子行业独获125亿主力净流入，元件净流入超30亿居首，资金抱团明显。该主线已连续3个交易日领涨，是当前市场<strong>最有持续性</strong>的方向。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-gold">支</span>活跃支线题材</div>
+    <div class="analysis-text">
+      <span class="tag-inline tag-blue">网络安全/AI应用</span> 中新赛克一字3连板，永信至诚20cm涨停——DeepSeek V4.1+黄仁勋看好网络安全。<br>
+      <span class="tag-inline tag-green">医药/CRO</span> 万邦医药、近岸蛋白20cm涨停——超跌反弹+防御属性。<br>
+      <span class="tag-inline tag-red">汽车产业链</span> 众泰汽车5天4板，山子高科一字，安凯客车、海马汽车涨停——智能网联汽车"十五五"催化。<br>
+      <span class="tag-inline tag-gold">培育钻石/MLCC</span> 黄河旋风涨停，双星新材2连板——超跌反弹+村田停产催化延续。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-green">弱</span>弱势退潮板块与风险点</div>
+    <div class="analysis-text">
+      <span class="tag-inline tag-green">高位人气股集体退潮</span> 龙版传媒复牌一字跌停（前期AI漫剧龙头），南宁百货、红棉股份跌停——高位投机资金集中兑现。<br>
+      <span class="tag-inline tag-green">农业/种植业</span> 新农开发、敦煌种业跌停，前期农业投机主线彻底退潮。<br>
+      <span class="tag-inline tag-green">AI算力/光模块/存储</span> 前期热门科技方向高位分歧，资金从高位题材流向PCB低位补涨。<br>
+      <strong>风险点：</strong>① 成交1.63万亿创年内次低，量能持续萎缩，反弹缺乏增量资金；② 科创50跌1.62%弱于沪指，科技内部分化；③ 美联储9月议息在即（本周三），外部不确定性仍存；④ 高位股退潮可能蔓延至其他方向。
+    </div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-blue">风</span>市场风格偏向</div>
+    <div class="analysis-text">
+      <strong>中小盘成长强于大盘权重，PCB硬件独强</strong>。沪指仅跌0.07%几乎平收，但科创50跌1.62%——看似矛盾，实则因为黄白线分化：国证2000涨0.84%，中小盘股涨多跌少（3126涨/2224跌），但大盘权重股（沪深300 -0.67%）拖累指数。市场风格从上周五的"科技硬件独强"延续，但今日PCB主线更聚焦，且医药、汽车等方向多点开花。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-purple">技</span>技术形态与量价关系</div>
+    <div class="analysis-text">
+      <strong>上证指数：</strong>今日低开0.54%后反弹，最低3867即开盘价，形成"单针探底"形态。收盘3885.33，站回3880上方。上周五跌破收敛三角形后，今日在3867获得支撑，短期有企稳迹象。<br>
+      <strong>量价关系：</strong>成交1.63万亿，较上周五缩量3427亿——<strong>缩量企稳</strong>。上周五放量深V（1.97万亿），今日缩量整理（1.63万亿），说明恐慌盘已释放，但增量资金尚未进场。地量之后通常酝酿方向选择。<br>
+      <strong>关键位：</strong>沪指支撑3867（今日低点）、3852（上周五低点）；压力3895（今日高点）、3910（上周五开盘缺口）。创业板指3262今日低点与上周五3261形成双底支撑。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-red">情</span>情绪周期定位</div>
+    <div class="analysis-text">
+      当前处于<strong>恐慌释放后的修复初期</strong>（情绪评分45/100）。涨停55家（上周五40家），连板11只（上周五7只），晋级率57%（上周五33%）——情绪指标全面回暖。但跌停18家且集中在高位人气股，说明高位投机仍在退潮。市场处于<strong>新老交替期</strong>：旧主线（农业、高位题材）退潮，新主线（PCB/元件）正在确立。
+    </div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-gold">核</span>核心驱动因素与核心矛盾</div>
+    <div class="analysis-text">
+      <strong>核心驱动：</strong>① <strong>PCB涨价逻辑持续强化</strong>——建滔第七轮涨价+电子布加速+AI算力需求，电子行业获125亿主力净流入；② <strong>恐慌后技术修复</strong>——上周五放量深V后，今日缩量企稳，3867形成双底支撑；③ <strong>政策催化</strong>——智能网联汽车"十五五"规划、DeepSeek V4.1发布；④ <strong>防御轮动</strong>——医药超跌反弹，培育钻石等低位方向补涨。<br>
+      <strong>核心矛盾：</strong>① <strong>PCB独强 vs 市场缩量</strong>——PCB主线明确但全市场成交创年内次低，独木难支；② <strong>个股涨多跌少 vs 指数收跌</strong>——3126股上涨但三大指数全绿，权重股拖累明显；③ <strong>新主线确立 vs 美联储议息</strong>——PCB涨价逻辑独立于外部，但本周三美联储议息仍是最大外部变量。
+    </div>
+  </div>
+</div>
+
+<!-- 模块7：后市推演 -->
+<div class="card" id="outlook">
+  <div class="card-header">
+    <div class="card-title"><span class="num">7</span>后市推演与关注方向</div>
+    <span class="card-badge badge-gold">缩量企稳·方向待选</span>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div class="analysis-h3"><span class="icon icon-gold">率</span>情景推演（概率为分析设定值，非预测）</div>
+    <div class="prob-bar">
+      <div class="prob-seg" style="width:35%;background:linear-gradient(90deg,var(--red),#f06070)">反弹修复 35%</div>
+      <div class="prob-seg" style="width:45%;background:linear-gradient(90deg,#e8932c,#f0b054)">震荡磨底 45%</div>
+      <div class="prob-seg" style="width:20%;background:linear-gradient(90deg,#3cb5a6,var(--green))">继续下探 20%</div>
+    </div>
+    <div class="prob-legend">
+      <span><span class="prob-dot" style="background:var(--red)"></span>情景一 反弹修复 约35%</span>
+      <span><span class="prob-dot" style="background:#e8932c"></span>情景二 震荡磨底 约45%</span>
+      <span><span class="prob-dot" style="background:var(--green)"></span>情景三 继续下探 约20%</span>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:8px">注：概率为基于当前量价、情绪与外部变量（美联储9月议息）状态的分析设定权重（合计100%），非市场共识或收益预期；将随量能与消息面变化动态调整。</div>
+  </div>
+
+  <div class="scenario-grid detail-only">
+    <div class="scenario-card scenario-bull">
+      <div class="scenario-label up">情景一｜反弹修复</div>
+      <div class="scenario-prob up">35%</div>
+      <div class="scenario-desc">PCB主线持续扩散带动科技硬件全面回暖，沪指反弹收复3910跳空缺口并站稳3900上方。美联储议息结果偏鸽（不加息或释放鸽派信号），增量资金回流，成交重回1.8万亿以上。</div>
+      <div class="scenario-falsify">证伪信号：沪指无法站稳3895且成交持续萎缩。</div>
+    </div>
+    <div class="scenario-card scenario-neutral">
+      <div class="scenario-label" style="color:var(--text2)">情景二｜震荡磨底</div>
+      <div class="scenario-prob" style="color:var(--text2)">45%</div>
+      <div class="scenario-desc">大概率情景。沪指在3860-3910区间反复磨底，PCB主线与其他板块跷跷板持续，赚钱效应集中在科技硬件方向。等待美联储议息落地及方向选择。</div>
+      <div class="scenario-falsify">证伪信号：放量突破3910或跌破3852。</div>
+    </div>
+    <div class="scenario-card scenario-bear">
+      <div class="scenario-label down">情景三｜继续下探</div>
+      <div class="scenario-prob down">20%</div>
+      <div class="scenario-desc">美联储超预期鹰派（加息25bp并放鹰），全球风险资产承压。沪指跌破3867支撑，向3852-3830区间寻求支撑。PCB主线补跌，高位股退潮蔓延。</div>
+      <div class="scenario-falsify">证伪信号：成交萎缩至1.5万亿以下且不再创新低。</div>
+    </div>
+  </div>
+
+  <div class="analysis-section" style="margin-top:20px">
+    <div class="analysis-h3"><span class="icon icon-gold">关</span>短期关注方向（方向性观察，不构成个股推荐）</div>
+    <ul class="focus-list">
+      <li><strong>PCB/元件主线持续性：</strong>今日电子行业独获125亿净流入，超声电子6天4板。本周关键看PCB能否持续扩散至更广方向，若成交配合放大则新主线确认。</li>
+      <li><strong>美联储9月议息（本周三）：</strong>加息25bp概率此前升至70%，议息结果是本周最大外部变量，将直接决定全球风险资产方向。</li>
+      <li><strong>沪指3867支撑有效性：</strong>今日最低3867（即开盘价），形成"单针探底"。若下周不再跌破且能收复3895，则短期企稳信号明确。</li>
+      <li><strong>量能变化：</strong>今日1.63万亿创年内次低，缩量企稳。关注成交能否重回1.8万亿以上——地量之后若放量则方向选择。</li>
+      <li><strong>高位股退潮是否蔓延：</strong>龙版传媒复牌跌停、农业股批量跌停，关注退潮是否从高位题材扩散至PCB等新主线。</li>
+      <li><strong>中小盘风格能否持续：</strong>今日国证2000涨0.84%，3126股上涨，关注中小盘赚钱效应能否延续。</li>
+    </ul>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-red">风</span>风险提示要点</div>
+    <div class="analysis-text">
+      ① 成交1.63万亿创年内次低，量能持续萎缩，反弹缺乏增量资金支撑；② 美联储9月议息在即，外部流动性不确定性仍存；③ 高位人气股退潮明显（龙版传媒复牌跌停），需警惕退潮蔓延；④ 科创50跌1.62%弱于沪指，科技内部分化；⑤ 沪指上周五跌破收敛三角形后今日仅勉强企稳，技术形态仍需确认。
+    </div>
+  </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div class="footer-risk">
+    <strong>风险提示：</strong>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中涉及的板块与方向仅为客观分析，不代表对任何个股或板块的推荐。投资者应根据自身风险承受能力独立做出投资决策。
+  </div>
+  <div>A股大盘全景复盘 · 2026年9月14日</div>
+  <div>数据来源：同花顺、上交所、财联社、证券时报、东方财富、上海证券报</div>
+  <div style="margin-top:8px;color:var(--text3)">本报告由AI自动生成，仅供学习交流使用 · 北向资金当日精确净买入未披露（2024年8月起交易所取消盘中实时披露），相关表述已如实标注</div>
+</div>
+
+</div>
+<script>
+function toggleMode(){
+  document.body.classList.toggle('compact');
+  var btn=document.querySelector('.nav-toggle');
+  btn.textContent=document.body.classList.contains('compact')?'详细模式':'精简模式';
+}
+function switchSector(el,type){
+  document.querySelectorAll('.sector-tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.getElementById('sector-up').style.display=type==='up'?'':'none';
+  document.getElementById('sector-down').style.display=type==='down'?'':'none';
+}
+window.addEventListener('scroll',function(){
+  var sections=document.querySelectorAll('.card[id]');
+  var scrollPos=window.scrollY+80;
+  sections.forEach(function(sec){
+    if(sec.offsetTop<=scrollPos && sec.offsetTop+sec.offsetHeight>scrollPos){
+      var id=sec.getAttribute('id');
+      document.querySelectorAll('.nav-links a').forEach(function(a){
+        a.style.color='';a.style.background='';
+        if(a.getAttribute('href')==='#'+id){a.style.color='#fff';a.style.background='rgba(255,255,255,0.15)';}
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
