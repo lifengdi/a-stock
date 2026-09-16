@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026年9月15日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#e63946;--red-light:#fce4e6;--red-bg:rgba(230,57,70,0.08);
+  --green:#2a9d8f;--green-light:#e0f5f2;--green-bg:rgba(42,157,143,0.08);
+  --bg:#f5f6f8;--card:#ffffff;--text:#1a1a2e;--text2:#555770;--text3:#8b8da3;
+  --border:#e8e9ef;--accent:#c9a96e;--accent2:#8b6f47;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,26,46,0.97);backdrop-filter:blur(10px);box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{color:#fff;font-weight:700;font-size:16px;letter-spacing:1px;white-space:nowrap}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:4px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.nav-toggle{background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:600;transition:all .2s}
+.nav-toggle:hover{background:var(--accent2)}
+.container{max-width:1200px;margin:0 auto;padding:76px 20px 40px}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4a 100%);border-radius:12px;padding:32px 36px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(201,169,110,0.15) 0%,transparent 70%);border-radius:50%}
+.hero-date{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.hero-title{color:#fff;font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:1px}
+.hero-subtitle{color:rgba(255,255,255,0.65);font-size:14px;max-width:700px}
+.hero-tags{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.hero-tag{background:rgba(201,169,110,0.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid rgba(201,169,110,0.3)}
+.hero-kpi{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:20px}
+.hero-kpi-item{background:rgba(255,255,255,0.06);border-radius:8px;padding:12px 10px;text-align:center;border:1px solid rgba(255,255,255,0.08)}
+.hero-kpi-name{color:rgba(255,255,255,0.6);font-size:11px;margin-bottom:4px}
+.hero-kpi-val{color:#fff;font-size:18px;font-weight:800}
+.hero-kpi-chg{font-size:12px;font-weight:700;margin-top:2px}
+.up{color:var(--red)!important}
+.down{color:var(--green)!important}
+.card{background:var(--card);border-radius:12px;padding:28px 32px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border)}
+.card-title{font-size:19px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.card-title .num{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.card-badge{font-size:12px;padding:4px 10px;border-radius:4px;font-weight:600}
+.badge-red{background:var(--red-light);color:var(--red)}
+.badge-green{background:var(--green-light);color:var(--green)}
+.badge-gold{background:#fdf6e3;color:var(--accent2)}
+.index-table{width:100%;border-collapse:collapse;margin-top:8px}
+.index-table th{background:var(--bg);padding:10px 12px;font-size:13px;color:var(--text2);font-weight:600;text-align:center;border-bottom:2px solid var(--border)}
+.index-table td{padding:12px;text-align:center;border-bottom:1px solid var(--border);font-size:14px}
+.index-table tr:hover td{background:#fafbfc}
+.idx-name{font-weight:700;text-align:left!important;padding-left:16px!important}
+.idx-close{font-size:17px;font-weight:800}
+.idx-chg{font-weight:700;font-size:15px}
+.idx-vol{color:var(--text2);font-size:13px}
+.volume-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.vol-item{background:linear-gradient(135deg,#f8f9fb,#f0f1f5);border-radius:8px;padding:14px 16px;text-align:center}
+.vol-label{font-size:12px;color:var(--text3);margin-bottom:4px}
+.vol-value{font-size:20px;font-weight:800;color:var(--text)}
+.vol-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.emotion-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.emotion-card{background:var(--bg);border-radius:10px;padding:18px;text-align:center;border:1px solid var(--border)}
+.emotion-label{font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px}
+.emotion-value{font-size:30px;font-weight:800;margin-bottom:2px}
+.emotion-sub{font-size:11px;color:var(--text3)}
+.ratio-bar-wrap{margin:16px 0}
+.ratio-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;font-weight:600}
+.ratio-bar{height:28px;border-radius:6px;overflow:hidden;display:flex;background:var(--border)}
+.ratio-up{background:linear-gradient(90deg,var(--red),#f06070);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;min-width:40px}
+.ratio-flat{background:#b0b3c0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600}
+.ratio-down{background:linear-gradient(90deg,#3cb5a6,var(--green));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;min-width:40px}
+.limit-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.limit-box{border-radius:10px;padding:18px;text-align:center}
+.limit-up-box{background:var(--red-bg);border:1px solid rgba(230,57,70,0.2)}
+.limit-down-box{background:var(--green-bg);border:1px solid rgba(42,157,143,0.2)}
+.limit-num{font-size:36px;font-weight:800}
+.limit-label{font-size:13px;font-weight:600;margin-top:4px}
+.ladder-section{margin-top:20px}
+.ladder-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.ladder-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+.ladder-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.ladder-item{border-radius:8px;padding:12px 10px;text-align:center;border:1px solid var(--border)}
+.ladder-height{font-size:20px;font-weight:800;margin-bottom:4px}
+.ladder-count{font-size:12px;color:var(--text2)}
+.ladder-desc{font-size:11px;color:var(--text3);margin-top:4px}
+.blast-info{display:flex;align-items:center;gap:16px;margin-top:16px;background:var(--bg);border-radius:8px;padding:14px 18px}
+.blast-num{font-size:28px;font-weight:800;color:var(--red)}
+.blast-text{font-size:13px;color:var(--text2);flex:1}
+.sector-tabs{display:flex;gap:8px;margin-bottom:16px}
+.sector-tab{padding:6px 16px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);transition:all .2s}
+.sector-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sector-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sector-bar-name{width:110px;font-size:13px;font-weight:600;text-align:right;flex-shrink:0}
+.sector-bar-track{flex:1;height:24px;background:var(--bg);border-radius:4px;overflow:hidden}
+.sector-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:11px;font-weight:700}
+.sector-bar-fill.up{background:linear-gradient(90deg,var(--red),#f06070)}
+.sector-bar-fill.down{background:linear-gradient(90deg,#3cb5a6,var(--green))}
+.sector-bar-pct{width:55px;font-size:13px;font-weight:700;text-align:right;flex-shrink:0}
+.sector-bar-fund{width:90px;font-size:11px;color:var(--text3);text-align:right;flex-shrink:0}
+.sector-logic{margin-top:16px;background:var(--bg);border-radius:8px;padding:14px 18px}
+.sector-logic h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.sector-logic p{font-size:13px;color:var(--text2);line-height:1.7}
+.fund-section{margin-bottom:20px}
+.fund-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.fund-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+.fund-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.fund-bar-name{width:120px;font-size:13px;font-weight:600;text-align:right;flex-shrink:0}
+.fund-bar-track{flex:1;height:22px;background:var(--bg);border-radius:4px;overflow:hidden}
+.fund-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:11px;font-weight:700}
+.fund-bar-fill.in{background:linear-gradient(90deg,var(--red),#f06070)}
+.fund-bar-fill.out{background:linear-gradient(90deg,#3cb5a6,var(--green))}
+.fund-note{font-size:12px;color:var(--text3);margin-top:10px;padding:10px 14px;background:#fdf6e3;border-radius:6px;border-left:3px solid var(--accent)}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:20px}
+.tl-item::before{content:"";position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+.tl-time{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.tl-content{font-size:14px;color:var(--text2);line-height:1.7}
+.tl-content strong{color:var(--text)}
+.analysis-section{margin-bottom:18px}
+.analysis-h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.analysis-h3 .icon{width:22px;height:22px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.icon-red{background:var(--red)}
+.icon-gold{background:var(--accent)}
+.icon-green{background:var(--green)}
+.icon-blue{background:#4a90d9}
+.icon-purple{background:#8b5cf6}
+.analysis-text{font-size:14px;color:var(--text2);line-height:1.8;padding-left:30px}
+.analysis-text strong{color:var(--text)}
+.tag-inline{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;font-weight:600;margin-right:4px}
+.tag-red{background:var(--red-light);color:var(--red)}
+.tag-gold{background:#fdf6e3;color:var(--accent2)}
+.tag-green{background:var(--green-light);color:var(--green)}
+.tag-blue{background:#e8f0fe;color:#4a90d9}
+.support-table{width:100%;border-collapse:collapse;margin:12px 0}
+.support-table th{background:var(--bg);padding:10px;font-size:12px;color:var(--text2);font-weight:600;text-align:center;border-bottom:2px solid var(--border)}
+.support-table td{padding:10px;text-align:center;border-bottom:1px solid var(--border);font-size:13px}
+.support-table .sup{color:var(--green);font-weight:700}
+.support-table .res{color:var(--red);font-weight:700}
+.support-note{font-size:12px;color:var(--text3);margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:6px}
+.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.scenario-card{border-radius:10px;padding:18px;border:1px solid var(--border);text-align:center}
+.scenario-bull{background:var(--red-bg);border-color:rgba(230,57,70,0.2)}
+.scenario-neutral{background:#f8f9fb;border-color:var(--border)}
+.scenario-bear{background:var(--green-bg);border-color:rgba(42,157,143,0.2)}
+.scenario-label{font-size:14px;font-weight:700;margin-bottom:6px}
+.scenario-prob{font-size:32px;font-weight:800;margin-bottom:10px}
+.scenario-desc{font-size:12px;color:var(--text2);line-height:1.6;text-align:left}
+.scenario-falsify{font-size:11px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);text-align:left}
+.prob-bar{height:28px;border-radius:6px;overflow:hidden;display:flex;margin:12px 0}
+.prob-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.prob-legend{display:flex;gap:16px;font-size:12px;color:var(--text2);margin-bottom:8px;flex-wrap:wrap}
+.prob-legend span{display:flex;align-items:center;gap:4px}
+.prob-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.focus-list{padding-left:30px;font-size:14px;color:var(--text2);line-height:1.9}
+.focus-list li{margin-bottom:4px}
+.focus-list strong{color:var(--text)}
+.footer{text-align:center;padding:24px 20px;color:var(--text3);font-size:12px;line-height:1.8}
+.footer-risk{background:#fdf0f0;border:1px solid rgba(230,57,70,0.15);border-radius:8px;padding:14px 20px;margin-bottom:12px;color:#8b3a3a;font-size:12px;line-height:1.7}
+body.compact .detail-only{display:none!important}
+body.compact .card{padding:20px 24px}
+body.compact .analysis-text{font-size:13px}
+@media(max-width:768px){
+  .hero-kpi{grid-template-columns:repeat(3,1fr)}
+  .emotion-grid{grid-template-columns:repeat(2,1fr)}
+  .volume-overview{grid-template-columns:repeat(2,1fr)}
+  .ladder-grid{grid-template-columns:repeat(3,1fr)}
+  .scenario-grid{grid-template-columns:1fr}
+  .limit-compare{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-title{font-size:22px}
+  .card{padding:18px 16px}
+  .sector-bar-name{width:80px;font-size:12px}
+  .sector-bar-fund{display:none}
+  .index-table{font-size:12px}
+  .index-table th,.index-table td{padding:8px 6px}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">A股<span>全景复盘</span></div>
+    <div class="nav-links">
+      <a href="#index">指数</a><a href="#emotion">情绪</a><a href="#sector">板块</a><a href="#fund">资金</a><a href="#timeline">节奏</a><a href="#analysis">分析</a><a href="#outlook">推演</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleMode()">精简模式</button>
+  </div>
+</nav>
+<div class="container">
+
+<!-- 头部 -->
+<div class="hero">
+  <div class="hero-date">2026年9月15日 · 星期二 · 收盘复盘 · 数据截至15:00</div>
+  <div class="hero-title">A股大盘全景复盘</div>
+  <div class="hero-subtitle">地量分化 · 主板收跌 · 科创50逆势涨1.55% — "十五五"电子规划引爆半导体，1.61万亿创年内新低，高位股大面积退潮</div>
+  <div class="hero-tags">
+    <span class="hero-tag">成交1.61万亿</span>
+    <span class="hero-tag">创年内新低</span>
+    <span class="hero-tag">科创50逆势涨</span>
+    <span class="hero-tag">半导体领涨</span>
+    <span class="hero-tag">高位股退潮</span>
+  </div>
+  <div class="hero-kpi">
+    <div class="hero-kpi-item"><div class="hero-kpi-name">上证指数</div><div class="hero-kpi-val">3864.28</div><div class="hero-kpi-chg down">-0.54%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">深证成指</div><div class="hero-kpi-val">13287.97</div><div class="hero-kpi-chg down">-0.72%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">创业板指</div><div class="hero-kpi-val">3247.92</div><div class="hero-kpi-chg down">-1.15%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">科创50</div><div class="hero-kpi-val">1551.96</div><div class="hero-kpi-chg up">+1.55%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">沪深300</div><div class="hero-kpi-val">4450.04</div><div class="hero-kpi-chg down">-0.67%</div></div>
+    <div class="hero-kpi-item"><div class="hero-kpi-name">两市成交</div><div class="hero-kpi-val">1.61万亿</div><div class="hero-kpi-chg down">创年内新低</div></div>
+  </div>
+</div>
+
+<!-- 模块1：五大核心指数 -->
+<div class="card" id="index">
+  <div class="card-header">
+    <div class="card-title"><span class="num">1</span>五大核心指数</div>
+    <span class="card-badge badge-gold">地量分化·科创50独强</span>
+  </div>
+  <table class="index-table">
+    <thead><tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr></thead>
+    <tbody>
+      <tr><td class="idx-name">上证指数</td><td class="idx-close">3864.28</td><td class="idx-chg down">-0.54%</td><td>约3875</td><td>约3886</td><td>约3860</td><td class="idx-vol">7639.83亿</td></tr>
+      <tr><td class="idx-name">深证成指</td><td class="idx-close">13287.97</td><td class="idx-chg down">-0.72%</td><td>13362.17</td><td>13484.00</td><td>13273.31</td><td class="idx-vol">8487.34亿</td></tr>
+      <tr><td class="idx-name">创业板指</td><td class="idx-close">3247.92</td><td class="idx-chg down">-1.15%</td><td>约3275</td><td>约3295</td><td>约3245</td><td class="idx-vol">约3900亿</td></tr>
+      <tr><td class="idx-name">科创50</td><td class="idx-close up">1551.96</td><td class="idx-chg up">+1.55%</td><td>约1535</td><td>约1555</td><td>约1530</td><td class="idx-vol">约650亿</td></tr>
+      <tr><td class="idx-name">沪深300</td><td class="idx-close">4450.04</td><td class="idx-chg down">-0.67%</td><td>约4465</td><td>约4485</td><td>约4445</td><td class="idx-vol">3947.76亿</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:12px;color:var(--text3);margin-top:8px">备注：上证指数/创业板指/科创50今开/最高/最低为基于分时走势的估算值（标注"约"）；上证50收2846.31跌0.52%，北证50收1028.51涨0.65%，科创综指逆势涨0.73%。</div>
+  <div class="volume-overview">
+    <div class="vol-item"><div class="vol-label">两市成交额</div><div class="vol-value">1.61万亿</div><div class="vol-sub">较上日缩量约165亿</div></div>
+    <div class="vol-item"><div class="vol-label">量能级别</div><div class="vol-value">年内新低</div><div class="vol-sub">连续3日缩量</div></div>
+    <div class="vol-item"><div class="vol-label">上涨/下跌家数</div><div class="vol-value">1106/4309</div><div class="vol-sub">超4300股下跌</div></div>
+    <div class="vol-item"><div class="vol-label">风格分化</div><div class="vol-value">科创独强</div><div class="vol-sub">科创50+1.55%</div></div>
+  </div>
+</div>
+
+<!-- 模块2：市场情绪 -->
+<div class="card" id="emotion">
+  <div class="card-header">
+    <div class="card-title"><span class="num">2</span>市场情绪</div>
+    <span class="card-badge badge-green">情绪冰点·高位股退潮</span>
+  </div>
+  <div class="emotion-grid">
+    <div class="emotion-card"><div class="emotion-label">上涨家数</div><div class="emotion-value up">1106</div><div class="emotion-sub">仅约20%个股上涨</div></div>
+    <div class="emotion-card"><div class="emotion-label">下跌家数</div><div class="emotion-value down">4309</div><div class="emotion-sub">超80%个股下跌</div></div>
+    <div class="emotion-card"><div class="emotion-label">涨停 / 跌停</div><div class="emotion-value">32 <span style="font-size:18px;color:var(--text3)">/</span> 32</div><div class="emotion-sub">涨停跌停各半</div></div>
+    <div class="emotion-card"><div class="emotion-label">炸板率</div><div class="emotion-value" style="color:var(--red)">44%</div><div class="emotion-sub">封板率56%</div></div>
+  </div>
+  <div class="ratio-bar-wrap">
+    <div class="ratio-label"><span>上涨 1106家 (20.1%)</span><span>下跌 4309家 (78.3%)</span><span>平盘52家 (1.6%)</span></div>
+    <div class="ratio-bar">
+      <div class="ratio-up" style="width:20.1%">20%</div>
+      <div class="ratio-flat" style="width:1.6%"></div>
+      <div class="ratio-down" style="width:78.3%">78%</div>
+    </div>
+  </div>
+  <div class="limit-compare">
+    <div class="limit-box limit-up-box">
+      <div class="limit-num up">32</div>
+      <div class="limit-label">涨停家数</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">连板7只，晋级率36%</div>
+    </div>
+    <div class="limit-box limit-down-box">
+      <div class="limit-num down">32</div>
+      <div class="limit-label">跌停家数</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px">227只跌超5%</div>
+    </div>
+  </div>
+  <div class="ladder-section detail-only">
+    <div class="ladder-title">连板梯队（财联社口径，不含ST）</div>
+    <div class="ladder-grid">
+      <div class="ladder-item" style="border-color:var(--red);background:var(--red-bg)">
+        <div class="ladder-height up">5板</div>
+        <div class="ladder-count">1只</div>
+        <div class="ladder-desc">闽东电力（电力）</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--accent2)">4板</div>
+        <div class="ladder-count">1只</div>
+        <div class="ladder-desc">中新赛克（网络安全）</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--text2)">3板</div>
+        <div class="ladder-count">2只</div>
+        <div class="ladder-desc">双星新材、澳弘电子</div>
+      </div>
+      <div class="ladder-item">
+        <div class="ladder-height" style="color:var(--text3)">2板</div>
+        <div class="ladder-count">3只</div>
+        <div class="ladder-desc">启明信息等</div>
+      </div>
+      <div class="ladder-item" style="background:var(--green-bg)">
+        <div class="ladder-height down">高位退潮</div>
+        <div class="ladder-count">多只跌停</div>
+        <div class="ladder-desc">国芳集团、桂林旅游等</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-top:10px">连板股总数7只（较上周五11只减少），三连板及以上4只。连板晋级率36.36%（上周五11只→今日4只），情绪大幅降温。高位股大面积退潮：龙版传媒、国芳集团、金健米业、敦煌种业、桂林旅游（6天5板）、百大集团（5连板）、红棉股份集体跌停。</div>
+  </div>
+  <div class="blast-info">
+    <div class="blast-num">44%</div>
+    <div class="blast-text">
+      <strong>炸板率44%（封板率56%）</strong>：今日25只个股盘中触及涨停但未封住，封板率仅56.14%，较昨日69%大幅下降。市场情绪从昨日的"修复"急转为"冰点"，高位股退潮严重。但半导体方向逆势强势，多只半导体ETF涨停或涨超10%。
+    </div>
+  </div>
+</div>
+
+<!-- 模块3：板块轮动 -->
+<div class="card" id="sector">
+  <div class="card-header">
+    <div class="card-title"><span class="num">3</span>板块轮动</div>
+    <span class="card-badge badge-red">半导体爆发·消费旅游重挫</span>
+  </div>
+  <div class="sector-tabs">
+    <button class="sector-tab active" onclick="switchSector(this,'up')">涨幅TOP10</button>
+    <button class="sector-tab" onclick="switchSector(this,'down')">跌幅TOP10</button>
+  </div>
+  <div id="sector-up">
+    <div class="sector-bar-row"><div class="sector-bar-name">风电设备</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:100%">+4.08% 领涨</div></div><div class="sector-bar-pct up">+4.08%</div><div class="sector-bar-fund">大金重工涨停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">电子化学品</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:62%">+2.51%</div></div><div class="sector-bar-pct up">+2.51%</div><div class="sector-bar-fund">政策催化</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">半导体</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:33%">+1.32% 成交1905亿</div></div><div class="sector-bar-pct up">+1.32%</div><div class="sector-bar-fund">十五五规划引爆</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">小金属</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:18%">+0.74%</div></div><div class="sector-bar-pct up">+0.74%</div><div class="sector-bar-fund">资源方向</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">电池</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:13%">+0.51%</div></div><div class="sector-bar-pct up">+0.51%</div><div class="sector-bar-fund">新能源企稳</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">元件</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:9%">+0.37% 成交1358亿</div></div><div class="sector-bar-pct up">+0.37%</div><div class="sector-bar-fund">PCB延续</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">存储芯片</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:70%">DRAM/NAND涨30-40%</div></div><div class="sector-bar-pct up">约+3%</div><div class="sector-bar-fund">苹果三星涨价</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">先进封装</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:50%">HBM方向</div></div><div class="sector-bar-pct up">约+2%</div><div class="sector-bar-fund">存算融合规划</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">半导体设备</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:45%">华海清科+8%</div></div><div class="sector-bar-pct up">约+1.8%</div><div class="sector-bar-fund">全链条攻关</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">通信设备</div><div class="sector-bar-track"><div class="sector-bar-fill up" style="width:20%">成交1189亿</div></div><div class="sector-bar-pct up">-0.83%</div><div class="sector-bar-fund">分化</div></div>
+  </div>
+  <div id="sector-down" style="display:none">
+    <div class="sector-bar-row"><div class="sector-bar-name">旅游及酒店</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:100%">-5.12% 领跌</div></div><div class="sector-bar-pct down">-5.12%</div><div class="sector-bar-fund">桂林旅游跌停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">种植业与林业</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:98%">-5.02%</div></div><div class="sector-bar-pct down">-5.02%</div><div class="sector-bar-fund">农业退潮</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">零售</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:80%">-4.11%</div></div><div class="sector-bar-pct down">-4.11%</div><div class="sector-bar-fund">国芳集团跌停</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">地面兵装</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:55%">板块跌幅居前</div></div><div class="sector-bar-pct down">约-2.8%</div><div class="sector-bar-fund">军工回调</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">一般零售</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:50%">商业零售重挫</div></div><div class="sector-bar-pct down">约-2.5%</div><div class="sector-bar-fund">资金出逃</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">汽车零部件</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:36%">-1.83%</div></div><div class="sector-bar-pct down">-1.83%</div><div class="sector-bar-fund">前期活跃回调</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">消费电子</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:23%">-1.17%</div></div><div class="sector-bar-pct down">-1.17%</div><div class="sector-bar-fund">高位分歧</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">通用设备</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:26%">-1.36%</div></div><div class="sector-bar-pct down">-1.36%</div><div class="sector-bar-fund">板块走弱</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">电力</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:19%">-0.97%</div></div><div class="sector-bar-pct down">-0.97%</div><div class="sector-bar-fund">分化</div></div>
+    <div class="sector-bar-row"><div class="sector-bar-name">建筑材料</div><div class="sector-bar-track"><div class="sector-bar-fill down" style="width:40%">-2.03%</div></div><div class="sector-bar-pct down">-2.03%</div><div class="sector-bar-fund">周期走弱</div></div>
+  </div>
+  <div class="sector-logic detail-only">
+    <h4>领涨核心逻辑</h4>
+    <p><strong>半导体（绝对主线）：</strong>工信部、发改委联合印发《电子信息制造业发展"十五五"规划》，提出推动集成电路全链条攻关，发展高性能处理器、高密度存储器，2030年营收突破30万亿。叠加苹果接受三星2027Q1存储芯片报价（DRAM/NAND较今年Q3涨30%-40%），半导体板块全面爆发。多只半导体ETF涨停或涨超10%，中韩半导体ETF成交逾240亿创历史新高。<br>
+    <strong>风电设备（+4.08%领涨）：</strong>吉鑫科技、大金重工涨停，海力风电涨超12%，闽东电力5连板。逻辑：欧洲海上风电供应约束加剧，风机售价涨40%-45%，中东能源危机推升天然气价格。<br>
+    <strong>电子化学品（+2.51%）：</strong>半导体产业链上游材料，受"十五五"规划催化，低开高走。<br>
+    <strong>存储芯片：</strong>苹果接受三星2027Q1存储报价，DRAM/NAND涨价30%-40%，存储涨价逻辑强化。<br>
+    <strong>PCB/元件：</strong>澳弘电子3连板，板块成交1358亿居前，涨价逻辑延续但涨幅收窄（+0.37%）。</p>
+    <h4 style="margin-top:12px">领跌核心逻辑</h4>
+    <p><strong>旅游及酒店（-5.12%领跌）：</strong>桂林旅游（6天5板）跌停，前期旅游炒作主线退潮。<br>
+    <strong>种植业与林业（-5.02%）：</strong>农业方向继续杀跌，神农种业跌7.76%，前期投机主线彻底退潮。<br>
+    <strong>零售（-4.11%）：</strong>国芳集团（12天7板）跌停，百大集团（5连板）跌停，商业零售高位股集体崩落。<br>
+    <strong>高位股退潮：</strong>龙版传媒复牌后连续跌停，金健米业、敦煌种业、红棉股份跌停。资金从高位投机方向全面撤出，转向半导体政策主线。</p>
+  </div>
+</div>
+
+<!-- 模块4：资金流向 -->
+<div class="card" id="fund">
+  <div class="card-header">
+    <div class="card-title"><span class="num">4</span>资金流向</div>
+    <span class="card-badge badge-red">电子行业获133亿净流入</span>
+  </div>
+  <div class="fund-section">
+    <div class="fund-title">电子行业获逾133亿元主力资金净流入（连续两日居首）</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:12px">Wind实时监测数据显示，电子行业获得逾133亿元主力资金净流入，通信获得逾39亿元净流入，基础化工获得逾22亿元净流入。特大单全天净流出20.45亿元，通鼎互联特大单净流入21.29亿元居首。</div>
+    <div class="fund-bar-row"><div class="fund-bar-name">电子行业(整体)</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:100%">+133亿</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">通信</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:30%">+39亿</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">基础化工</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:17%">+22亿</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">电力设备</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:15%">净流入</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">半导体ETF</div><div class="fund-bar-track"><div class="fund-bar-fill in" style="width:90%">多只涨停</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">旅游/酒店</div><div class="fund-bar-track"><div class="fund-bar-fill out" style="width:80%">净流出</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">零售/消费</div><div class="fund-bar-track"><div class="fund-bar-fill out" style="width:65%">净流出</div></div></div>
+    <div class="fund-bar-row"><div class="fund-bar-name">种植业</div><div class="fund-bar-track"><div class="fund-bar-fill out" style="width:55%">净流出</div></div></div>
+  </div>
+  <div class="fund-section detail-only">
+    <div class="fund-title">资金风格特征</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8">
+      今日市场最显著的资金特征是<strong>电子行业连续两日获超百亿净流入</strong>（昨日125亿→今日133亿），资金从旅游、零售、农业等消费/投机方向大规模撤出，集中涌入半导体政策主线。多只半导体ETF涨停或涨超10%，中韩半导体ETF成交逾240亿创历史新高——机构资金通过ETF渠道大幅加仓科技。但全市场成交1.61万亿创年内新低，说明增量资金仅集中在半导体单一方向，其他板块持续失血。
+    </div>
+  </div>
+  <div class="fund-note">
+    <strong>北向资金说明：</strong>自2024年8月起，交易所取消北向资金盘中实时披露，日度净买入金额于次一交易日公布。今日（9月15日）北向资金精确净买入数据暂未披露，以上资金分析基于主力资金/行业资金流向口径。待明日数据公布后可补充核对。
+  </div>
+</div>
+
+<!-- 模块5：全天走势 -->
+<div class="card" id="timeline">
+  <div class="card-header">
+    <div class="card-title"><span class="num">5</span>全天走势复盘</div>
+    <span class="card-badge badge-gold">低开冲高·午后回落·科创独强</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:30 开盘 · 集体低开</div>
+      <div class="tl-content">三大指数集体低开。上证指数低开约0.26%，深证成指低开0.17%报13362.17，创业板指低开约0.2%。受昨日缩量调整及美联储议息前观望情绪影响，市场低开。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:30-10:30 早盘 · 低开冲高</div>
+      <div class="tl-content">开盘后指数快速拉升，<strong>盘中一度悉数翻红</strong>。深成指最高冲至<strong>13484.00</strong>，科创50在半导体板块带动下逆势走强涨超1.5%。《电子信息制造业"十五五"规划》消息刺激半导体、电子化学品方向爆发，多只半导体ETF直线拉升。风电设备板块同步走强。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30-11:30 上午 · 高位震荡</div>
+      <div class="tl-content">指数在高位维持震荡，科创50维持红盘。半导体板块领涨，华海清科涨超8%，拓荆科技涨近8%。但市场赚钱效应并未扩散——超4300只个股下跌，仅半导体、风电等少数方向上涨。半日成交10568亿，较前半日缩量约475亿。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:00-14:00 午后 · 冲高回落</div>
+      <div class="tl-content">午后指数冲高回落，主板跌幅扩大。旅游、零售、农业等前期高位股继续杀跌，桂林旅游（6天5板）跌停，国芳集团（12天7板）跌停，百大集团跌停。市场呈"半导体独涨、其余全跌"的极端分化格局。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:00-15:00 尾盘 · 弱势收跌</div>
+      <div class="tl-content">尾盘指数维持低位震荡。沪指收于<strong>3864.28</strong>（-0.54%），深成指收<strong>13287.97</strong>（-0.72%），创业板指收<strong>3247.92</strong>（-1.15%）。科创50逆势收<strong>1551.96</strong>（+1.55%）。全天成交1.61万亿，创年内新低。</div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--text2);margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:6px">
+    <strong>整体形态：</strong>集体低开 → 早盘低开冲高（半导体引领翻红）→ 午后冲高回落 → 尾盘弱势收跌。主板三连阴，但科创50逆势大涨1.55%，市场呈"政策驱动半导体独强、其余板块普跌"的极端结构性行情。
+  </div>
+</div>
+
+<!-- 模块6：专业分析 -->
+<div class="card" id="analysis">
+  <div class="card-header">
+    <div class="card-title"><span class="num">6</span>专业深度分析</div>
+    <span class="card-badge badge-gold">地量分化·半导体政策驱动</span>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <div class="analysis-h3"><span class="icon icon-gold">位</span>关键技术位 · 支撑/压力一览</div>
+    <table class="support-table">
+      <thead><tr><th>指数</th><th>收盘</th><th>支撑位</th><th>距收盘</th><th>压力位</th><th>距收盘</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700">上证指数</td><td>3864.28</td><td class="sup">3850-3860</td><td>-0.4%~-0.1%</td><td class="res">3885-3900</td><td>+0.5%~+0.9%</td></tr>
+        <tr><td style="font-weight:700">深证成指</td><td>13287.97</td><td class="sup">13273-13280</td><td>-0.1%~0%</td><td class="res">13400-13484</td><td>+0.8%~+1.5%</td></tr>
+        <tr><td style="font-weight:700">创业板指</td><td>3247.92</td><td class="sup">3245-3250</td><td>-0.1%~0%</td><td class="res">3285-3300</td><td>+1.1%~+1.6%</td></tr>
+        <tr><td style="font-weight:700">科创50</td><td>1551.96</td><td class="sup">1530-1540</td><td>-1.4%~-0.8%</td><td class="res">1560-1580</td><td>+0.5%~+1.8%</td></tr>
+        <tr><td style="font-weight:700">沪深300</td><td>4450.04</td><td class="sup">4440-4450</td><td>-0.2%~0%</td><td class="res">4480-4500</td><td>+0.7%~+1.1%</td></tr>
+      </tbody>
+    </table>
+    <div class="support-note">口径说明：支撑位基于今日盘中实际低点设定（深成指最低13273即接近收盘）；压力位基于今日反弹高点及昨日收盘。沪指3850为上周五恐慌低点3852附近，若跌破则向下测试3830-3840。科创50逆势走强，关注1560-1580压力区间。</div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-red">主</span>核心主线与持续性判断</div>
+    <div class="analysis-text">
+      今日市场在极端缩量中走出<strong>半导体政策驱动型独立行情</strong>。最明确的主线：<br>
+      <span class="tag-inline tag-red">半导体/集成电路</span> 工信部、发改委联合印发《电子信息制造业发展"十五五"规划》——推动集成电路全链条攻关，发展高性能处理器、高密度存储器，2030年营收突破30万亿。叠加苹果接受三星存储涨价30%-40%，半导体板块全面爆发，<strong>多只半导体ETF涨停或涨超10%</strong>。这是政策+产业双轮驱动的主线，持续性较强，但需关注政策利好兑现后的分化。<br>
+      <span class="tag-inline tag-gold">风电设备</span> +4.08%领涨行业，欧洲海上风电风机售价涨40%-45%，闽东电力5连板。属于外部供需驱动的支线。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-gold">支</span>活跃支线题材</div>
+    <div class="analysis-text">
+      <span class="tag-inline tag-blue">存储芯片/HBM</span> 苹果接受三星2027Q1存储报价，DRAM/NAND涨价30%-40%。<br>
+      <span class="tag-inline tag-blue">半导体设备/材料</span> 华海清科+8%，拓荆科技+8%，电子化学品+2.51%。<br>
+      <span class="tag-inline tag-gold">PCB/元件</span> 澳弘电子3连板，板块成交1358亿居前，但涨幅收窄至+0.37%。<br>
+      <span class="tag-inline tag-green">网络安全</span> 中新赛克4连板（高度板）。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-green">弱</span>弱势退潮板块与风险点</div>
+    <div class="analysis-text">
+      <span class="tag-inline tag-green">旅游/零售/农业高位股集体崩落</span> 桂林旅游（6天5板）、国芳集团（12天7板）、百大集团（5连板）、龙版传媒、金健米业、敦煌种业、红棉股份——前期投机主线全面退潮。<br>
+      <span class="tag-inline tag-green">消费/服务类板块</span> 旅游-5.12%、零售-4.11%，资金从消费方向大幅撤出。<br>
+      <strong>风险点：</strong>① 成交1.61万亿创年内新低，连续3日缩量，地量之后仍需方向选择；② 半导体"一家独涨"，4309股下跌，市场宽度极差；③ 高位股退潮严重，跌停32家与涨停持平；④ 美联储9月议息在即（本周三），外部不确定性；⑤ 沪指三连阴，3850支撑面临考验。
+    </div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-blue">风</span>市场风格偏向</div>
+    <div class="analysis-text">
+      <strong>极端分化：政策驱动的科技硬件独强，其余板块普跌。</strong>科创50涨1.55%而沪深300跌0.67%，创业板指跌1.15%——这种分化极为罕见。市场风格从昨日的"中小盘强"转为"半导体独强"，资金高度集中于政策利好方向。全市场4309股下跌但科创50大涨，说明资金从其他方向撤出后集中涌入半导体，而非全面做多。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-purple">技</span>技术形态与量价关系</div>
+    <div class="analysis-text">
+      <strong>上证指数：</strong>三连阴，收于3864.28，已跌破昨日"单针探底"低点3867。3852（上周五恐慌低点）为关键支撑。若跌破3852则下看3830-3840区间。<br>
+      <strong>量价关系：</strong>成交1.61万亿创年内新低，连续3日缩量（1.97万亿→1.63万亿→1.61万亿）。地量见地价？地量之后通常酝酿方向选择，但需放量确认。今日地量+半导体独涨，说明存量资金在政策催化下抱团，但增量资金未进场。<br>
+      <strong>科创50：</strong>逆势涨1.55%收1551.96，与主板形成强烈背离。半导体政策利好驱动，关注能否持续领涨。
+    </div>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-red">情</span>情绪周期定位</div>
+    <div class="analysis-text">
+      当前处于<strong>情绪冰点+结构性热点并存</strong>（情绪评分25/100）。涨停32家（昨日55家），连板7只（昨日11只），晋级率36%（昨日57%），封板率56%（昨日69%）——情绪指标全面恶化。但半导体板块逆势爆发，多只ETF涨停，属于政策驱动的结构性行情。市场处于<strong>新旧主线激烈交替期</strong>：旧投机主线（旅游、零售、农业）崩落，新政策主线（半导体）正在确立，但市场宽度极差。
+    </div>
+  </div>
+
+  <div class="analysis-section">
+    <div class="analysis-h3"><span class="icon icon-gold">核</span>核心驱动因素与核心矛盾</div>
+    <div class="analysis-text">
+      <strong>核心驱动：</strong>① <strong>《电子信息制造业"十五五"规划》</strong>——工信部+发改委联合印发，推动集成电路全链条攻关，2030年营收30万亿，直接引爆半导体；② <strong>存储涨价</strong>——苹果接受三星2027Q1存储报价，DRAM/NAND涨30%-40%；③ <strong>风电外部催化</strong>——欧洲海上风电风机售价涨40%-45%；④ <strong>台积电8月营收同比+53%</strong>——半导体景气度验证。<br>
+      <strong>核心矛盾：</strong>① <strong>半导体独涨 vs 4300股下跌</strong>——政策利好驱动的科技行情未能扩散，市场宽度极差；② <strong>地量1.61万亿 vs 半导体放量</strong>——全市场缩量但半导体成交1905亿居首，存量资金极端抱团；③ <strong>新主线确立 vs 高位股崩落</strong>——半导体新主线凝聚，但旧投机主线（旅游零售农业）全面退潮，情绪冰点；④ <strong>政策利好 vs 美联储议息</strong>——国内政策暖风强劲，但本周三美联储议息仍是最大外部变量。
+    </div>
+  </div>
+</div>
+
+<!-- 模块7：后市推演 -->
+<div class="card" id="outlook">
+  <div class="card-header">
+    <div class="card-title"><span class="num">7</span>后市推演与关注方向</div>
+    <span class="card-badge badge-gold">地量待变·方向选择窗口</span>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div class="analysis-h3"><span class="icon icon-gold">率</span>情景推演（概率为分析设定值，非预测）</div>
+    <div class="prob-bar">
+      <div class="prob-seg" style="width:30%;background:linear-gradient(90deg,var(--red),#f06070)">反弹修复 30%</div>
+      <div class="prob-seg" style="width:45%;background:linear-gradient(90deg,#e8932c,#f0b054)">震荡磨底 45%</div>
+      <div class="prob-seg" style="width:25%;background:linear-gradient(90deg,#3cb5a6,var(--green))">继续下探 25%</div>
+    </div>
+    <div class="prob-legend">
+      <span><span class="prob-dot" style="background:var(--red)"></span>情景一 反弹修复 约30%</span>
+      <span><span class="prob-dot" style="background:#e8932c"></span>情景二 震荡磨底 约45%</span>
+      <span><span class="prob-dot" style="background:var(--green)"></span>情景三 继续下探 约25%</span>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:8px">注：概率为基于当前量价、情绪与外部变量（美联储9月议息）状态的分析设定权重（合计100%），非市场共识或收益预期；将随量能与消息面变化动态调整。</div>
+  </div>
+
+  <div class="scenario-grid detail-only">
+    <div class="scenario-card scenario-bull">
+      <div class="scenario-label up">情景一｜反弹修复</div>
+      <div class="scenario-prob up">30%</div>
+      <div class="scenario-desc">半导体政策利好持续扩散，从半导体向更广科技方向蔓延，带动市场情绪修复。沪指放量反弹收复3885并站回3900。美联储议息结果偏鸽，增量资金回流，成交重回1.8万亿以上。</div>
+      <div class="scenario-falsify">证伪信号：沪指无法站稳3865且半导体冲高回落。</div>
+    </div>
+    <div class="scenario-card scenario-neutral">
+      <div class="scenario-label" style="color:var(--text2)">情景二｜震荡磨底</div>
+      <div class="scenario-prob" style="color:var(--text2)">45%</div>
+      <div class="scenario-desc">大概率情景。沪指在3850-3890区间反复磨底，半导体主线与其他板块跷跷板持续，赚钱效应集中在科技方向。等待美联储议息落地及方向选择。</div>
+      <div class="scenario-falsify">证伪信号：放量突破3890或跌破3850。</div>
+    </div>
+    <div class="scenario-card scenario-bear">
+      <div class="scenario-label down">情景三｜继续下探</div>
+      <div class="scenario-prob down">25%</div>
+      <div class="scenario-desc">美联储超预期鹰派，沪指跌破3850支撑向3830-3840寻求支撑。半导体政策利好兑现后回落，高位股退潮蔓延，市场情绪进一步冰点。</div>
+      <div class="scenario-falsify">证伪信号：成交萎缩至1.55万亿以下且不再创新低。</div>
+    </div>
+  </div>
+
+  <div class="analysis-section" style="margin-top:20px">
+    <div class="analysis-h3"><span class="icon icon-gold">关</span>短期关注方向（方向性观察，不构成个股推荐）</div>
+    <ul class="focus-list">
+      <li><strong>半导体政策主线持续性：</strong>"十五五"电子规划是中长期政策催化，关注半导体能否从今日的ETF驱动扩散至个股层面，成交能否持续放量。</li>
+      <li><strong>美联储9月议息（本周三）：</strong>加息25bp概率此前升至70%，议息结果是本周最大外部变量。若偏鸽则全球风险资产反弹，偏鹰则承压。</li>
+      <li><strong>沪指3850支撑有效性：</strong>今日收3864，已跌破昨日3867低点。3852（上周五恐慌低点）为关键支撑，若跌破则下看3830。</li>
+      <li><strong>量能变化：</strong>1.61万亿创年内新低，地量之后关注放量方向。若放量上涨则反弹启动，若放量下跌则继续探底。</li>
+      <li><strong>高位股退潮是否企稳：</strong>今日旅游、零售、农业高位股集体跌停，关注退潮是否接近尾声。</li>
+      <li><strong>科创50能否持续领涨：</strong>今日科创50逆势+1.55%，关注政策催化下科技风格能否持续。</li>
+    </ul>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <div class="analysis-h3"><span class="icon icon-red">风</span>风险提示要点</div>
+    <div class="analysis-text">
+      ① 成交1.61万亿创年内新低，连续3日缩量，市场缺乏增量资金；② 4309股下跌但科创50独涨，市场宽度极差，"一家独涨"难持续；③ 高位股退潮严重（32只跌停），情绪冰点；④ 美联储9月议息在即，外部不确定性；⑤ 沪指三连阴，3850支撑面临考验；⑥ 半导体政策利好可能短期兑现后回落。
+    </div>
+  </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div class="footer-risk">
+    <strong>风险提示：</strong>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中涉及的板块与方向仅为客观分析，不代表对任何个股或板块的推荐。投资者应根据自身风险承受能力独立做出投资决策。
+  </div>
+  <div>A股大盘全景复盘 · 2026年9月15日</div>
+  <div>数据来源：同花顺、上交所、财联社、证券时报、东方财富、上海证券报、界面新闻</div>
+  <div style="margin-top:8px;color:var(--text3)">本报告由AI自动生成，仅供学习交流使用 · 北向资金当日精确净买入未披露（2024年8月起交易所取消盘中实时披露），相关表述已如实标注</div>
+</div>
+
+</div>
+<script>
+function toggleMode(){
+  document.body.classList.toggle('compact');
+  var btn=document.querySelector('.nav-toggle');
+  btn.textContent=document.body.classList.contains('compact')?'详细模式':'精简模式';
+}
+function switchSector(el,type){
+  document.querySelectorAll('.sector-tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.getElementById('sector-up').style.display=type==='up'?'':'none';
+  document.getElementById('sector-down').style.display=type==='down'?'':'none';
+}
+window.addEventListener('scroll',function(){
+  var sections=document.querySelectorAll('.card[id]');
+  var scrollPos=window.scrollY+80;
+  sections.forEach(function(sec){
+    if(sec.offsetTop<=scrollPos && sec.offsetTop+sec.offsetHeight>scrollPos){
+      var id=sec.getAttribute('id');
+      document.querySelectorAll('.nav-links a').forEach(function(a){
+        a.style.color='';a.style.background='';
+        if(a.getAttribute('href')==='#'+id){a.style.color='#fff';a.style.background='rgba(255,255,255,0.15)';}
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
