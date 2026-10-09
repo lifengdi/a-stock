@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 - 2026年10月8日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f4f5f7;color:#333;line-height:1.6}
+.navbar{position:fixed;top:0;left:0;right:0;background:#1a1a2e;z-index:1000;padding:0 20px;display:flex;align-items:center;height:52px;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.navbar .logo{color:#fff;font-size:16px;font-weight:700;margin-right:30px;white-space:nowrap}
+.navbar .nav-links{display:flex;gap:6px;flex:1;overflow-x:auto}
+.navbar .nav-links a{color:#b0b0c0;text-decoration:none;font-size:13px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:all 0.2s}
+.navbar .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.mode-toggle{background:#e8a838;color:#fff;border:none;padding:7px 16px;border-radius:4px;font-size:13px;cursor:pointer;font-weight:600;white-space:nowrap;transition:background 0.2s}
+.mode-toggle:hover{background:#d4952e}
+.container{max-width:960px;margin:0 auto;padding:72px 16px 40px}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4a 100%);border-radius:12px;padding:32px 28px;margin-bottom:20px;color:#fff}
+.hero .date{font-size:13px;color:#8888aa;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:700;margin-bottom:12px}
+.hero .subtitle{font-size:14px;color:#ccc;line-height:1.8;margin-bottom:18px}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.hero .tag{background:rgba(232,168,56,0.2);color:#e8a838;padding:4px 12px;border-radius:20px;font-size:12px;border:1px solid rgba(232,168,56,0.3)}
+.hero .index-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.hero .index-card{background:rgba(255,255,255,0.08);border-radius:8px;padding:12px 8px;text-align:center}
+.hero .index-card .name{font-size:11px;color:#aaa;margin-bottom:4px}
+.hero .index-card .value{font-size:18px;font-weight:700}
+.hero .index-card .change{font-size:12px;margin-top:2px}
+.card{background:#fff;border-radius:10px;padding:24px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #eee}
+.card-title{font-size:18px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:10px}
+.card-num{background:#e8a838;color:#fff;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.card-badge{font-size:12px;padding:4px 12px;border-radius:20px;font-weight:600}
+.badge-red{background:#fde8e8;color:#e74c3c}
+.badge-green{background:#e8f5e9;color:#27ae60}
+.badge-orange{background:#fef3e2;color:#e8a838}
+.badge-blue{background:#e3f2fd;color:#2196f3}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+th{background:#f8f9fa;padding:10px 8px;text-align:center;font-weight:600;color:#555;border-bottom:2px solid #eee}
+td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0}
+tr:hover td{background:#fafbfc}
+.up{color:#e74c3c;font-weight:600}
+.down{color:#27ae60;font-weight:600}
+.flat{color:#888;font-weight:600}
+.big-num{font-size:32px;font-weight:700}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:16px;text-align:center}
+.stat-box .stat-label{font-size:12px;color:#888;margin-bottom:6px}
+.stat-box .stat-value{font-size:24px;font-weight:700}
+.progress-bar{width:100%;height:28px;background:#eee;border-radius:14px;overflow:hidden;display:flex;margin-bottom:8px;position:relative}
+.progress-bar .seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;transition:width 0.5s}
+.progress-bar .seg-up{background:#e74c3c}
+.progress-bar .seg-flat{background:#95a5a6}
+.progress-bar .seg-down{background:#27ae60}
+.progress-labels{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:16px}
+.bar-row{display:flex;align-items:center;margin-bottom:8px;font-size:13px}
+.bar-row .bar-name{width:100px;text-align:right;padding-right:10px;color:#555;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#eee;border-radius:4px;overflow:hidden;position:relative}
+.bar-row .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;font-weight:600;white-space:nowrap}
+.bar-row .bar-fill.red{background:linear-gradient(90deg,#e74c3c,#f39c12)}
+.bar-row .bar-fill.green{background:linear-gradient(90deg,#27ae60,#2ecc71)}
+.bar-row .bar-value{width:70px;text-align:left;padding-left:8px;font-weight:600;flex-shrink:0}
+.concept-item{display:flex;align-items:flex-start;margin-bottom:10px;font-size:13px;line-height:1.7}
+.concept-item .concept-tag{flex-shrink:0;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-right:10px;margin-top:2px;min-width:80px;text-align:center}
+.concept-item .concept-tag.red{background:#fde8e8;color:#e74c3c}
+.concept-item .concept-tag.green{background:#e8f5e9;color:#27ae60}
+.concept-item .concept-tag.orange{background:#fef3e2;color:#e8a838}
+.concept-item .concept-tag.blue{background:#e3f2fd;color:#2196f3}
+.concept-item .concept-tag.purple{background:#f3e5f5;color:#9b59b6}
+.flow-arrow{font-size:28px;margin:0 8px}
+.flow-box{display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.flow-box .flow-item{text-align:center;padding:12px 20px}
+.flow-box .flow-item .flow-label{font-size:12px;color:#888}
+.flow-box .flow-item .flow-value{font-size:22px;font-weight:700}
+.timeline-item{display:flex;margin-bottom:14px;font-size:13px;line-height:1.8}
+.timeline-item .time-label{flex-shrink:0;width:50px;font-weight:700;color:#e8a838}
+.timeline-item .time-content{flex:1;color:#444}
+.analysis-section{margin-bottom:18px}
+.analysis-section h4{font-size:14px;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.analysis-section p{font-size:13px;color:#444;line-height:1.9;margin-bottom:8px}
+.scenario-bar{display:flex;height:36px;border-radius:6px;overflow:hidden;margin-bottom:10px}
+.scenario-item{display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600}
+.scenario-legend{display:flex;gap:20px;margin-bottom:12px;font-size:12px;color:#666}
+.scenario-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.note{font-size:11px;color:#999;margin-bottom:12px;line-height:1.6}
+.disclaimer{background:#fef9f0;border-left:4px solid #e8a838;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:12px;color:#888;line-height:1.8;text-align:center}
+.footer{text-align:center;font-size:11px;color:#aaa;padding:20px 0;line-height:1.8}
+.detail-only{display:block}
+body.compact .detail-only{display:none}
+body.compact .card{padding:16px}
+body.compact .hero{padding:20px}
+body.compact .hero .index-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:768px){
+.navbar{padding:0 12px;height:48px}
+.navbar .logo{font-size:14px;margin-right:12px}
+.navbar .nav-links a{font-size:11px;padding:5px 8px}
+.mode-toggle{padding:5px 10px;font-size:11px}
+.container{padding:60px 10px 30px}
+.hero{padding:20px 16px}
+.hero h1{font-size:20px}
+.hero .index-grid{grid-template-columns:repeat(3,1fr)}
+.card{padding:16px}
+.stat-grid{grid-template-columns:repeat(2,1fr)}
+.bar-row .bar-name{width:80px;font-size:12px}
+.flow-box{flex-direction:column}
+.flow-arrow{transform:rotate(90deg);margin:8px 0}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="logo">A股全景复盘</div>
+<div class="nav-links">
+<a href="#index">指数</a>
+<a href="#sentiment">情绪</a>
+<a href="#sector">板块</a>
+<a href="#capital">资金</a>
+<a href="#rhythm">节奏</a>
+<a href="#analysis">分析</a>
+<a href="#outlook">推演</a>
+</div>
+<button class="mode-toggle" onclick="toggleMode()">精简模式</button>
+</nav>
+
+<div class="container">
+
+<!-- 首屏概览 -->
+<div class="hero">
+<div class="date">2026年10月8日 · 星期四 · 收盘复盘 · 国庆后首个交易日</div>
+<h1>节后首日高开低走 · 科创50重挫4.82%</h1>
+<p class="subtitle">10月8日，三大指数节后首日高开低走全线收跌，沪指跌0.79%报3811.90点，深成指跌2.07%，创业板指跌3.15%创年内新低，科创50暴跌4.82%。两市成交1.68万亿，较节前放量约2441亿，放量下探特征显著。全市场仅约1634只上涨，3466只下跌。电池/固态电池、航运、燃气逆势领涨，半导体、AI算力、医药大幅回调。主力资金净流出480.37亿，炸板率飙升至42%，情绪混沌。</p>
+<div class="tags">
+<span class="tag">放量2441亿</span>
+<span class="tag">高开低走</span>
+<span class="tag">科创50跌4.82%</span>
+<span class="tag">电池逆势领涨</span>
+<span class="tag">炸板率42%</span>
+<span class="tag">主力流出480亿</span>
+</div>
+<div class="index-grid">
+<div class="index-card"><div class="name">上证指数</div><div class="value down">3811.90</div><div class="change down">-0.79%</div></div>
+<div class="index-card"><div class="name">深证成指</div><div class="value down">12620.90</div><div class="change down">-2.07%</div></div>
+<div class="index-card"><div class="name">创业板指</div><div class="value down">3036.66</div><div class="change down">-3.15%</div></div>
+<div class="index-card"><div class="name">科创50</div><div class="value down">1456.32</div><div class="change down">-4.82%</div></div>
+<div class="index-card"><div class="name">沪深300</div><div class="value down">4310.28</div><div class="change down">-1.09%</div></div>
+<div class="index-card"><div class="name">两市成交</div><div class="value" style="color:#e8a838">1.68万亿</div><div class="change" style="color:#e8a838">放量2441亿</div></div>
+</div>
+</div>
+
+<!-- 模块1：五大核心指数 -->
+<div class="card" id="index">
+<div class="card-header">
+<div class="card-title"><span class="card-num">1</span>五大核心指数</div>
+<span class="card-badge badge-green">全线收跌·科创抗跌失败</span>
+</div>
+<table>
+<tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th><th>较上日变化</th></tr>
+<tr><td>上证指数</td><td>3811.90</td><td class="down">-0.79%</td><td>3838.98</td><td>3864.12</td><td>3795.37</td><td>8111.83亿</td><td class="up">放量</td></tr>
+<tr><td>深证成指</td><td>12620.90</td><td class="down">-2.07%</td><td>12896.45</td><td>约12950</td><td>约12580</td><td>8709.44亿</td><td class="up">放量</td></tr>
+<tr><td>创业板指</td><td>3036.66</td><td class="down">-3.15%</td><td>约3120</td><td>约3135</td><td>约3025</td><td>约3800亿</td><td class="up">放量</td></tr>
+<tr><td>科创50</td><td>1456.32</td><td class="down">-4.82%</td><td>1512.79</td><td>1521.46</td><td>1446.43</td><td>824亿</td><td class="up">放量</td></tr>
+<tr><td>沪深300</td><td>4310.28</td><td class="down">-1.09%</td><td>约4350</td><td>约4370</td><td>约4295</td><td>约3900亿</td><td class="up">放量</td></tr>
+</table>
+<div class="note detail-only">备注：创业板指、沪深300的开盘/最高/最低为基于分时走势的估算值。两市合计成交约1.68万亿（8111.83+8709.44≈16821亿），较上一交易日（9/30的1.44万亿）大幅放量约2441亿，放量幅度约17%。科创50以-4.82%跌幅领跌，半导体板块全线重挫。深成指、创业板指均创年内新低。沪指盘中下探3795.37，逼近3800整数关口。</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">沪深两市成交</div><div class="stat-value" style="color:#e8a838">1.68万亿</div></div>
+<div class="stat-box"><div class="stat-label">较上日放量</div><div class="stat-value up">约2441亿</div></div>
+<div class="stat-box"><div class="stat-label">上涨/下跌家数</div><div class="stat-value">1634/3466</div></div>
+<div class="stat-box"><div class="stat-label">上涨占比</div><div class="stat-value down">约32%</div></div>
+</div>
+</div>
+
+<!-- 模块2：市场情绪 -->
+<div class="card" id="sentiment">
+<div class="card-header">
+<div class="card-title"><span class="card-num">2</span>市场情绪</div>
+<span class="card-badge badge-red">情绪混沌·炸板率飙升</span>
+</div>
+<div class="progress-bar">
+<div class="seg seg-up" style="width:32%">上涨 1634</div>
+<div class="seg seg-flat" style="width:2%">约</div>
+<div class="seg seg-down" style="width:66%">下跌 3466</div>
+</div>
+<div class="progress-labels">
+<span>上涨占比 约32%</span>
+<span>平盘占比 约2%</span>
+<span>下跌占比 约66%</span>
+</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">涨停家数</div><div class="stat-value up">45</div></div>
+<div class="stat-box"><div class="stat-label">跌停家数</div><div class="stat-value down">15</div></div>
+<div class="stat-box"><div class="stat-label">连板股总数</div><div class="stat-value" style="color:#e8a838">约18只</div></div>
+<div class="stat-box"><div class="stat-label">炸板率</div><div class="stat-value up">约42%</div></div>
+</div>
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:12px">连板梯队</h4>
+<div class="stat-grid" style="grid-template-columns:repeat(5,1fr)">
+<div class="stat-box" style="background:#fde8e8"><div class="stat-label">8连板</div><div class="stat-value up">1</div><div style="font-size:11px;color:#888;margin-top:4px">新华传媒</div></div>
+<div class="stat-box" style="background:#fef3e2"><div class="stat-label">4连板</div><div class="stat-value" style="color:#e8a838">2</div><div style="font-size:11px;color:#888;margin-top:4px">九阳股份/时代万恒</div></div>
+<div class="stat-box"><div class="stat-label">3连板</div><div class="stat-value" style="color:#9b59b6">4</div><div style="font-size:11px;color:#888;margin-top:4px">上海洗霸/传艺科技等</div></div>
+<div class="stat-box"><div class="stat-label">2连板</div><div class="stat-value" style="color:#2196f3">约3</div><div style="font-size:11px;color:#888;margin-top:4px">龙蟠科技/陆家嘴等</div></div>
+<div class="stat-box"><div class="stat-label">首板</div><div class="stat-value flat">约35</div><div style="font-size:11px;color:#888;margin-top:4px">电池/航运为主</div></div>
+</div>
+<div class="detail-only">
+<p style="font-size:13px;color:#444;line-height:1.9;margin-top:12px">情绪特征：全市场1634只上涨、3466只下跌，下跌占比约66%，个股普跌。涨停45家（较节前56家减少11家）、跌停15家（较节前增加4家），跌停家数偏多，亏钱效应显现。连板股总数约18只，最高连板高度8板（新华传媒），但炸板率飙升至约42%（45家涨停对应约32家炸板），较节前的约22%大幅上升，短线情绪急剧降温。新华传媒凭借并购属性继续缩量8连板，成为市场唯一高标。时代万恒4连板（电池属性）、九阳股份4连板（家电+并购）。3板梯队包括上海洗霸、传艺科技、紫竹高科、园林股份。整体承接尚可但封板率大幅下降，资金追高意愿减弱。</p>
+</div>
+</div>
+
+<!-- 模块3：板块轮动 -->
+<div class="card" id="sector">
+<div class="card-header">
+<div class="card-title"><span class="card-num">3</span>板块轮动</div>
+<span class="card-badge badge-red">防御领涨·科技重挫</span>
+</div>
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">行业/概念涨幅TOP</h4>
+<div class="bar-row"><div class="bar-name">固态电池</div><div class="bar-track"><div class="bar-fill red" style="width:75%">+约4.5%</div></div><div class="bar-value up">+约4.5%</div></div>
+<div class="bar-row"><div class="bar-name">电池</div><div class="bar-track"><div class="bar-fill red" style="width:60%">+约3.6%</div></div><div class="bar-value up">+约3.6%</div></div>
+<div class="bar-row"><div class="bar-name">航运/油运</div><div class="bar-track"><div class="bar-fill red" style="width:50%">+约3.0%</div></div><div class="bar-value up">+约3.0%</div></div>
+<div class="bar-row"><div class="bar-name">燃气</div><div class="bar-track"><div class="bar-fill red" style="width:38%">+约2.3%</div></div><div class="bar-value up">+约2.3%</div></div>
+<div class="bar-row"><div class="bar-name">煤炭</div><div class="bar-track"><div class="bar-fill red" style="width:30%">+约1.8%</div></div><div class="bar-value up">+约1.8%</div></div>
+<div class="bar-row"><div class="bar-name">银行</div><div class="bar-track"><div class="bar-fill red" style="width:22%">+约1.3%</div></div><div class="bar-value up">+约1.3%</div></div>
+<div class="bar-row"><div class="bar-name">电力</div><div class="bar-track"><div class="bar-fill red" style="width:18%">+约1.1%</div></div><div class="bar-value up">+约1.1%</div></div>
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">行业/概念跌幅TOP</h4>
+<div class="bar-row"><div class="bar-name">半导体</div><div class="bar-track"><div class="bar-fill green" style="width:85%">-约5.2%</div></div><div class="bar-value down">-约5.2%</div></div>
+<div class="bar-row"><div class="bar-name">存储芯片</div><div class="bar-track"><div class="bar-fill green" style="width:75%">-约4.5%</div></div><div class="bar-value down">-约4.5%</div></div>
+<div class="bar-row"><div class="bar-name">光模块/CPO</div><div class="bar-track"><div class="bar-fill green" style="width:68%">-约4.1%</div></div><div class="bar-value down">-约4.1%</div></div>
+<div class="bar-row"><div class="bar-name">AI应用</div><div class="bar-track"><div class="bar-fill green" style="width:58%">-约3.5%</div></div><div class="bar-value down">-约3.5%</div></div>
+<div class="bar-row"><div class="bar-name">生物制品</div><div class="bar-track"><div class="bar-fill green" style="width:48%">-约2.9%</div></div><div class="bar-value down">-约2.9%</div></div>
+<div class="bar-row"><div class="bar-name">贵金属</div><div class="bar-track"><div class="bar-fill green" style="width:40%">-约2.4%</div></div><div class="bar-value down">-约2.4%</div></div>
+<div class="bar-row"><div class="bar-name">传媒/游戏</div><div class="bar-track"><div class="bar-fill green" style="width:35%">-约2.1%</div></div><div class="bar-value down">-约2.1%</div></div>
+
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">领涨概念与驱动逻辑</h4>
+<div class="concept-item"><span class="concept-tag red">固态电池+4.5%</span><span>力王股份、传艺科技、紫竹高科20cm涨停，龙蟠科技、野马电池涨停。固态电池概念掀涨停潮，驱动因素为政策预期+超跌反弹+节前资金布局新能源方向。传艺科技凭借固态电池+PCB双属性晋级3连板。</span></div>
+<div class="concept-item"><span class="concept-tag red">航运/油运+3.0%</span><span>中远海能、招商南油涨停。油运板块逆势走强，驱动因素为国际油价波动+油运周期景气度预期+防御属性。</span></div>
+<div class="concept-item"><span class="concept-tag orange">燃气+2.3%</span><span>国新能源涨停，燃气板块活跃，驱动因素为冬季供气预期+能源价格波动+防御属性。</span></div>
+<div class="concept-item"><span class="concept-tag blue">煤炭/电力/银行</span><span>煤炭、电力、银行等防御板块涨幅居前，资金从科技成长方向撤离后涌入低估值防御板块，节前避险情绪浓厚。</span></div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">领跌概念与驱动逻辑</h4>
+<div class="concept-item"><span class="concept-tag green">半导体 净流出超百亿</span><span>半导体板块单日重挫约5.2%，科创50跌4.82%。驱动因素为节前热门方向获利了结+外围半导体不确定性+高位股补跌。澜起科技等权重股大幅下跌。</span></div>
+<div class="concept-item"><span class="concept-tag green">光模块/CPO 领跌</span><span>天孚通信跌9.86%，剑桥科技跌6.01%，光模块板块全线走弱。驱动因素为AI算力方向短期调整+节前获利盘集中出逃+估值偏高。</span></div>
+<div class="concept-item"><span class="concept-tag green">AI应用/传媒</span><span>AI应用、传媒、影视游戏全线走弱，节前热门AI应用方向回调。驱动因素为资金从成长方向撤离+缺乏新催化。</span></div>
+<div class="concept-item"><span class="concept-tag green">医药/贵金属</span><span>生物制品、贵金属板块走弱，医药节前反弹后回调，贵金属随国际金价波动。</span></div>
+</div>
+</div>
+
+<!-- 模块4：资金流向 -->
+<div class="card" id="capital">
+<div class="card-header">
+<div class="card-title"><span class="card-num">4</span>资金流向</div>
+<span class="card-badge badge-green">主力净流出480亿·南向净流入64亿</span>
+</div>
+<div class="flow-box">
+<div class="flow-item"><div class="flow-label">主力资金全天</div><div class="flow-value down">-480.37亿</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-item"><div class="flow-label">北向资金成交</div><div class="flow-value" style="color:#e8a838">约2770亿</div></div>
+</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">沪股通成交</div><div class="stat-value" style="color:#e8a838">约1450亿</div></div>
+<div class="stat-box"><div class="stat-label">深股通成交</div><div class="stat-value" style="color:#e8a838">约1320亿</div></div>
+<div class="stat-box"><div class="stat-label">北向占两市成交</div><div class="stat-value up">约16.5%</div></div>
+<div class="stat-box"><div class="stat-label">融资融券余额</div><div class="stat-value down">约26300亿</div></div>
+</div>
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:12px 0 8px">行业资金流向</h4>
+<div class="concept-item"><span class="concept-tag red">电池 +约35亿</span><span>电池/固态电池板块获主力资金净流入约35亿，龙蟠科技、传艺科技等获资金加仓。</span></div>
+<div class="concept-item"><span class="concept-tag red">航运 +约15亿</span><span>航运/油运板块主力净流入约15亿，中远海能、招商南油获资金关注。</span></div>
+<div class="concept-item"><span class="concept-tag red">银行 小幅流入</span><span>银行板块获主力资金小幅净流入，防御属性吸引避险资金。</span></div>
+<div class="concept-item"><span class="concept-tag green">半导体 净流出超120亿</span><span>半导体板块单日主力净流出超120亿，领跌行业，算力硬件方向资金大幅流出。</span></div>
+<div class="concept-item"><span class="concept-tag green">光模块/通信 净流出约80亿</span><span>光模块、通信设备板块资金净流出约80亿，AI算力方向获利了结。</span></div>
+<div class="concept-item"><span class="concept-tag green">医药/传媒 净流出</span><span>医药生物、传媒板块资金净流出，节前反弹后资金撤离。</span></div>
+<p style="font-size:12px;color:#888;line-height:1.8;margin-top:12px">北向资金：2024年8月起交易所取消盘中实时披露，日度净买入次一交易日公布，当日精确净买入未披露。北向资金全天成交约2770亿元，占两市总成交额约16.5%。北向ETF买入及卖出成交额40.77亿元（沪股通20.44亿，深股通20.34亿）。南向资金全天净买入64.77亿港元（港股通沪38.36亿+深26.41亿），资金持续流入港股。科创板两融余额3382.34亿元，较上一交易日减少7.92亿元，连续7个交易日减少，杠杆资金持续撤离科创板。</p>
+</div>
+</div>
+
+<!-- 模块5：全天运行节奏 -->
+<div class="card" id="rhythm">
+<div class="card-header">
+<div class="card-title"><span class="card-num">5</span>全天运行节奏</div>
+<span class="card-badge badge-orange">高开低走·放量下探</span>
+</div>
+<div class="timeline-item"><div class="time-label">【开盘】</div><div class="time-content">三大指数节后首日高开，沪指开盘3838.98点（高开约0.1%），深成指开盘12896.45点，创业板指高开约0.5%。电池板块高开，固态电池概念多股竞价涨停。半导体、光模块板块低开。两市开盘成交量较节前明显放大。</div></div>
+<div class="timeline-item"><div class="time-label">【早盘】</div><div class="time-content">指数高开后迅速回落，沪指翻绿，深成指、创业板指跌幅扩大。科创50跌幅快速扩大至3%以上，半导体股全线重挫。固态电池板块维持强势，传艺科技、紫竹高科20cm涨停。航运板块拉升，中远海能涨停。约10:46，科创50跌幅扩大至3%，报1484.51点。</div></div>
+<div class="timeline-item"><div class="time-label">【午盘】</div><div class="time-content">指数继续震荡下行，创业板指跌幅扩大至3%以上，深成指跌超2%。全市场超3500只个股下跌，亏钱效应扩散。电池板块维持领涨，龙蟠科技涨停晋级2连板。银行、煤炭等防御板块逆势走强，护盘迹象明显。两市半日成交约1.3万亿，放量显著。</div></div>
+<div class="timeline-item"><div class="time-label">【午后】</div><div class="time-content">指数维持低位震荡，跌幅略有扩大。沪指下探3795.37点，逼近3800整数关口。科创50跌幅扩大至4.8%以上，成分股仅5只上涨、45只下跌。燃气板块拉升，国新能源涨停。传媒、AI应用板块跌幅扩大。尾盘指数略有回升，但未能翻红。</div></div>
+<div class="timeline-item"><div class="time-label">【尾盘】</div><div class="time-content">尾盘指数小幅回升，沪指收3811.90点跌0.79%，深成指收12620.90点跌2.07%，创业板指收3036.66点跌3.15%，科创50收1456.32点跌4.82%。两市成交1.68万亿，较上日大幅放量约2441亿。个股方面，1634只上涨、3466只下跌，涨停45家、跌停15家。新华传媒8连板，炸板率约42%。</div></div>
+</div>
+
+<!-- 模块6：专业深度分析 -->
+<div class="card" id="analysis">
+<div class="card-header">
+<div class="card-title"><span class="card-num">6</span>专业深度分析</div>
+<span class="card-badge badge-red">放量下挫·情绪混沌·方向待选</span>
+</div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">📊 关键技术位 · 支撑/压力一览</h4>
+<table>
+<tr><th>指数</th><th>收盘</th><th>支撑位</th><th>距收盘</th><th>压力位</th><th>距收盘</th></tr>
+<tr><td>上证指数</td><td>3811.90</td><td class="down">3780-3800</td><td class="down">-0.3%~-0.8%</td><td class="up">3850-3900</td><td class="up">+1.0%~+2.3%</td></tr>
+<tr><td>深证成指</td><td>12620.90</td><td class="down">12500-12600</td><td class="down">-0.2%~-1.0%</td><td class="up">12800-13000</td><td class="up">+1.4%~+3.0%</td></tr>
+<tr><td>创业板指</td><td>3036.66</td><td class="down">3000-3020</td><td class="down">-0.5%~-1.2%</td><td class="up">3100-3150</td><td class="up">+2.1%~+3.7%</td></tr>
+<tr><td>科创50</td><td>1456.32</td><td class="down">1440-1450</td><td class="down">-0.4%~-1.1%</td><td class="up">1500-1520</td><td class="up">+3.0%~+4.4%</td></tr>
+<tr><td>沪深300</td><td>4310.28</td><td class="down">4280-4300</td><td class="down">-0.2%~-0.7%</td><td class="up">4350-4400</td><td class="up">+0.9%~+2.1%</td></tr>
+</table>
+<div class="note detail-only">口径说明：沪指支撑位基于3800整数关口及9月28日低点3823附近设定；压力位基于3900整数关口及9月29日高点3850附近设定。深成指、创业板指均创年内新低，下方支撑需观察整数关口。科创50单日重挫4.82%，1440-1450为关键心理支撑，若失守则看1400整数位。</div>
+
+<div class="analysis-section detail-only">
+<h4>🔴 核心主线与持续性判断</h4>
+<p>今日为节后首日放量下挫，市场缺乏明确主线，呈现防御+局部题材特征：</p>
+<p><strong style="color:#e74c3c">电池/固态电池逆势领涨</strong>——固态电池概念掀涨停潮，力王股份、传艺科技、紫竹高科20cm涨停，龙蟠科技、野马电池涨停。驱动因素为政策预期+超跌反弹+新能源方向节前布局。但板块成交缩量，持续性存疑，更可能是政策预期驱动的脉冲行情。</p>
+<p><strong style="color:#e8a838">航运/油运周期走强</strong>——中远海能、招商南油涨停，油运板块逆势走强。驱动因素为国际油价波动+油运周期景气度预期+防御属性，是今日少数有持续资金关注的方向。</p>
+<p><strong style="color:#2196f3">防御板块资金流入</strong>——银行、煤炭、电力、燃气等防御板块涨幅居前，资金从科技成长方向撤离后涌入低估值防御板块，节前避险情绪浓厚。</p>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🟡 活跃支线题材</h4>
+<div class="concept-item"><span class="concept-tag purple">固态电池</span><span>板块内多只个股强势涨停，传艺科技3连板，新能源材料方向局部活跃。</span></div>
+<div class="concept-item"><span class="concept-tag orange">煤化工</span><span>金牛化工涨停，煤化工概念走强，能源化工方向局部活跃。</span></div>
+<div class="concept-item"><span class="concept-tag blue">燃气/煤炭</span><span>国新能源涨停，冬季供气预期+能源价格波动，防御属性突出。</span></div>
+<div class="concept-item"><span class="concept-tag red">家电/并购</span><span>九阳股份4连板，并购属性持续强势，新华传媒8连板。</span></div>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🟢 弱势退潮板块与风险点</h4>
+<div class="concept-item"><span class="concept-tag green">半导体（领跌）</span><span>单日主力净流出超120亿，科创50重挫4.82%，前期热门算力硬件方向大幅回调，节前获利盘集中了结。</span></div>
+<div class="concept-item"><span class="concept-tag green">光模块/CPO</span><span>天孚通信跌9.86%，剑桥科技跌6.01%，AI算力方向全线走弱，估值偏高+获利了结。</span></div>
+<div class="concept-item"><span class="concept-tag green">AI应用/传媒</span><span>全线走弱，AI应用方向连续调整，短线资金撤离。</span></div>
+<div class="concept-item"><span class="concept-tag green">高位人气股</span><span>炸板率飙升至42%，昨日高标集体断板，连板高度虽维持8板但晋级率大幅下降，短线情绪急剧降温。</span></div>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>⚖️ 市场风格偏向</h4>
+<p><strong>防御 vs 成长</strong>——银行、煤炭、燃气等防御/超跌方向逆势领涨，半导体、AI算力、医药等成长方向大幅回调。资金从前期热门的AI/算力/应用方向撤离，向地产、医药等超跌防御板块切换。整体呈现放量下挫、个股普跌、风格防御的特征，节后首日抛压集中释放。</p>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🔍 核心驱动因素与核心矛盾</h4>
+<p><strong>核心矛盾：</strong>节后资金面宽松预期与节前获利盘集中了结+外围不确定性之间的博弈，连板高度维持8板但炸板率飙升至42%，短线情绪混沌。</p>
+<p><strong>驱动因素拆解：</strong></p>
+<p>① <strong>节后获利了结</strong>——节前9月29-30日连续反弹积累获利盘，节后首日集中兑现，主力净流出480.37亿；</p>
+<p>② <strong>科技成长回调</strong>——半导体、光模块、AI应用等节前热门方向大幅回调，算力硬件方向资金流出超200亿；</p>
+<p>③ <strong>防御资金涌入</strong>——银行、煤炭、电力、燃气等低估值防御板块获避险资金青睐；</p>
+<p>④ <strong>电池政策预期</strong>——固态电池概念掀涨停潮，政策预期+超跌反弹驱动；</p>
+<p>⑤ <strong>外围不确定性</strong>——国庆长假期间海外市场波动，科技股承压，传导至A股半导体方向；</p>
+<p>⑥ <strong>两融持续下降</strong>——科创板两融余额连续7日减少，杠杆资金风险偏好下降；</p>
+<p>⑦ <strong>南向资金流入</strong>——南向净买入64.77亿港元，资金持续流向港股洼地。</p>
+</div>
+</div>
+
+<!-- 模块7：后市推演与关注方向 -->
+<div class="card" id="outlook">
+<div class="card-header">
+<div class="card-title"><span class="card-num">7</span>后市推演与关注方向</div>
+<span class="card-badge badge-orange">放量下挫后·方向选择</span>
+</div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">短期情景推演（概率为分析设定值，非预测）</h4>
+<div class="scenario-bar">
+<div class="scenario-item" style="width:30%;background:#e74c3c">超跌反弹 30%</div>
+<div class="scenario-item" style="width:45%;background:#e8a838">震荡整理 45%</div>
+<div class="scenario-item" style="width:25%;background:#27ae60">继续下探 25%</div>
+</div>
+<div class="scenario-legend">
+<span><span class="scenario-dot" style="background:#e74c3c"></span>情景一 超跌修复 约30%</span>
+<span><span class="scenario-dot" style="background:#e8a838"></span>情景二 震荡整理 约45%</span>
+<span><span class="scenario-dot" style="background:#27ae60"></span>情景三 继续回调 约25%</span>
+</div>
+<div class="note">注：概率为基于当前量价、情绪与外部变量状态的分析设定权重（合计100%），非市场共识或收益预期；将随后续开盘量能与消息面变化动态调整。节后首日放量下挫至1.68万亿，抛压集中释放后存在超跌反弹可能，但深成指、创业板指创年内新低，趋势仍偏弱。</div>
+
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景一：超跌修复（概率约30%）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>沪指3800关口企稳，半导体/AI算力方向止跌企稳，电池/新能源政策利好落地，北向资金回流</td></tr>
+<tr><td>市场特征</td><td>沪指反弹挑战3850-3900压力位，电池/航运领涨，半导体/通信超跌反弹，个股涨多跌少</td></tr>
+<tr><td>量能预期</td><td>成交维持1.5-1.7万亿，资金回流确认反弹有效性</td></tr>
+<tr><td>板块表现</td><td>固态电池延续强势；半导体/光模块超跌反弹；航运持续走强；银行/煤炭高位震荡</td></tr>
+<tr><td>证伪信号</td><td>①反弹首日成交不足1.4万亿；②电池龙头低开低走套牢资金；③半导体继续净流出超80亿；④连板高度压缩至5板以下</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景二：震荡整理（概率约45%·基准情景）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>无重大利好或利空，沪指在3780-3880区间震荡整理，板块轮动加快，资金观望情绪浓厚</td></tr>
+<tr><td>市场特征</td><td>沪指围绕3820震荡，个股涨跌互现，缺乏持续性主线，防御板块与科技成长交替表现</td></tr>
+<tr><td>量能预期</td><td>成交维持1.4-1.7万亿区间，方向选择等待政策或外围信号</td></tr>
+<tr><td>板块表现</td><td>电池/航运等防御方向震荡；半导体/AI局部活跃但缺乏持续性；高股息板块抗跌</td></tr>
+<tr><td>证伪信号</td><td>①沪指单日跌超1%且跌破3780；②成交萎缩至1.3万亿以下；③跌停家数超25家；④出现新的领跌主线</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景三：继续下探（概率约25%）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>外围市场大幅波动，国内政策不及预期，科技成长方向继续杀跌，沪指3800支撑失守</td></tr>
+<tr><td>市场特征</td><td>指数低开低走，个股普跌，跌停家数回升至25+，亏钱效应扩散，防御板块也补跌</td></tr>
+<tr><td>量能预期</td><td>下跌过程中可能放量至1.8万亿+（恐慌盘涌出）；若缩量下跌则说明抛压未尽，仍有下探空间</td></tr>
+<tr><td>板块表现</td><td>仅极少数高股息板块抗跌；电池/航运等节前强势方向全线回落；科技成长继续下探；银行板块可能护盘</td></tr>
+<tr><td>证伪信号</td><td>①沪指在3780附近出现长下影线且当日收回3800以上；②放量上涨且成交超1.8万亿；③电池/PCB板块出现涨停潮；④北向资金大幅净流入</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:20px 0 10px">关键监控指标与证伪触发器</h4>
+<table>
+<tr><th>监控指标</th><th>当前值</th><th>看多信号</th><th>看空信号</th></tr>
+<tr><td>沪指3800支撑</td><td>3811.90</td><td>3800附近企稳反弹</td><td>有效跌破3800</td></tr>
+<tr><td>两市成交额</td><td>1.68万亿</td><td>放量至1.8万亿+上涨</td><td>缩量至1.4万亿以下</td></tr>
+<tr><td>主力资金流向</td><td>净流出480.37亿</td><td>连续净流入且单日超100亿</td><td>再度大幅净流出超500亿</td></tr>
+<tr><td>半导体资金</td><td>净流出超120亿</td><td>止跌净流入</td><td>继续净流出超80亿</td></tr>
+<tr><td>连板高度</td><td>8板（新华传媒）</td><td>高度拓展至9板+且有新龙头</td><td>高度压缩至5板以下</td></tr>
+<tr><td>炸板率</td><td>约42%</td><td>回落至30%以下</td><td>继续攀升至50%以上</td></tr>
+<tr><td>科创50走势</td><td>1456.32（-4.82%）</td><td>率先反弹收复1500</td><td>跌破1440补跌</td></tr>
+<tr><td>两融余额</td><td>约26300亿</td><td>止跌回升</td><td>继续大幅减少</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:20px 0 10px">短期关注方向（方向性观察，不构成个股推荐）</h4>
+<p style="font-size:13px;color:#444;line-height:1.9">
+• <strong>成交量变化：</strong>今日成交1.68万亿大幅放量2441亿，放量下挫后关注后续能否缩量企稳。若缩量至1.4万亿以下且指数止跌，则抛压释放较为充分；若继续放量下跌，则恐慌盘尚未出清。<br>
+• <strong>电池/固态电池持续性：</strong>今日逆势领涨掀涨停潮，关注节后新能源政策是否落地。若政策超预期则电池板块可能迎来趋势性机会，若政策不及预期则今日反弹可能是诱多。<br>
+• <strong>半导体止跌信号：</strong>今日净流出超120亿领跌，科创50重挫4.82%。关注能否止跌企稳，若继续杀跌则拖累科技成长整体。<br>
+• <strong>航运/油运周期逻辑：</strong>中远海能、招商南油涨停，关注国际油价走势及油运景气度能否持续，是今日少数有持续资金关注的方向。<br>
+• <strong>沪指3800关键支撑：</strong>沪指盘中下探3795.37，3800为关键心理支撑。若失守则看3750-3780，若企稳则可能在3800-3900区间震荡。<br>
+• <strong>新华传媒8连板走向：</strong>市场唯一高标，若继续晋级则短线情绪尚有支撑，若断板则可能引发高位股补跌。<br>
+• <strong>南向资金持续流入：</strong>南向净买入64.77亿港元，关注港股洼地效应是否持续吸引A股资金分流。
+</p>
+</div>
+</div>
+
+<!-- 风险提示 -->
+<div class="disclaimer">
+风险提示：本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中涉及的板块与方向仅为客观分析，不代表对任何个股或板块的推荐。投资者应根据自身风险承受能力独立做出投资决策。
+</div>
+
+<div class="footer">
+A股大盘全景复盘 · 2026年10月8日 · 国庆后首个交易日<br>
+数据来源：同花顺、上交所、深交所、财联社、证券时报、东方财富、第一财经、新浪财经、韭研公社<br>
+本报告由AI自动生成，仅供学习交流使用。北向资金当日精确净买入未披露（2024年8月起交易所取消盘中实时披露），相关表述已如实标注。<br>
+两市成交1.68万亿，较上日放量约2441亿。科创50跌4.82%，炸板率约42%，短线情绪混沌。
+</div>
+
+</div>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle('compact');
+var btn=document.querySelector('.mode-toggle');
+if(document.body.classList.contains('compact')){
+btn.textContent='详细模式';
+}else{
+btn.textContent='精简模式';
+}
+}
+document.querySelectorAll('.nav-links a').forEach(function(a){
+a.addEventListener('click',function(e){
+e.preventDefault();
+var target=document.querySelector(this.getAttribute('href'));
+if(target){
+window.scrollTo({top:target.offsetTop-60,behavior:'smooth'});
+}
+});
+});
+</script>
+</body>
+</html>
