@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 - 2026年10月12日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f4f5f7;color:#333;line-height:1.6}
+.navbar{position:fixed;top:0;left:0;right:0;background:#1a1a2e;z-index:1000;padding:0 20px;display:flex;align-items:center;height:52px;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.navbar .logo{color:#fff;font-size:16px;font-weight:700;margin-right:30px;white-space:nowrap}
+.navbar .nav-links{display:flex;gap:6px;flex:1;overflow-x:auto}
+.navbar .nav-links a{color:#b0b0c0;text-decoration:none;font-size:13px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:all 0.2s}
+.navbar .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.mode-toggle{background:#e8a838;color:#fff;border:none;padding:7px 16px;border-radius:4px;font-size:13px;cursor:pointer;font-weight:600;white-space:nowrap;transition:background 0.2s}
+.mode-toggle:hover{background:#d4952e}
+.container{max-width:960px;margin:0 auto;padding:72px 16px 40px}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4a 100%);border-radius:12px;padding:32px 28px;margin-bottom:20px;color:#fff}
+.hero .date{font-size:13px;color:#8888aa;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:700;margin-bottom:12px}
+.hero .subtitle{font-size:14px;color:#ccc;line-height:1.8;margin-bottom:18px}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.hero .tag{background:rgba(39,174,96,0.2);color:#2ecc71;padding:4px 12px;border-radius:20px;font-size:12px;border:1px solid rgba(39,174,96,0.3)}
+.hero .index-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.hero .index-card{background:rgba(255,255,255,0.08);border-radius:8px;padding:12px 8px;text-align:center}
+.hero .index-card .name{font-size:11px;color:#aaa;margin-bottom:4px}
+.hero .index-card .value{font-size:18px;font-weight:700}
+.hero .index-card .change{font-size:12px;margin-top:2px}
+.card{background:#fff;border-radius:10px;padding:24px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #eee}
+.card-title{font-size:18px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:10px}
+.card-num{background:#e8a838;color:#fff;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.card-badge{font-size:12px;padding:4px 12px;border-radius:20px;font-weight:600}
+.badge-red{background:#fde8e8;color:#e74c3c}
+.badge-green{background:#e8f5e9;color:#27ae60}
+.badge-orange{background:#fef3e2;color:#e8a838}
+.badge-blue{background:#e3f2fd;color:#2196f3}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+th{background:#f8f9fa;padding:10px 8px;text-align:center;font-weight:600;color:#555;border-bottom:2px solid #eee}
+td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0}
+tr:hover td{background:#fafbfc}
+.up{color:#e74c3c;font-weight:600}
+.down{color:#27ae60;font-weight:600}
+.flat{color:#888;font-weight:600}
+.big-num{font-size:32px;font-weight:700}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:16px;text-align:center}
+.stat-box .stat-label{font-size:12px;color:#888;margin-bottom:6px}
+.stat-box .stat-value{font-size:24px;font-weight:700}
+.progress-bar{width:100%;height:28px;background:#eee;border-radius:14px;overflow:hidden;display:flex;margin-bottom:8px;position:relative}
+.progress-bar .seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;transition:width 0.5s}
+.progress-bar .seg-up{background:#e74c3c}
+.progress-bar .seg-flat{background:#95a5a6}
+.progress-bar .seg-down{background:#27ae60}
+.progress-labels{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:16px}
+.bar-row{display:flex;align-items:center;margin-bottom:8px;font-size:13px}
+.bar-row .bar-name{width:100px;text-align:right;padding-right:10px;color:#555;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#eee;border-radius:4px;overflow:hidden;position:relative}
+.bar-row .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;font-weight:600;white-space:nowrap}
+.bar-row .bar-fill.red{background:linear-gradient(90deg,#e74c3c,#f39c12)}
+.bar-row .bar-fill.green{background:linear-gradient(90deg,#27ae60,#2ecc71)}
+.bar-row .bar-value{width:70px;text-align:left;padding-left:8px;font-weight:600;flex-shrink:0}
+.concept-item{display:flex;align-items:flex-start;margin-bottom:10px;font-size:13px;line-height:1.7}
+.concept-item .concept-tag{flex-shrink:0;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-right:10px;margin-top:2px;min-width:80px;text-align:center}
+.concept-item .concept-tag.red{background:#fde8e8;color:#e74c3c}
+.concept-item .concept-tag.green{background:#e8f5e9;color:#27ae60}
+.concept-item .concept-tag.orange{background:#fef3e2;color:#e8a838}
+.concept-item .concept-tag.blue{background:#e3f2fd;color:#2196f3}
+.concept-item .concept-tag.purple{background:#f3e5f5;color:#9b59b6}
+.flow-arrow{font-size:28px;margin:0 8px}
+.flow-box{display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.flow-box .flow-item{text-align:center;padding:12px 20px}
+.flow-box .flow-item .flow-label{font-size:12px;color:#888}
+.flow-box .flow-item .flow-value{font-size:22px;font-weight:700}
+.timeline-item{display:flex;margin-bottom:14px;font-size:13px;line-height:1.8}
+.timeline-item .time-label{flex-shrink:0;width:50px;font-weight:700;color:#e8a838}
+.timeline-item .time-content{flex:1;color:#444}
+.analysis-section{margin-bottom:18px}
+.analysis-section h4{font-size:14px;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.analysis-section p{font-size:13px;color:#444;line-height:1.9;margin-bottom:8px}
+.scenario-bar{display:flex;height:36px;border-radius:6px;overflow:hidden;margin-bottom:10px}
+.scenario-item{display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600}
+.scenario-legend{display:flex;gap:20px;margin-bottom:12px;font-size:12px;color:#666}
+.scenario-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.note{font-size:11px;color:#999;margin-bottom:12px;line-height:1.6}
+.disclaimer{background:#fef9f0;border-left:4px solid #e8a838;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:12px;color:#888;line-height:1.8;text-align:center}
+.footer{text-align:center;font-size:11px;color:#aaa;padding:20px 0;line-height:1.8}
+.detail-only{display:block}
+body.compact .detail-only{display:none}
+body.compact .card{padding:16px}
+body.compact .hero{padding:20px}
+body.compact .hero .index-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:768px){
+.navbar{padding:0 12px;height:48px}
+.navbar .logo{font-size:14px;margin-right:12px}
+.navbar .nav-links a{font-size:11px;padding:5px 8px}
+.mode-toggle{padding:5px 10px;font-size:11px}
+.container{padding:60px 10px 30px}
+.hero{padding:20px 16px}
+.hero h1{font-size:20px}
+.hero .index-grid{grid-template-columns:repeat(3,1fr)}
+.card{padding:16px}
+.stat-grid{grid-template-columns:repeat(2,1fr)}
+.bar-row .bar-name{width:80px;font-size:12px}
+.flow-box{flex-direction:column}
+.flow-arrow{transform:rotate(90deg);margin:8px 0}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="logo">A股全景复盘</div>
+<div class="nav-links">
+<a href="#index">指数</a>
+<a href="#sentiment">情绪</a>
+<a href="#sector">板块</a>
+<a href="#capital">资金</a>
+<a href="#rhythm">节奏</a>
+<a href="#analysis">分析</a>
+<a href="#outlook">推演</a>
+</div>
+<button class="mode-toggle" onclick="toggleMode()">精简模式</button>
+</nav>
+
+<div class="container">
+
+<!-- 首屏概览 -->
+<div class="hero">
+<div class="date">2026年10月12日 · 星期一 · 收盘复盘 · 缩量调整</div>
+<h1>沪指失守3800 · 银行传媒逆势护盘</h1>
+<p class="subtitle">10月12日，A股三大指数集体收跌，沪指跌0.43%报3797.24点，再度失守3800点关口；深成指跌2.03%，创业板指跌2.61%失守3000点，科创50跌2.10%。两市成交1.54万亿，较上日大幅缩量3628亿。全市场超4300只个股下跌，仅1167只上涨。银行板块逆势走强（+2.32%），中国银行、中信银行、工商银行续创历史新高；传媒板块延续强势（+1.47%），新华传媒10连板，出版业6股涨停。通信（-4.49%）、电子（-3.20%）领跌，CPO/光通信概念大幅调整，中际旭创跌超6%。主力资金净流出263.38亿，连续4日流出。</p>
+<div class="tags">
+<span class="tag">缩量3628亿</span>
+<span class="tag">沪指失守3800</span>
+<span class="tag">银行创历史新高</span>
+<span class="tag">传媒10连板</span>
+<span class="tag">通信领跌-4.49%</span>
+<span class="tag">超4300股下跌</span>
+</div>
+<div class="index-grid">
+<div class="index-card"><div class="name">上证指数</div><div class="value down">3797.24</div><div class="change down">-0.43%</div></div>
+<div class="index-card"><div class="name">深证成指</div><div class="value down">12384.87</div><div class="change down">-2.03%</div></div>
+<div class="index-card"><div class="name">创业板指</div><div class="value down">2963.82</div><div class="change down">-2.61%</div></div>
+<div class="index-card"><div class="name">科创50</div><div class="value down">1426.72</div><div class="change down">-2.10%</div></div>
+<div class="index-card"><div class="name">沪深300</div><div class="value down">4287.98</div><div class="change down">-0.68%</div></div>
+<div class="index-card"><div class="name">两市成交</div><div class="value" style="color:#e8a838">1.54万亿</div><div class="change" style="color:#2ecc71">缩量3628亿</div></div>
+</div>
+</div>
+
+<!-- 模块1：五大核心指数 -->
+<div class="card" id="index">
+<div class="card-header">
+<div class="card-title"><span class="card-num">1</span>五大核心指数</div>
+<span class="card-badge badge-green">全线收跌·缩量调整</span>
+</div>
+<table>
+<tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr>
+<tr><td>上证指数</td><td>3797.24</td><td class="down">-0.43%</td><td>约3804</td><td>约3814</td><td>约3790</td><td>7149.10亿</td></tr>
+<tr><td>深证成指</td><td>12384.87</td><td class="down">-2.03%</td><td>12586.96</td><td>12656.69</td><td>12373.00</td><td>8229.21亿</td></tr>
+<tr><td>创业板指</td><td>2963.82</td><td class="down">-2.61%</td><td>约2990</td><td>约3000</td><td>约2955</td><td>3923.34亿</td></tr>
+<tr><td>科创50</td><td>1426.72</td><td class="down">-2.10%</td><td>约1450</td><td>约1455</td><td>约1420</td><td>约800亿</td></tr>
+<tr><td>沪深300</td><td>4287.98</td><td class="down">-0.68%</td><td>约4310</td><td>约4320</td><td>约4280</td><td>4055.74亿</td></tr>
+</table>
+<div class="note detail-only">备注：深证成指今开12586.96、最高12656.69、最低12373.00为金融数据库权威数据；上证指数、创业板指、科创50、沪深300的开盘/最高/最低为基于分时走势的估算值。两市合计成交约1.54万亿（15378亿），较上一交易日（10/9的1.92万亿）大幅缩量约3628亿，缩量幅度约19%。沪指再度失守3800点关口，创业板指失守3000点关口。沪深300跌幅最小（-0.68%），银行股权重护盘明显。</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">沪深两市成交</div><div class="stat-value" style="color:#e8a838">1.54万亿</div></div>
+<div class="stat-box"><div class="stat-label">较上日缩量</div><div class="stat-value down">约3628亿</div></div>
+<div class="stat-box"><div class="stat-label">上涨/下跌家数</div><div class="stat-value">1167/4325</div></div>
+<div class="stat-box"><div class="stat-label">上涨占比</div><div class="stat-value down">约21%</div></div>
+</div>
+</div>
+
+<!-- 模块2：市场情绪 -->
+<div class="card" id="sentiment">
+<div class="card-header">
+<div class="card-title"><span class="card-num">2</span>市场情绪</div>
+<span class="card-badge badge-green">情绪转弱·涨停46家</span>
+</div>
+<div class="progress-bar">
+<div class="seg seg-up" style="width:21%">上涨 1167</div>
+<div class="seg seg-flat" style="width:2%">平</div>
+<div class="seg seg-down" style="width:77%">下跌 4325</div>
+</div>
+<div class="progress-labels">
+<span>上涨占比 约21%</span>
+<span>平盘占比 约2%</span>
+<span>下跌占比 约77%</span>
+</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">涨停家数</div><div class="stat-value up">46</div></div>
+<div class="stat-box"><div class="stat-label">跌停家数</div><div class="stat-value down">约9</div></div>
+<div class="stat-box"><div class="stat-label">连板股总数</div><div class="stat-value" style="color:#e8a838">18只</div></div>
+<div class="stat-box"><div class="stat-label">炸板率</div><div class="stat-value down">约35%</div></div>
+</div>
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:12px">连板梯队</h4>
+<div class="stat-grid" style="grid-template-columns:repeat(5,1fr)">
+<div class="stat-box" style="background:#fde8e8"><div class="stat-label">10连板</div><div class="stat-value up">1</div><div style="font-size:11px;color:#888;margin-top:4px">新华传媒</div></div>
+<div class="stat-box" style="background:#fef3e2"><div class="stat-label">6连板</div><div class="stat-value" style="color:#e8a838">2</div><div style="font-size:11px;color:#888;margin-top:4px">九阳股份/时代万恒</div></div>
+<div class="stat-box"><div class="stat-label">2连板</div><div class="stat-value" style="color:#9b59b6">约5</div><div style="font-size:11px;color:#888;margin-top:4px">博纳/吉视/新经典等</div></div>
+<div class="stat-box"><div class="stat-label">11天8板</div><div class="stat-value" style="color:#2196f3">1</div><div style="font-size:11px;color:#888;margin-top:4px">新华文轩</div></div>
+<div class="stat-box"><div class="stat-label">首板</div><div class="stat-value flat">约28</div><div style="font-size:11px;color:#888;margin-top:4px">传媒/光伏/储能为主</div></div>
+</div>
+<div class="detail-only">
+<p style="font-size:13px;color:#444;line-height:1.9;margin-top:12px">情绪特征：全市场仅1167只上涨（占比21%），4325只下跌，个股普跌格局明显。涨停46家（较前日72家大幅减少26家），跌停约9家，炸板率约35%（较前日20%大幅攀升），封板率65%（25股封板未遂），短线情绪快速转弱。连板股总数18只，连板晋级率仅33.33%，高度维持10板（新华传媒一字涨停，封单15.89亿，累计涨幅159.51%）。九阳股份、时代万恒无惧分歧双双晋级6连板。传媒板块出版方向6股涨停（新华传媒、龙版传媒、新华文轩、新经典、果麦文化、内蒙新华），成为今日唯一结构性亮点。整体情绪定性为混沌偏弱，上周五V形反转的修复动能未能延续。</p>
+</div>
+</div>
+
+<!-- 模块3：板块轮动 -->
+<div class="card" id="sector">
+<div class="card-header">
+<div class="card-title"><span class="card-num">3</span>板块轮动</div>
+<span class="card-badge badge-green">银行护盘·通信电子领跌</span>
+</div>
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">行业涨幅TOP</h4>
+<div class="bar-row"><div class="bar-name">银行</div><div class="bar-track"><div class="bar-fill red" style="width:85%">+2.32%</div></div><div class="bar-value up">+2.32%</div></div>
+<div class="bar-row"><div class="bar-name">传媒</div><div class="bar-track"><div class="bar-fill red" style="width:55%">+1.47%</div></div><div class="bar-value up">+1.47%</div></div>
+<div class="bar-row"><div class="bar-name">食品饮料</div><div class="bar-track"><div class="bar-fill red" style="width:25%">+0.64%</div></div><div class="bar-value up">+0.64%</div></div>
+<div class="bar-row"><div class="bar-name">非银金融</div><div class="bar-track"><div class="bar-fill red" style="width:18%">+0.45%</div></div><div class="bar-value up">+0.45%</div></div>
+<div class="bar-row"><div class="bar-name">家用电器</div><div class="bar-track"><div class="bar-fill red" style="width:15%">+0.38%</div></div><div class="bar-value up">+0.38%</div></div>
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">行业跌幅TOP</h4>
+<div class="bar-row"><div class="bar-name">通信</div><div class="bar-track"><div class="bar-fill green" style="width:90%">-4.49%</div></div><div class="bar-value down">-4.49%</div></div>
+<div class="bar-row"><div class="bar-name">电子</div><div class="bar-track"><div class="bar-fill green" style="width:65%">-3.20%</div></div><div class="bar-value down">-3.20%</div></div>
+<div class="bar-row"><div class="bar-name">有色金属</div><div class="bar-track"><div class="bar-fill green" style="width:60%">-约3.0%</div></div><div class="bar-value down">-约3.0%</div></div>
+<div class="bar-row"><div class="bar-name">基础化工</div><div class="bar-track"><div class="bar-fill green" style="width:50%">-约2.5%</div></div><div class="bar-value down">-约2.5%</div></div>
+<div class="bar-row"><div class="bar-name">房地产</div><div class="bar-track"><div class="bar-fill green" style="width:40%">-约2.0%</div></div><div class="bar-value down">-约2.0%</div></div>
+
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">领涨概念与驱动逻辑</h4>
+<div class="concept-item"><span class="concept-tag red">银行 +2.32%</span><span>银行板块逆势走强，建设银行、招商银行、农业银行涨超3%，中国银行、中信银行、工商银行续创历史新高。主力净流入8.72亿（Wind口径逾43亿）。驱动因素为高股息防御属性+险资增配预期+市场避险情绪升温，成为今日护盘核心力量。</span></div>
+<div class="concept-item"><span class="concept-tag red">传媒 +1.47%</span><span>传媒板块延续强势，出版方向6股涨停：新华传媒10连板（一字，封单15.89亿）、龙版传媒2板、新华文轩11天8板、新经典2板、果麦文化20CM首板、内蒙新华首板。主力净流入23.65亿居首（Wind口径逾57亿）。驱动因素为网络游戏首次写入《出版业发展"十五五"规划》+并购重组预期+AI应用催化。</span></div>
+<div class="concept-item"><span class="concept-tag orange">光伏/逆变器 +4.42%</span><span>光伏设备板块午后异动拉升，首航新能20CM涨停、安彩高科涨停，逆变器概念涨4.42%。驱动因素为海外需求预期+板块超跌反弹+储能政策催化。</span></div>
+<div class="concept-item"><span class="concept-tag blue">风电/储能</span><span>天顺风能涨停，振宏股份涨超10%；储能板块金冠电气、首航新能双双20CM涨停。驱动因素为新能源政策预期+超跌反弹。</span></div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">领跌概念与驱动逻辑</h4>
+<div class="concept-item"><span class="concept-tag green">通信 -4.49%</span><span>通信行业领跌，CPO/光通信概念大幅调整。星网锐捷跌停，中际旭创跌超6%，剑桥科技跌超8%，长飞光纤跌超6%。主力资金大幅净流出。驱动因素为前期算力硬件方向涨幅较大获利了结+海外科技股波动+光模块估值偏高。</span></div>
+<div class="concept-item"><span class="concept-tag green">电子 -3.20%</span><span>电子行业主力净流出规模居首，半导体/消费电子方向继续调整。驱动因素为外围科技股波动+节前获利盘了结+科创50持续走弱拖累。</span></div>
+<div class="concept-item"><span class="concept-tag green">有色金属 -约3.0%</span><span>有色金属主力净流出逾64亿（Wind口径），贵金属+工业金属双杀。驱动因素为美元走强+大宗商品价格波动+获利盘了结。</span></div>
+<div class="concept-item"><span class="concept-tag green">种业/能源金属/消费电子</span><span>种业、能源金属、消费电子概念跌幅居前。驱动因素为板块轮动调整+缺乏新催化+资金从成长方向撤离转向防御。</span></div>
+</div>
+</div>
+
+<!-- 模块4：资金流向 -->
+<div class="card" id="capital">
+<div class="card-header">
+<div class="card-title"><span class="card-num">4</span>资金流向</div>
+<span class="card-badge badge-green">主力净流出263亿·连续4日</span>
+</div>
+<div class="flow-box">
+<div class="flow-item"><div class="flow-label">主力资金全天</div><div class="flow-value down">-263.38亿</div></div>
+<div class="flow-arrow">→</div>
+<div class="flow-item"><div class="flow-label">南向资金净买入</div><div class="flow-value up">26.03亿港元</div></div>
+</div>
+<div class="stat-grid">
+<div class="stat-box"><div class="stat-label">传媒主力净流入</div><div class="stat-value up">+23.65亿</div></div>
+<div class="stat-box"><div class="stat-label">银行主力净流入</div><div class="stat-value up">+8.72亿</div></div>
+<div class="stat-box"><div class="stat-label">电子主力净流出</div><div class="stat-value down">居首</div></div>
+<div class="stat-box"><div class="stat-label">有色净流出(Wind)</div><div class="stat-value down">逾64亿</div></div>
+</div>
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:12px 0 8px">行业资金流向（证券时报口径）</h4>
+<div class="concept-item"><span class="concept-tag red">传媒 +23.65亿</span><span>传媒行业主力资金净流入规模居首，板块上涨1.47%，出版方向6股涨停，并购重组+政策催化吸引资金涌入。</span></div>
+<div class="concept-item"><span class="concept-tag red">银行 +8.72亿</span><span>银行行业主力净流入8.72亿元，板块上涨2.32%，高股息防御属性吸引避险资金。Wind口径银行净流入逾43亿。</span></div>
+<div class="concept-item"><span class="concept-tag red">电力设备 +逾30亿(Wind)</span><span>电力设备行业Wind口径净流入逾30亿，光伏/储能午后异动拉升，首航新能、金冠电气20CM涨停。</span></div>
+<div class="concept-item"><span class="concept-tag red">计算机 +逾18亿(Wind)</span><span>计算机行业Wind口径净流入逾18亿，AI应用+网络安全方向局部活跃。</span></div>
+<div class="concept-item"><span class="concept-tag green">电子 净流出居首</span><span>电子行业主力资金净流出规模居首，半导体/消费电子方向资金大幅撤离，板块跌3.20%。</span></div>
+<div class="concept-item"><span class="concept-tag green">通信 大幅净流出</span><span>通信行业跌4.49%领跌，CPO/光通信方向资金大幅流出，中际旭创、新易盛等重仓股遭抛售。</span></div>
+<div class="concept-item"><span class="concept-tag green">有色金属 净流出逾64亿(Wind)</span><span>有色金属Wind口径净流出逾64亿，贵金属+工业金属双杀，大宗商品价格波动引发资金撤离。</span></div>
+<p style="font-size:12px;color:#888;line-height:1.8;margin-top:12px">北向资金：2024年8月起交易所取消盘中实时披露，日度净买入次一交易日公布，当日精确净买入未披露。北向资金全天成交活跃，沪股通成交前三：药明康德17.55亿、澜起科技16.98亿、兆易创新13.96亿；深股通成交前三：宁德时代39.33亿、新易盛33.16亿、中际旭创33.1亿。南向资金全天净买入26.03亿港元（较前日2.90亿大幅增加），小米集团-W获净买入9.74亿港元居首，友邦保险7.29亿，药明生物0.80亿；长飞光纤光缆遭净卖出5.70亿，中芯国际4.34亿。主力资金已连续4个交易日净流出，今日净流出263.38亿，较上周五（116.88亿）有所扩大。</p>
+</div>
+</div>
+
+<!-- 模块5：全天运行节奏 -->
+<div class="card" id="rhythm">
+<div class="card-header">
+<div class="card-title"><span class="card-num">5</span>全天运行节奏</div>
+<span class="card-badge badge-green">低开低走·缩量阴跌</span>
+</div>
+<div class="timeline-item"><div class="time-label">【开盘】</div><div class="time-content">三大指数集体低开，沪指低开约0.2%报3804附近，深成指低开约0.4%，创业板指低开约0.5%。受上周五V形反转后获利盘了结及外围科技股波动影响，开盘后指数震荡下行。银行股逆势走强，中国银行、中信银行、工商银行高开续创历史新高。传媒板块延续强势，新华传媒一字10连板。</div></div>
+<div class="timeline-item"><div class="time-label">【早盘】</div><div class="time-content">指数低开后震荡走低，通信、电子板块率先下挫，CPO/光通信概念大幅调整，星网锐捷跌停，中际旭创跌超6%，剑桥科技跌超8%。创业板指跌幅扩大至2%以上，失守3000点关口。沪指在3800点附近挣扎，银行股护盘使沪指跌幅相对有限。半日成交1.01万亿，较上日半日缩量1552亿。上涨仅1323家，下跌3770家。</div></div>
+<div class="timeline-item"><div class="time-label">【午盘】</div><div class="time-content">指数维持低位震荡，沪指在3790-3800区间徘徊，深成指、创业板指继续走低。全市场超4000只下跌，亏钱效应扩散。传媒板块出版方向持续活跃，新华传媒、龙版传媒、新华文轩、新经典等多股涨停。光伏设备板块开始有资金悄悄布局。有色金属、基础化工继续下挫。</div></div>
+<div class="timeline-item"><div class="time-label">【午后】</div><div class="time-content">约13:30，光伏设备板块异动拉升，首航新能20CM涨停、安彩高科涨停，逆变器概念涨超4%。储能板块跟随反弹，金冠电气20CM涨停。但通信、电子板块跌幅进一步扩大，拖累深成指、创业板指继续下行。沪指在银行股护盘下跌幅收窄，但未能收复3800点。市场整体缺乏上攻动能，缩量阴跌格局明显。</div></div>
+<div class="timeline-item"><div class="time-label">【尾盘】</div><div class="time-content">尾盘指数维持低位，无明显资金抄底迹象。截至收盘，沪指跌0.43%报3797.24点，再度失守3800点；深成指跌2.03%报12384.87点；创业板指跌2.61%报2963.82点，失守3000点；科创50跌2.10%报1426.72点；沪深300跌0.68%报4287.98点。两市成交1.54万亿，缩量3628亿。全市场1167只上涨、4325只下跌，涨停46家、跌停约9家，炸板率约35%。</div></div>
+</div>
+
+<!-- 模块6：专业深度分析 -->
+<div class="card" id="analysis">
+<div class="card-header">
+<div class="card-title"><span class="card-num">6</span>专业深度分析</div>
+<span class="card-badge badge-green">缩量回调·防御占优·方向待选</span>
+</div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">📊 关键技术位 · 支撑/压力一览</h4>
+<table>
+<tr><th>指数</th><th>收盘</th><th>支撑位</th><th>距收盘</th><th>压力位</th><th>距收盘</th></tr>
+<tr><td>上证指数</td><td>3797.24</td><td class="down">3750-3780</td><td class="down">-0.5%~-1.2%</td><td class="up">3820-3850</td><td class="up">+0.6%~+1.4%</td></tr>
+<tr><td>深证成指</td><td>12384.87</td><td class="down">12300-12400</td><td class="down">-0.7%~-1.5%</td><td class="up">12600-12800</td><td class="up">+1.7%~+3.4%</td></tr>
+<tr><td>创业板指</td><td>2963.82</td><td class="down">2930-2950</td><td class="down">-0.5%~-1.1%</td><td class="up">3000-3050</td><td class="up">+1.2%~+2.9%</td></tr>
+<tr><td>科创50</td><td>1426.72</td><td class="down">1400-1420</td><td class="down">-0.5%~-1.9%</td><td class="up">1450-1480</td><td class="up">+1.6%~+3.7%</td></tr>
+<tr><td>沪深300</td><td>4287.98</td><td class="down">4250-4280</td><td class="down">-0.2%~-0.9%</td><td class="up">4320-4350</td><td class="up">+0.7%~+1.4%</td></tr>
+</table>
+<div class="note detail-only">口径说明：沪指支撑位基于上周五盘中低点3755及3780整数关口设定；今日收盘3797再度失守3800，3750-3780为短期关键支撑。压力位基于3820（今日开盘附近）及3850（上周五高点附近）设定。创业板指今日失守3000点，2930-2950为前期低点支撑。沪深300因银行股权重护盘跌幅最小，4250-4280支撑较强。</div>
+
+<div class="analysis-section detail-only">
+<h4>🔴 核心主线与持续性判断</h4>
+<p>今日市场呈现明显的"防御占优、成长退潮"格局，核心主线逐渐清晰：</p>
+<p><strong style="color:#e74c3c">银行/高股息（最强主线）</strong>——板块大涨2.32%，中国银行、中信银行、工商银行续创历史新高，建设银行、招商银行、农业银行涨超3%。主力净流入8.72亿（Wind口径逾43亿）。驱动因素为高股息防御属性+险资增配预期+市场避险情绪升温。在市场缩量调整、成长方向退潮的背景下，银行板块的防御属性凸显，持续性较强，有望成为短期市场核心主线。</p>
+<p><strong style="color:#e8a838">传媒/出版（结构性主线）</strong>——板块涨1.47%，出版方向6股涨停，新华传媒10连板（一字，封单15.89亿），新华文轩11天8板，内蒙新华13天7板。主力净流入23.65亿居首。驱动因素为网络游戏首次写入《出版业发展"十五五"规划》+并购重组预期+AI应用催化。传媒板块已连续3日领涨，趋势性较强，但需关注高位股分歧风险。</p>
+<p><strong style="color:#2196f3">光伏/储能（超跌反弹）</strong>——光伏设备午后异动，逆变器概念涨4.42%，首航新能、安彩高科、金冠电气涨停。驱动因素为海外需求预期+板块超跌反弹+储能政策催化。持续性有待观察，目前更偏向超跌反弹性质。</p>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🟡 活跃支线题材</h4>
+<div class="concept-item"><span class="concept-tag purple">并购重组</span><span>新华传媒10连板带动并购重组主题，传媒、出版类并购预期个股活跃。</span></div>
+<div class="concept-item"><span class="concept-tag orange">高股息/防御</span><span>银行、食品饮料、家用电器等防御方向逆势上涨，资金避险情绪升温。</span></div>
+<div class="concept-item"><span class="concept-tag blue">风电/储能</span><span>天顺风能涨停，金冠电气、首航新能20CM涨停，新能源政策预期+超跌反弹。</span></div>
+<div class="concept-item"><span class="concept-tag red">短剧/游戏</span><span>短剧概念股延续强势，博纳影业、吉视传媒2连板，网络游戏政策催化。</span></div>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🟢 弱势退潮板块与风险点</h4>
+<div class="concept-item"><span class="concept-tag green">通信/CPO（领跌）</span><span>通信行业跌4.49%领跌，CPO/光通信概念大幅调整，星网锐捷跌停，中际旭创跌超6%，剑桥科技跌超8%。前期算力硬件方向继续退潮，资金大幅撤离。</span></div>
+<div class="concept-item"><span class="concept-tag green">电子/半导体</span><span>电子行业跌3.20%，主力净流出居首，半导体/消费电子方向连续调整，科创50跌2.10%。</span></div>
+<div class="concept-item"><span class="concept-tag green">有色金属</span><span>有色金属跌约3%，主力净流出逾64亿（Wind口径），贵金属+工业金属双杀。</span></div>
+<div class="concept-item"><span class="concept-tag green">房地产/基础化工</span><span>房地产跌约2%，基础化工跌约2.5%，周期方向整体调整，缺乏新催化。</span></div>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>⚖️ 市场风格偏向</h4>
+<p><strong>防御 vs 进攻</strong>——银行、食品饮料、家用电器等防御方向逆势上涨，通信、电子、有色等进攻/成长方向大幅领跌。资金从前期成长/进攻方向（CPO、半导体、算力硬件）大幅撤离，转向银行等高股息防御方向。上周五V形反转后市场风险偏好未能延续，今日快速转向防御风格。主力资金连续4日净流出，机构资金偏谨慎，缩量3628亿说明场外资金观望情绪浓厚。</p>
+</div>
+
+<div class="analysis-section detail-only">
+<h4>🔍 核心驱动因素与核心矛盾</h4>
+<p><strong>核心矛盾：</strong>上周五V形反转的修复动能未能延续，市场在3800点关键位置再次面临方向选择——银行护盘使沪指跌幅有限，但深成指、创业板指大幅下挫反映成长方向的真实弱势。</p>
+<p><strong>驱动因素拆解：</strong></p>
+<p>① <strong>缩量调整</strong>——两市成交1.54万亿，较上周五大幅缩量3628亿（缩量19%），场外资金观望情绪浓厚，上周五抄底资金未能形成持续合力；</p>
+<p>② <strong>银行护盘</strong>——中国银行、中信银行、工商银行续创历史新高，银行板块涨2.32%，高股息防御属性吸引避险资金，使沪指跌幅远小于深成指和创业板指；</p>
+<p>③ <strong>传媒延续强势</strong>——网络游戏首次写入《出版业发展"十五五"规划》+并购重组预期，出版方向6股涨停，新华传媒10连板，成为今日唯一结构性亮点；</p>
+<p>④ <strong>通信/电子领跌</strong>——CPO/光通信概念大幅调整，星网锐捷跌停、中际旭创跌超6%，前期算力硬件方向获利了结+海外科技股波动；</p>
+<p>⑤ <strong>主力连续流出</strong>——主力净流出263.38亿（连续4日），较上周五（116.88亿）有所扩大，机构资金仍偏谨慎；</p>
+<p>⑥ <strong>南向大幅流入</strong>——南向资金净买入26.03亿港元（较前日2.90亿大幅增加），小米集团获买入9.74亿，港股洼地效应重新显现；</p>
+<p>⑦ <strong>情绪快速转弱</strong>——涨停从72家降至46家，炸板率从20%升至35%，连板晋级率仅33%，上周五V形反转的修复情绪快速消退。</p>
+</div>
+</div>
+
+<!-- 模块7：后市推演与关注方向 -->
+<div class="card" id="outlook">
+<div class="card-header">
+<div class="card-title"><span class="card-num">7</span>后市推演与关注方向</div>
+<span class="card-badge badge-orange">缩量回调后·方向选择窗口</span>
+</div>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin-bottom:10px">短期情景推演（概率为分析设定值，非预测）</h4>
+<div class="scenario-bar">
+<div class="scenario-item" style="width:30%;background:#e74c3c">企稳反弹 30%</div>
+<div class="scenario-item" style="width:45%;background:#e8a838">震荡整理 45%</div>
+<div class="scenario-item" style="width:25%;background:#27ae60">继续下探 25%</div>
+</div>
+<div class="scenario-legend">
+<span><span class="scenario-dot" style="background:#e74c3c"></span>情景一 企稳反弹 约30%</span>
+<span><span class="scenario-dot" style="background:#e8a838"></span>情景二 震荡整理 约45%</span>
+<span><span class="scenario-dot" style="background:#27ae60"></span>情景三 继续下探 约25%</span>
+</div>
+<div class="note">注：概率为基于当前量价、情绪与外部变量状态的分析设定权重（合计100%），非市场共识或收益预期；将随后续开盘量能与消息面变化动态调整。今日缩量调整后市场进入方向选择窗口，银行护盘使沪指跌幅有限，但成长方向真实弱势，需关注3750-3780支撑有效性。</div>
+
+<div class="detail-only">
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景一：企稳反弹（概率约30%）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>明日沪指在3780附近企稳回升，银行/传媒延续强势，通信/电子止跌，成交量回升至1.7万亿以上，主力资金流出收窄或转正</td></tr>
+<tr><td>市场特征</td><td>沪指收复3800点并挑战3820-3850压力位，创业板指反弹至3000点附近，银行/传媒/光伏领涨，个股涨多跌少</td></tr>
+<tr><td>量能预期</td><td>成交回升至1.7-1.9万亿，资金回流确认反弹有效性，主力资金流出大幅收窄</td></tr>
+<tr><td>板块表现</td><td>银行/高股息延续强势；传媒出版主线延续；光伏/储能超跌反弹延续；通信/电子止跌企稳；周期板块低位修复</td></tr>
+<tr><td>证伪信号</td><td>①明日成交继续萎缩至1.4万亿以下；②银行板块高开低走套牢资金；③传媒炸板率超40%；④主力继续净流出超300亿；⑤沪指跌破3780且收盘低于3770</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景二：震荡整理（概率约45%·基准情景）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>沪指在3750-3850区间震荡整理，银行护盘与成长杀跌形成对冲，板块轮动加快，资金观望情绪浓厚</td></tr>
+<tr><td>市场特征</td><td>沪指围绕3800震荡，个股涨跌互现，银行/传媒等防御方向震荡，科技成长方向分化，缺乏持续性主线</td></tr>
+<tr><td>量能预期</td><td>成交维持1.5-1.7万亿区间，方向选择等待政策或外围信号，主力资金小幅净流出或基本平衡</td></tr>
+<tr><td>板块表现</td><td>银行/传媒等强势方向高位震荡；通信/电子低位弱反弹但缺乏持续性；高股息板块抗跌；光伏/储能间歇性活跃</td></tr>
+<tr><td>证伪信号</td><td>①沪指单日跌超1.5%且跌破3750；②成交萎缩至1.3万亿以下；③跌停家数超20家；④银行板块补跌超2%；⑤新华传媒断板且高位股集体补跌</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:16px 0 10px">情景三：继续下探（概率约25%）</h4>
+<table>
+<tr><th style="width:120px">维度</th><th>具体描述</th></tr>
+<tr><td>触发条件</td><td>银行护盘力量衰竭，沪指3780支撑失守，外围市场大幅波动，国内政策不及预期，通信/电子继续杀跌拖累全市场</td></tr>
+<tr><td>市场特征</td><td>指数低开低走，个股普跌，跌停家数回升至20+，亏钱效应再次扩散，银行/传媒等今日强势方向全线回落</td></tr>
+<tr><td>量能预期</td><td>下跌过程中可能放量至1.8万亿+（恐慌盘再次涌出）；若缩量下跌则说明抛压未尽，仍有下探空间</td></tr>
+<tr><td>板块表现</td><td>仅极少数高股息板块抗跌；银行/传媒等今日强势方向全线回落；科技成长继续下探；沪指考验3700-3750支撑</td></tr>
+<tr><td>证伪信号</td><td>①沪指在3750附近出现长下影线且当日收回3800以上；②放量上涨且成交超1.8万亿；③传媒/银行板块出现涨停潮；④主力资金大幅净流入超200亿；⑤新华传媒继续晋级11连板</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:20px 0 10px">关键监控指标与证伪触发器</h4>
+<table>
+<tr><th>监控指标</th><th>当前值</th><th>看多信号</th><th>看空信号</th></tr>
+<tr><td>沪指3800关口</td><td>3797.24（失守）</td><td>快速收复3800且放量上行</td><td>有效跌破3780且收盘低于3770</td></tr>
+<tr><td>两市成交额</td><td>1.54万亿</td><td>回升至1.7万亿以上上涨</td><td>继续缩量至1.4万亿以下</td></tr>
+<tr><td>主力资金流向</td><td>净流出263.38亿</td><td>流出收窄至100亿以内或转正</td><td>再度大幅净流出超350亿</td></tr>
+<tr><td>银行板块走势</td><td>+2.32%</td><td>延续强势且成交放大</td><td>高开低走补跌超2%</td></tr>
+<tr><td>传媒板块走势</td><td>+1.47%</td><td>延续涨停潮且新华传媒晋级</td><td>炸板率超40%且新华传媒断板</td></tr>
+<tr><td>连板高度</td><td>10板（新华传媒）</td><td>高度拓展至11板+且有新龙头</td><td>高度压缩至7板以下</td></tr>
+<tr><td>炸板率</td><td>约35%</td><td>回落至25%以下</td><td>攀升至45%以上</td></tr>
+<tr><td>通信/电子止跌</td><td>-4.49%/-3.20%</td><td>止跌企稳且跌幅收窄至1%以内</td><td>继续大跌超3%拖累全市场</td></tr>
+</table>
+
+<h4 style="font-size:14px;color:#1a1a2e;margin:20px 0 10px">短期关注方向（方向性观察，不构成个股推荐）</h4>
+<p style="font-size:13px;color:#444;line-height:1.9">
+• <strong>沪指3750-3780关键支撑：</strong>今日收盘3797再度失守3800，3750-3780为短期关键支撑区间（上周五盘中低点3755）。若失守则看3700-3750，若企稳则可能在3780-3850区间震荡。<br>
+• <strong>银行板块持续性：</strong>今日银行逆势大涨2.32%，多只个股创历史新高，是沪指跌幅有限的核心原因。明日银行能否延续强势是判断市场风格的关键——若银行持续走强则防御风格确立，若高开低走则护盘力量衰竭。<br>
+• <strong>传媒出版主线：</strong>已连续3日领涨，新华传媒10连板，出版方向6股涨停。关注网络游戏政策催化是否持续，若政策超预期则传媒板块可能迎来趋势性机会，若高位股分歧则需警惕补跌风险。<br>
+• <strong>通信/电子止跌信号：</strong>今日通信跌4.49%、电子跌3.20%领跌，CPO/光通信大幅调整。关注能否止跌企稳，若继续杀跌则拖累科技成长整体，若止跌则市场反弹基础更牢固。<br>
+• <strong>成交量变化：</strong>今日缩量3628亿至1.54万亿，场外资金观望。明日若放量回升至1.7万亿以上则反弹可信度较高，若继续缩量则弱势难改。<br>
+• <strong>主力资金转向：</strong>主力已连续4日净流出，今日263.38亿。关注明日能否流出收窄或转正，这是机构资金认可当前位置的关键信号。<br>
+• <strong>新华传媒10连板走向：</strong>市场唯一高标，一字涨停封单15.89亿。若继续晋级11连板则短线情绪尚有支撑，若断板则可能引发高位股补跌。<br>
+• <strong>南向资金动向：</strong>今日南向净买入26.03亿港元（较前日大幅增加），小米集团获买入9.74亿。关注港股洼地效应是否持续，南向持续流入对A股科技成长有间接支撑作用。
+</p>
+</div>
+</div>
+
+<!-- 风险提示 -->
+<div class="disclaimer">
+风险提示：本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中涉及的板块与方向仅为客观分析，不代表对任何个股或板块的推荐。投资者应根据自身风险承受能力独立做出投资决策。
+</div>
+
+<div class="footer">
+A股大盘全景复盘 · 2026年10月12日 · 缩量调整日<br>
+数据来源：同花顺、上交所、深交所、财联社、证券时报、东方财富、上海证券报、新浪财经、第一财经、金融界、中国证券报<br>
+本报告由AI自动生成，仅供学习交流使用。北向资金当日精确净买入未披露（2024年8月起交易所取消盘中实时披露），相关表述已如实标注。<br>
+两市成交1.54万亿，较上日缩量约3628亿。沪指再度失守3800点，银行板块逆势涨2.32%护盘，传媒出版6股涨停，通信/电子领跌。
+</div>
+
+</div>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle('compact');
+var btn=document.querySelector('.mode-toggle');
+if(document.body.classList.contains('compact')){
+btn.textContent='详细模式';
+}else{
+btn.textContent='精简模式';
+}
+}
+document.querySelectorAll('.nav-links a').forEach(function(a){
+a.addEventListener('click',function(e){
+e.preventDefault();
+var target=document.querySelector(this.getAttribute('href'));
+if(target){
+window.scrollTo({top:target.offsetTop-60,behavior:'smooth'});
+}
+});
+});
+</script>
+</body>
+</html>
