@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026-10-19</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #e63946;
+    --red-light: #fce4e6;
+    --green: #2a9d8f;
+    --green-light: #e0f5f2;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
+    --accent: #1d3557;
+    --gold: #c9a227;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .navbar .logo { font-weight: 700; font-size: 16px; color: var(--accent); }
+  .navbar .logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 4px; overflow-x: auto; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary); font-size: 13px;
+    padding: 6px 12px; border-radius: 6px; white-space: nowrap; transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--red-light); color: var(--red); }
+  .mode-toggle {
+    background: var(--accent); color: #fff; border: none; padding: 6px 14px;
+    border-radius: 6px; font-size: 12px; cursor: pointer; white-space: nowrap;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 72px 20px 40px; }
+  .hero {
+    background: linear-gradient(135deg, #1d3557 0%, #2d4a6f 100%);
+    border-radius: 16px; padding: 32px; color: #fff; margin-bottom: 24px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; right: -40px; top: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(230,57,70,0.15);
+  }
+  .hero h1 { font-size: 26px; margin-bottom: 8px; }
+  .hero .date { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
+  .hero-summary { display: flex; gap: 32px; flex-wrap: wrap; }
+  .hero-item .label { font-size: 12px; opacity: 0.7; }
+  .hero-item .value { font-size: 22px; font-weight: 700; }
+  .hero-item .value.up { color: #ff8a95; }
+  .hero-item .value.down { color: #5ec4b8; }
+  .card {
+    background: var(--card); border-radius: 14px; padding: 24px;
+    margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 16px;
+    padding-left: 12px; border-left: 4px solid var(--red);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-title .tag {
+    font-size: 11px; font-weight: 400; color: var(--text-secondary);
+    background: var(--bg); padding: 3px 10px; border-radius: 10px;
+  }
+  .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .index-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+    transition: transform 0.2s;
+  }
+  .index-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .index-name { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+  .index-close { font-size: 24px; font-weight: 700; }
+  .index-change { font-size: 14px; font-weight: 600; margin-top: 2px; }
+  .index-detail { font-size: 11px; color: var(--text-secondary); margin-top: 8px; line-height: 1.8; }
+  .up { color: var(--red); }
+  .down { color: var(--green); }
+  .sentiment-row { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .sentiment-box {
+    flex: 1; min-width: 140px; text-align: center; padding: 16px;
+    border-radius: 10px; background: var(--bg);
+  }
+  .sentiment-box .num { font-size: 28px; font-weight: 700; }
+  .sentiment-box .desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+  .progress-wrap { margin-bottom: 12px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+  .progress-bar { height: 22px; background: var(--bg); border-radius: 11px; overflow: hidden; display: flex; }
+  .progress-up { background: linear-gradient(90deg, var(--red), #ff6b6b); height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; }
+  .progress-down { background: linear-gradient(90deg, #5ec4b8, var(--green)); height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; }
+  .ladder { display: flex; align-items: flex-end; gap: 8px; margin-top: 16px; height: 160px; padding: 0 8px; }
+  .ladder-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .ladder-bar {
+    width: 100%; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--red), #c1121f);
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 6px;
+    color: #fff; font-size: 16px; font-weight: 700; min-height: 30px;
+  }
+  .ladder-label { font-size: 11px; color: var(--text-secondary); margin-top: 6px; text-align: center; }
+  .sector-list { margin-bottom: 16px; }
+  .sector-item { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
+  .sector-name { width: 90px; font-size: 13px; text-align: right; flex-shrink: 0; }
+  .sector-bar-wrap { flex: 1; height: 24px; background: var(--bg); border-radius: 4px; position: relative; }
+  .sector-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 11px; color: #fff; font-weight: 600; }
+  .sector-bar.up-bar { background: linear-gradient(90deg, var(--red), #ff8a95); justify-content: flex-start; }
+  .sector-bar.down-bar { background: linear-gradient(90deg, #5ec4b8, var(--green)); justify-content: flex-end; margin-left: auto; }
+  .fund-summary { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .fund-card {
+    flex: 1; min-width: 200px; padding: 16px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--red-light), #fff5f5);
+    border: 1px solid #fdd;
+  }
+  .fund-card .label { font-size: 12px; color: var(--text-secondary); }
+  .fund-card .amount { font-size: 24px; font-weight: 700; color: var(--red); margin: 4px 0; }
+  .fund-card .sub { font-size: 11px; color: var(--text-secondary); }
+  .fund-card.warn {
+    background: linear-gradient(135deg, #fff8e6, #fffdf5);
+    border: 1px solid #f5e6b8;
+  }
+  .fund-card.warn .amount { color: var(--gold); }
+  .fund-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fund-detail {
+    padding: 12px; background: var(--bg); border-radius: 8px; font-size: 13px;
+  }
+  .fund-detail .title { font-weight: 600; margin-bottom: 6px; }
+  .fund-detail .stocks { color: var(--text-secondary); font-size: 12px; line-height: 1.8; }
+  .rhythm-timeline { position: relative; padding-left: 24px; }
+  .rhythm-timeline::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .rhythm-item { position: relative; margin-bottom: 20px; }
+  .rhythm-item::before {
+    content: ''; position: absolute; left: -20px; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+    border: 2px solid #fff; box-shadow: 0 0 0 2px var(--red);
+  }
+  .rhythm-time { font-size: 12px; color: var(--text-secondary); }
+  .rhythm-content { font-size: 14px; margin-top: 2px; }
+  .analysis-section { margin-bottom: 20px; }
+  .analysis-section h4 {
+    font-size: 15px; margin-bottom: 10px; color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .analysis-section h4::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+  }
+  .analysis-section p { font-size: 14px; color: #333; line-height: 1.8; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .tag-item {
+    font-size: 12px; padding: 4px 12px; border-radius: 12px;
+    background: var(--red-light); color: var(--red); font-weight: 500;
+  }
+  .tag-item.green { background: var(--green-light); color: var(--green); }
+  .tag-item.gray { background: var(--bg); color: var(--text-secondary); }
+  .scenario-box {
+    padding: 16px; border-radius: 10px; margin-bottom: 12px;
+    border-left: 4px solid;
+  }
+  .scenario-box.bull { background: var(--red-light); border-color: var(--red); }
+  .scenario-box.base { background: #f0f4f8; border-color: var(--accent); }
+  .scenario-box.bear { background: var(--green-light); border-color: var(--green); }
+  .scenario-box .title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .scenario-box .content { font-size: 13px; color: #333; }
+  body.concise .detailed-only { display: none !important; }
+  body.concise .card { padding: 16px; }
+  body.concise .card-title { font-size: 16px; }
+  .footer {
+    text-align: center; padding: 24px; font-size: 12px; color: var(--text-secondary);
+    border-top: 1px solid var(--border); margin-top: 20px;
+  }
+  .footer .risk { color: var(--red); font-weight: 600; margin-bottom: 6px; }
+  @media (max-width: 640px) {
+    .navbar { padding: 0 12px; }
+    .nav-links { display: none; }
+    .container { padding: 68px 12px 30px; }
+    .hero { padding: 20px; }
+    .hero h1 { font-size: 20px; }
+    .hero-summary { gap: 16px; }
+    .hero-item .value { font-size: 18px; }
+    .card { padding: 16px; }
+    .index-grid { grid-template-columns: repeat(2, 1fr); }
+    .index-close { font-size: 20px; }
+    .fund-detail-grid { grid-template-columns: 1fr; }
+    .sector-name { width: 70px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">A股<span>全景复盘</span></div>
+  <div class="nav-links">
+    <a href="#index">核心指数</a>
+    <a href="#sentiment">市场情绪</a>
+    <a href="#sector">板块轮动</a>
+    <a href="#fund">资金动向</a>
+    <a href="#rhythm">运行节奏</a>
+    <a href="#analysis">策略分析</a>
+    <a href="#outlook">短期推演</a>
+  </div>
+  <button class="mode-toggle" onclick="toggleMode()">切换精简模式</button>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>A股大盘全景复盘</h1>
+    <div class="date">2026年10月19日 星期一 | 数据截至当日收盘</div>
+    <div class="hero-summary">
+      <div class="hero-item">
+        <div class="label">上证指数</div>
+        <div class="value up">3730.92</div>
+        <div class="label up">+0.39%</div>
+      </div>
+      <div class="hero-item">
+        <div class="label">科创50</div>
+        <div class="value down">1329.19</div>
+        <div class="label down">-2.17%</div>
+      </div>
+      <div class="hero-item">
+        <div class="label">两市成交</div>
+        <div class="value">1.44万亿</div>
+        <div class="label">较前日缩量约1200亿</div>
+      </div>
+      <div class="hero-item">
+        <div class="label">上涨/下跌</div>
+        <div class="value">约2200 / 3100+</div>
+        <div class="label">指数红个股绿</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块1：核心指数 -->
+  <div class="card" id="index">
+    <div class="card-title">
+      一、五大核心指数收盘概览
+      <span class="tag">数据来源：同花顺/华泰证券</span>
+    </div>
+    <div class="index-grid">
+      <div class="index-card">
+        <div class="index-name">上证指数</div>
+        <div class="index-close up">3,730.92</div>
+        <div class="index-change up">+14.64 (+0.39%)</div>
+        <div class="index-detail">
+          今开：3,694.12<br>
+          最高：3,743.80 / 最低：3,692.29<br>
+          成交额：6,870.10亿
+        </div>
+      </div>
+      <div class="index-card">
+        <div class="index-name">深证成指</div>
+        <div class="index-close up">11,817.42</div>
+        <div class="index-change up">+14.96 (+0.13%)</div>
+        <div class="index-detail">
+          今开：11,743.22<br>
+          最高：11,884.16 / 最低：11,667.18<br>
+          成交额：7,505.02亿
+        </div>
+      </div>
+      <div class="index-card">
+        <div class="index-name">创业板指</div>
+        <div class="index-close down">2,746.29</div>
+        <div class="index-change down">-26.09 (-0.94%)</div>
+        <div class="index-detail">
+          今开：2,760.35<br>
+          最高：2,770.08 / 最低：2,708.92<br>
+          成交额：3,583.75亿
+        </div>
+      </div>
+      <div class="index-card">
+        <div class="index-name">科创50</div>
+        <div class="index-close down">1,329.19</div>
+        <div class="index-change down">-29.46 (-2.17%)</div>
+        <div class="index-detail">
+          今开：1,347.09<br>
+          最高：1,356.42 / 最低：1,323.67<br>
+          成交额：687.02亿
+        </div>
+      </div>
+      <div class="index-card">
+        <div class="index-name">沪深300</div>
+        <div class="index-close up">4,174.53</div>
+        <div class="index-change up">+3.79 (+0.09%)</div>
+        <div class="index-detail">
+          今开：4,148.35<br>
+          最高：4,192.02 / 最低：4,143.66<br>
+          成交额：3,634.48亿
+        </div>
+      </div>
+    </div>
+    <div class="detailed-only" style="margin-top:16px; font-size:13px; color:var(--text-secondary);">
+      <strong>特征：</strong>五大指数涨跌分化，呈现典型的"权重护盘、成长杀跌"格局。上证指数、深证成指、沪深300微涨，创业板指跌0.94%，科创50重挫2.17%。银行板块全天强势，工商银行、建设银行股价创历史新高，成为护盘主力。但全市场超3100只个股下跌，呈现"指数红、个股绿"的二八分化行情。两市成交1.44万亿，较前日缩量约1200亿，缩量反弹显示资金参与意愿仍偏谨慎。
+    </div>
+  </div>
+
+  <!-- 模块2：市场情绪 -->
+  <div class="card" id="sentiment">
+    <div class="card-title">
+      二、市场情绪温度
+      <span class="tag">数据来源：财联社/抖音涨停天梯</span>
+    </div>
+    <div class="sentiment-row">
+      <div class="sentiment-box">
+        <div class="num up">约2,200</div>
+        <div class="desc">上涨家数（约41%）</div>
+      </div>
+      <div class="sentiment-box">
+        <div class="num down">3,100+</div>
+        <div class="desc">下跌家数（约57%）</div>
+      </div>
+      <div class="sentiment-box">
+        <div class="num up">49</div>
+        <div class="desc">涨停家数</div>
+      </div>
+      <div class="sentiment-box">
+        <div class="num down">约12</div>
+        <div class="desc">跌停家数</div>
+      </div>
+      <div class="sentiment-box">
+        <div class="num" style="color:var(--gold)">33.3%</div>
+        <div class="desc">连板晋级率</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap detailed-only">
+      <div class="progress-label">
+        <span>涨跌家数分布</span>
+        <span>上涨约41% / 下跌约57% / 平盘约2%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-up" style="width:41%">约2200</div>
+        <div class="progress-down" style="width:57%">3100+</div>
+      </div>
+    </div>
+
+    <div class="detailed-only">
+      <h4 style="font-size:14px; margin:16px 0 10px; color:var(--accent);">连板梯队（最高3板）</h4>
+      <div class="ladder">
+        <div class="ladder-item">
+          <div class="ladder-bar" style="height:100%">3</div>
+          <div class="ladder-label">3板<br>吉大正元等</div>
+        </div>
+        <div class="ladder-item">
+          <div class="ladder-bar" style="height:70%; background:linear-gradient(180deg,#ff6b6b,#e63946)">8</div>
+          <div class="ladder-label">2板</div>
+        </div>
+        <div class="ladder-item">
+          <div class="ladder-bar" style="height:90%; background:linear-gradient(180deg,#ffb3b3,#ff8a95)">38</div>
+          <div class="ladder-label">首板</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:13px; color:var(--text-secondary);">
+        <strong>情绪定性：</strong>分化偏弱。虽然指数收红，但全市场超3100只个股下跌，赚钱效应实际较差。涨停49家较前日（61家）减少，连板高度从11板骤降至3板（新华传媒断板），连板股仅11家，晋级率33.3%。主线集中在人形机器人（19只涨停）和汽车（11只涨停），题材集中度较高。整体呈现"权重护盘、题材轮动、个股普跌"的弱平衡格局。
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块3：板块轮动 -->
+  <div class="card" id="sector">
+    <div class="card-title">
+      三、板块轮动分析
+      <span class="tag">申万一级行业</span>
+    </div>
+
+    <h4 style="font-size:14px; margin-bottom:10px; color:var(--red);">涨幅TOP5</h4>
+    <div class="sector-list">
+      <div class="sector-item">
+        <div class="sector-name">家用电器</div>
+        <div class="sector-bar-wrap"><div class="sector-bar up-bar" style="width:100%">+1.77%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">银行</div>
+        <div class="sector-bar-wrap"><div class="sector-bar up-bar" style="width:90%">+1.59%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">国防军工</div>
+        <div class="sector-bar-wrap"><div class="sector-bar up-bar" style="width:86%">+1.52%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">石油石化</div>
+        <div class="sector-bar-wrap"><div class="sector-bar up-bar" style="width:60%">+1.06%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">汽车</div>
+        <div class="sector-bar-wrap"><div class="sector-bar up-bar" style="width:55%">+0.97%</div></div>
+      </div>
+    </div>
+
+    <h4 style="font-size:14px; margin-bottom:10px; color:var(--green);">跌幅TOP3</h4>
+    <div class="sector-list">
+      <div class="sector-item">
+        <div class="sector-name">综合</div>
+        <div class="sector-bar-wrap"><div class="sector-bar down-bar" style="width:100%">-1.94%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">房地产</div>
+        <div class="sector-bar-wrap"><div class="sector-bar down-bar" style="width:81%">-1.57%</div></div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-name">农林牧渔</div>
+        <div class="sector-bar-wrap"><div class="sector-bar down-bar" style="width:65%">-1.26%</div></div>
+      </div>
+    </div>
+
+    <div class="detailed-only" style="margin-top:16px;">
+      <div style="font-size:13px; color:#333; line-height:1.8;">
+        <strong>题材板块表现：</strong><br>
+        · <span style="color:var(--red)">强势方向</span>：人形机器人概念领涨两市，19只涨停，主力资金净流入约69亿元，宇树科技涨超16%，兆威机电、浙江荣泰、福莱新材等批量涨停；减速器、电机板块同步拉升；汽车板块11只涨停；银行板块全天强势，工商银行、建设银行创历史新高；国防军工延续强势；光纤/光通信板块异动，亨通光电涨停（获资金净流入19.83亿）。<br>
+        · <span style="color:var(--green)">弱势方向</span>：农业股调整较多，金健米业盘中触及跌停，种植业、林业、乳业、粮食板块跌幅居前；房地产板块走弱，荣丰控股跌停；教育、半导体、电子元器件、电池等方向跌幅居前；前期热门的PCB概念继续退潮。<br><br>
+        <strong>核心驱动逻辑：</strong><br>
+        · <span style="color:var(--red)">上涨端</span>：人形机器人产业催化持续，宇树科技上市后带动产业链关注度，国际咨询机构预测市场规模快速增长；银行板块受低估值、高股息和"国家队"增持预期驱动；军工板块受地缘政治紧张和装备采购预期支撑；光通信受算力需求预期催化。<br>
+        · <span style="color:var(--green)">下跌端</span>：农业板块前期涨幅较大，今日获利回吐；房地产受销售数据疲软和政策预期降温影响；半导体受科创50重挫拖累，资金从高估值成长方向撤离。
+      </div>
+      <div class="tag-list" style="margin-top:12px;">
+        <span class="tag-item">人形机器人（19家涨停）</span>
+        <span class="tag-item">减速器/电机</span>
+        <span class="tag-item">汽车（11家涨停）</span>
+        <span class="tag-item green">银行（工行/建行创新高）</span>
+        <span class="tag-item green">国防军工</span>
+        <span class="tag-item gray">农业/房地产退潮</span>
+        <span class="tag-item gray">半导体/科创50重挫</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块4：资金动向 -->
+  <div class="card" id="fund">
+    <div class="card-title">
+      四、主力资金与北向动向
+      <span class="tag">数据来源：证券时报/上海证券报</span>
+    </div>
+    <div class="fund-summary">
+      <div class="fund-card warn">
+        <div class="label">主力资金全天净流出</div>
+        <div class="amount">-71.69亿</div>
+        <div class="sub">连续多日净流出</div>
+      </div>
+      <div class="fund-card">
+        <div class="label">机器人概念净流入</div>
+        <div class="amount">+69亿</div>
+        <div class="sub">19只股票涨停</div>
+      </div>
+    </div>
+    <div class="fund-detail-grid detailed-only">
+      <div class="fund-detail">
+        <div class="title">个股资金净流入TOP5</div>
+        <div class="stocks">
+          亨通光电：+19.83亿<br>
+          新易盛：+12.5亿（估）<br>
+          寒武纪：+10亿（估）<br>
+          生益科技：+8亿（估）<br>
+          宇树科技-W：+7亿（估）
+        </div>
+      </div>
+      <div class="fund-detail">
+        <div class="title">行业资金流向</div>
+        <div class="stocks">
+          净流入：通信（居首）、机器人、军工<br>
+          净流出：央企改革、电池、锂电池、<br>
+          新能源车、固态电池、PCB
+        </div>
+      </div>
+    </div>
+    <div class="detailed-only" style="margin-top:14px; font-size:13px; color:#333; line-height:1.8;">
+      <strong>资金特点：</strong>主力资金净流出71.69亿元，但流出规模较前几日明显收窄，显示抛压有所减轻。资金呈现明显的"高低切换"特征——从锂电池、新能源车、PCB等前期热门方向撤离，大幅流入人形机器人（+69亿）、通信、军工等方向。个股资金净流入方面，亨通光电以19.83亿居首，新易盛、寒武纪、生益科技等光通信/半导体个股获资金青睐。北向资金具体净流入/流出数据待交易所披露，从活跃股看，药明康德、兆易创新、寒武纪、贵州茅台、亨通光电等成交活跃。
+    </div>
+  </div>
+
+  <!-- 模块5：运行节奏 -->
+  <div class="card" id="rhythm">
+    <div class="card-title">
+      五、指数全天运行节奏
+      <span class="tag">上证指数视角</span>
+    </div>
+    <div class="rhythm-timeline">
+      <div class="rhythm-item">
+        <div class="rhythm-time">09:30 开盘</div>
+        <div class="rhythm-content">上证指数低开于3694.12点（较前收3716.28低开约0.60%），深成指、创业板指同步低开，科创50低开1.3%。银行板块开盘即走强，稳定指数。</div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">09:30 - 10:00 低开高走</div>
+        <div class="rhythm-content">开盘后指数快速拉升，上证从3694点回升至3710点附近。银行、石油石化等权重板块护盘，人形机器人概念开始活跃。但创业板指、科创50持续走弱，成长股抛压较重。</div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">10:00 - 11:30 震荡回升</div>
+        <div class="rhythm-content">指数震荡回升，上证逐步攀升至3722点。人形机器人板块持续发酵，多股涨停，带动市场情绪。汽车、军工板块同步走强。创业板指在2730-2750区间震荡。</div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">13:00 - 14:00 分化加剧</div>
+        <div class="rhythm-content">午后指数维持震荡，但分化加剧。上证在3715-3725区间波动，创业板指继续下探至2708.92点（全天最低），科创50跌幅扩大至2%以上。农业、房地产板块走弱。</div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">14:00 - 15:00 尾盘拉升</div>
+        <div class="rhythm-content">14:00后银行、石油石化等权重板块再度拉升，上证冲高至3743.80点（全天最高）。光通信板块异动，亨通光电涨停。创业板指从低点反弹，跌幅收窄。上证最终收于3730.92点，涨0.39%。</div>
+      </div>
+    </div>
+    <div class="detailed-only" style="margin-top:14px; font-size:13px; color:var(--text-secondary);">
+      <strong>节奏特征：</strong>典型的"低开—高走—震荡—尾盘拉升"格局。全天呈现V型反弹，银行板块全天强势是指数收红的关键。但个股层面超3100只下跌，"二八分化"明显。尾盘权重拉升有护盘迹象，但成交量缩量至1.44万亿，反弹基础尚不牢固。
+    </div>
+  </div>
+
+  <!-- 模块6：策略分析 -->
+  <div class="card" id="analysis">
+    <div class="card-title">
+      六、专业策略分析
+      <span class="tag">综合研判</span>
+    </div>
+
+    <div class="analysis-section">
+      <h4>市场主线与风格</h4>
+      <p><strong>核心主线：</strong>人形机器人成为今日绝对主线，19只涨停，主力资金净流入约69亿，宇树科技上市后产业链关注度持续提升。减速器、电机等核心零部件方向同步活跃。汽车板块11只涨停，成为第二大主线。银行板块全天强势，工商银行、建设银行创历史新高，发挥护盘作用。</p>
+      <p style="margin-top:8px;"><strong>风格偏向：</strong>显著的"权重护盘+题材轮动"风格。银行、石油石化等低估值权重板块稳定指数，人形机器人、汽车等题材板块提供赚钱效应。但科创50重挫2.17%，半导体、电子元器件等成长方向继续调整，资金从高估值成长向低估值价值和题材切换的趋势延续。</p>
+    </div>
+
+    <div class="analysis-section detailed-only">
+      <h4>技术形态与量价关系</h4>
+      <p>上证指数低开高走，收盘3730点，重新站上5日均线。从量价关系看，两市成交1.44万亿，较前日缩量约1200亿，属于"缩量反弹"形态——抛压减轻但买盘也未大规模入场，反弹力度有待确认。创业板指最低2708点后拉回，收2746点，在2700点整数关口获得支撑。科创50跌破1330点，技术形态较弱。</p>
+      <p style="margin-top:8px;"><strong>关键位：</strong>上证支撑位关注3700点（整数关口）和3680点（今日低点附近），压力位3750点（今日高点）和3780点。创业板指支撑位关注2700点，压力位2770-2800点。</p>
+    </div>
+
+    <div class="analysis-section detailed-only">
+      <h4>情绪周期判断</h4>
+      <p>当前处于<strong>弱平衡震荡期</strong>。连板高度从11板骤降至3板（新华传媒断板），连板股仅11家，显示高位股接力情绪降温。但涨停49家、人形机器人19只涨停，说明题材炒作仍有活跃度。晋级率33.3%，处于中等水平。</p>
+      <p style="margin-top:8px;">指数与个股背离：指数收红但超3100只个股下跌，"二八分化"明显。这种背离通常不可持续，若后续权重板块无法持续护盘，指数可能补跌；若题材板块扩散带动个股普涨，则反弹有望延续。</p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>核心驱动因素与矛盾</h4>
+      <p><strong>核心矛盾：</strong>权重护盘与个股普跌之间的背离，反映出市场在"政策底"与"业绩底"之间的博弈。银行等权重板块受"国家队"增持和低估值支撑，但成长板块受三季报业绩不确定性和高估值压制。资金在低估值价值与高弹性题材之间快速轮动。</p>
+      <p style="margin-top:8px;"><strong>驱动因素：</strong>①人形机器人产业催化持续，宇树科技带动产业链；②银行板块低估值+高股息+护盘资金；③地缘政治紧张支撑军工；④三季报窗口期资金避险情绪升温；⑤缩量环境下存量资金博弈，热点轮动加快。</p>
+    </div>
+  </div>
+
+  <!-- 模块7：短期推演 -->
+  <div class="card" id="outlook">
+    <div class="card-title">
+      七、短期行情推演与关注方向
+      <span class="tag">未来1-3个交易日</span>
+    </div>
+
+    <div class="scenario-box bull">
+      <div class="title">乐观情景（概率约30%）</div>
+      <div class="content">人形机器人主线持续发酵，带动科技成长板块反弹，科创50止跌回升。银行、石油石化等权重继续护盘，上证挑战3750-3780点压力位。成交量回升至1.6万亿以上，个股普涨格局出现，市场情绪全面修复。</div>
+    </div>
+
+    <div class="scenario-box base">
+      <div class="title">中性情景（概率约50%）</div>
+      <div class="content">指数在3700-3750区间震荡整理，权重护盘与题材轮动并存。人形机器人、汽车等新主线与前期退潮题材分化运行。市场维持缩量博弈，板块轮动加快。三季报业绩成为个股分化核心变量。</div>
+    </div>
+
+    <div class="scenario-box bear">
+      <div class="title">悲观情景（概率约20%）</div>
+      <div class="content">银行等权重板块护盘乏力，指数补跌，上证跌破3700点支撑。人形机器人主线退潮，市场缺乏新的赚钱效应。若成交量进一步萎缩至1.3万亿以下，需警惕市场情绪再度走弱。</div>
+    </div>
+
+    <div class="analysis-section" style="margin-top:16px;">
+      <h4>关注方向（非个股推荐）</h4>
+      <div class="tag-list">
+        <span class="tag-item">人形机器人/减速器</span>
+        <span class="tag-item">汽车产业链</span>
+        <span class="tag-item green">银行/高股息（防御）</span>
+        <span class="tag-item green">国防军工</span>
+        <span class="tag-item green">光通信/算力</span>
+        <span class="tag-item gray">关注3700点支撑</span>
+        <span class="tag-item gray">关注权重护盘持续性</span>
+      </div>
+      <p style="margin-top:12px; font-size:13px; color:var(--text-secondary);">
+        <strong>操作策略提示：</strong>当前处于弱平衡震荡期，"二八分化"明显，宜控制仓位、避免追高。重点关注人形机器人主线的持续性和银行等权重板块的护盘力度，以及3700点支撑有效性。三季报窗口期可关注业绩确定性强的低估值方向，警惕高位股补跌风险。
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="risk">风险提示</div>
+    <div>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。</div>
+    <div style="margin-top:8px;">数据来源：同花顺、华泰证券、东方财富、财联社、证券时报、上海证券报 | 生成时间：2026-10-19</div>
+  </div>
+
+</div>
+
+<script>
+  function toggleMode() {
+    document.body.classList.toggle('concise');
+    var btn = document.querySelector('.mode-toggle');
+    if (document.body.classList.contains('concise')) {
+      btn.textContent = '切换详细模式';
+    } else {
+      btn.textContent = '切换精简模式';
+    }
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
