@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026-10-22</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --up:#e53935;--up-light:#ffebee;--up-bg:#fdecea;
+  --down:#43a047;--down-light:#e8f5e9;--down-bg:#eaf5ea;
+  --bg:#f4f5f7;--card:#ffffff;--text:#1a1a2e;--text2:#555;--text3:#888;
+  --border:#e8e8ec;--accent:#1565c0;--accent-light:#e3f2fd;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+/* 导航栏 */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;font-size:17px;color:var(--text);white-space:nowrap}
+.nav-logo span{color:var(--up)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:13px;padding:6px 10px;border-radius:6px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{background:var(--accent-light);color:var(--accent)}
+.mode-btn{background:var(--accent);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.mode-btn:hover{opacity:.85}
+/* 主体 */
+.container{max-width:1100px;margin:0 auto;padding:72px 16px 40px}
+/* 头部摘要 */
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;border-radius:14px;padding:28px 24px;margin-bottom:20px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(229,57,53,.15),transparent 70%);border-radius:50%}
+.header h1{font-size:24px;margin-bottom:6px;position:relative}
+.header .date{font-size:14px;color:#a0aec0;margin-bottom:16px;position:relative}
+.header-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;position:relative}
+.header-item{background:rgba(255,255,255,.08);border-radius:10px;padding:12px 14px}
+.header-item .label{font-size:12px;color:#a0aec0;margin-bottom:4px}
+.header-item .value{font-size:20px;font-weight:700}
+.header-item .sub{font-size:12px;margin-top:2px}
+.up-c{color:var(--up)!important}.down-c{color:var(--down)!important}
+.up-bg{background:var(--up-bg)!important}.down-bg{background:var(--down-bg)!important}
+/* 卡片 */
+.card{background:var(--card);border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-title{font-size:18px;font-weight:700;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+.card-title::before{content:"";width:4px;height:20px;background:var(--accent);border-radius:2px}
+.card-title .tag{font-size:11px;font-weight:400;background:var(--accent-light);color:var(--accent);padding:2px 8px;border-radius:4px;margin-left:auto}
+/* 指数表格 */
+.idx-table{width:100%;border-collapse:collapse;font-size:14px}
+.idx-table th{background:#f8f9fb;padding:10px 8px;text-align:right;font-weight:600;color:var(--text2);font-size:13px;border-bottom:2px solid var(--border)}
+.idx-table th:first-child{text-align:left}
+.idx-table td{padding:12px 8px;text-align:right;border-bottom:1px solid var(--border)}
+.idx-table td:first-child{text-align:left;font-weight:600}
+.idx-table tr:last-child td{border-bottom:none}
+.idx-table .price{font-size:16px;font-weight:700}
+.idx-table .chg{font-weight:700;font-size:15px}
+/* 大数字展示 */
+.big-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:18px}
+.big-stat{background:var(--bg);border-radius:10px;padding:16px;text-align:center}
+.big-stat .num{font-size:28px;font-weight:800;line-height:1.2}
+.big-stat .lbl{font-size:12px;color:var(--text3);margin-top:4px}
+/* 进度条 */
+.progress-wrap{margin:14px 0}
+.progress-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:var(--text2)}
+.progress-bar{height:28px;background:var(--border);border-radius:6px;overflow:hidden;display:flex;position:relative}
+.progress-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;transition:width .6s}
+.progress-seg.up{background:var(--up)}.progress-seg.flat{background:#bdbdbd;color:#333}.progress-seg.down{background:var(--down)}
+/* 条形图 */
+.bar-chart{margin:10px 0}
+.bar-row{display:flex;align-items:center;margin-bottom:8px;font-size:13px}
+.bar-name{width:90px;flex-shrink:0;text-align:right;padding-right:10px;color:var(--text2);font-size:12px}
+.bar-track{flex:1;height:24px;background:var(--bg);border-radius:4px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:600;color:#fff;transition:width .6s;min-width:40px}
+.bar-fill.up{background:var(--up)}.bar-fill.down{background:var(--down)}
+.bar-val{width:55px;flex-shrink:0;text-align:right;padding-left:8px;font-weight:600;font-size:12px}
+/* 连板梯队 */
+.ladder{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.ladder-step{flex:1;min-width:80px;text-align:center}
+.ladder-step .height{font-size:11px;color:var(--text3);margin-bottom:4px}
+.ladder-step .count{font-size:22px;font-weight:800;padding:8px 0;border-radius:8px;background:var(--bg)}
+.ladder-step .count.hot{background:var(--up-light);color:var(--up)}
+.ladder-step .count.cold{background:var(--down-light);color:var(--down)}
+.ladder-step .desc{font-size:11px;color:var(--text3);margin-top:4px}
+/* 资金流向 */
+.fund-flow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.fund-box{border-radius:10px;padding:16px;text-align:center}
+.fund-box .amt{font-size:24px;font-weight:800}
+.fund-box .lbl{font-size:13px;color:var(--text2);margin-top:4px}
+/* 走势时间线 */
+.timeline{position:relative;padding-left:28px;margin:14px 0}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-item::before{content:"";position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+.tl-item .time{font-size:12px;color:var(--accent);font-weight:600}
+.tl-item .desc{font-size:14px;color:var(--text);margin-top:2px}
+/* 分析模块 */
+.analysis-section{margin-bottom:18px}
+.analysis-section h4{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--text);display:flex;align-items:center;gap:6px}
+.analysis-section h4::before{content:"";width:3px;height:14px;background:var(--up);border-radius:2px}
+.analysis-section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:6px}
+.analysis-section ul{padding-left:20px;font-size:14px;color:var(--text2);line-height:1.8}
+.analysis-section li{margin-bottom:4px}
+/* 标签 */
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;margin:2px 4px 2px 0}
+.badge-up{background:var(--up-light);color:var(--up)}
+.badge-down{background:var(--down-light);color:var(--down)}
+.badge-neutral{background:#f0f0f0;color:var(--text2)}
+.badge-warn{background:#fff3e0;color:#e65100}
+/* 表格通用 */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+.data-table th{background:#f8f9fb;padding:8px 6px;text-align:left;font-weight:600;color:var(--text2);border-bottom:2px solid var(--border)}
+.data-table td{padding:8px 6px;border-bottom:1px solid var(--border)}
+.data-table tr:last-child td{border-bottom:none}
+/* 精简模式 */
+body.concise .detail-only{display:none!important}
+body.concise .card{padding:16px 20px}
+body.concise .card-title{font-size:16px;margin-bottom:10px;padding-bottom:8px}
+/* 底部 */
+.footer{text-align:center;padding:24px 16px;color:var(--text3);font-size:12px;line-height:1.8}
+.footer .risk{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:14px 18px;margin-bottom:12px;color:#e65100;font-size:13px;max-width:800px;margin-left:auto;margin-right:auto}
+/* 响应式 */
+@media(max-width:768px){
+  .nav{padding:0 12px;height:50px}
+  .nav-logo{font-size:14px}
+  .nav-links a{font-size:11px;padding:5px 7px}
+  .mode-btn{padding:5px 10px;font-size:11px}
+  .container{padding:64px 10px 30px}
+  .header{padding:20px 16px}
+  .header h1{font-size:19px}
+  .header-summary{grid-template-columns:repeat(2,1fr);gap:10px}
+  .header-item .value{font-size:17px}
+  .card{padding:16px}
+  .card-title{font-size:16px}
+  .big-stats{grid-template-columns:repeat(2,1fr)}
+  .big-stat .num{font-size:22px}
+  .idx-table{font-size:12px}
+  .idx-table th,.idx-table td{padding:8px 4px}
+  .idx-table .price{font-size:14px}
+  .fund-flow{grid-template-columns:1fr}
+  .bar-name{width:70px;font-size:11px}
+  .ladder-step{min-width:60px}
+  .ladder-step .count{font-size:18px}
+}
+@media(max-width:480px){
+  .header-summary{grid-template-columns:1fr 1fr}
+  .big-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="nav">
+  <div class="nav-logo">A股<span>全景复盘</span></div>
+  <div class="nav-links">
+    <a href="#index">核心指数</a>
+    <a href="#sentiment">市场情绪</a>
+    <a href="#sector">板块轮动</a>
+    <a href="#northbound">北向资金</a>
+    <a href="#intraday">全天走势</a>
+    <a href="#analysis">专业分析</a>
+  </div>
+  <button class="mode-btn" onclick="toggleMode()">切换精简</button>
+</nav>
+
+<div class="container">
+
+<!-- 头部摘要 -->
+<div class="header">
+  <h1>A股大盘全景复盘</h1>
+  <div class="date">2026年10月22日 星期四 | 数据截至当日收盘</div>
+  <div class="header-summary">
+    <div class="header-item">
+      <div class="label">上证指数</div>
+      <div class="value down-c">3658.03</div>
+      <div class="sub down-c">-1.48% / -55.00</div>
+    </div>
+    <div class="header-item">
+      <div class="label">深证成指</div>
+      <div class="value down-c">11357.32</div>
+      <div class="sub down-c">-2.96%</div>
+    </div>
+    <div class="header-item">
+      <div class="label">创业板指</div>
+      <div class="value down-c">2576.90</div>
+      <div class="sub down-c">-4.37%</div>
+    </div>
+    <div class="header-item">
+      <div class="label">两市成交</div>
+      <div class="value" style="color:#ffd54f">1.53万亿</div>
+      <div class="sub" style="color:#a0aec0">放量993亿</div>
+    </div>
+  </div>
+</div>
+
+<!-- 模块1: 核心指数 -->
+<div class="card" id="index">
+  <div class="card-title">五大核心指数行情 <span class="tag">数据来源：同花顺/Wind/中证指数</span></div>
+  <table class="idx-table">
+    <thead>
+      <tr><th>指数名称</th><th>收盘点位</th><th>涨跌幅</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>上证指数</td>
+        <td class="price">3658.03</td>
+        <td class="chg down-c">-1.48%</td>
+        <td>—</td><td>—</td><td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>深证成指</td>
+        <td class="price">11357.32</td>
+        <td class="chg down-c">-2.96%</td>
+        <td>—</td><td>—</td><td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>创业板指</td>
+        <td class="price">2576.90</td>
+        <td class="chg down-c">-4.37%</td>
+        <td>—</td><td>—</td><td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>科创50</td>
+        <td class="price">1305.87</td>
+        <td class="chg down-c">-2.78%</td>
+        <td>—</td><td>—</td><td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>沪深300</td>
+        <td class="price">4036.30</td>
+        <td class="chg down-c">-1.84%</td>
+        <td>4110.65</td><td>4110.65</td><td>4022.87</td>
+        <td>4350.84亿</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="detail-only" style="margin-top:14px;font-size:13px;color:var(--text3)">
+    注：沪深300开盘即最高点（4110.65），全天低开低走态势明显。两市合计成交额15287亿元，较前一交易日放量993亿元，呈现"放量下跌"特征。上证指数成分股总市值约73.27万亿元。
+  </div>
+</div>
+
+<!-- 模块2: 市场情绪 -->
+<div class="card" id="sentiment">
+  <div class="card-title">市场情绪与涨跌停 <span class="tag">数据来源：Wind/东方财富/乐咕乐股</span></div>
+  
+  <div class="big-stats">
+    <div class="big-stat down-bg">
+      <div class="num down-c">533</div>
+      <div class="lbl">上涨家数</div>
+    </div>
+    <div class="big-stat up-bg">
+      <div class="num up-c">4994</div>
+      <div class="lbl">下跌家数</div>
+    </div>
+    <div class="big-stat">
+      <div class="num">43</div>
+      <div class="lbl">平盘家数</div>
+    </div>
+    <div class="big-stat up-bg">
+      <div class="num up-c">33</div>
+      <div class="lbl">涨停家数</div>
+    </div>
+    <div class="big-stat down-bg">
+      <div class="num down-c">8</div>
+      <div class="lbl">跌停家数</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap detail-only">
+    <div class="progress-label"><span>涨跌分布</span><span>上涨占比 9.6% | 下跌占比 89.6%</span></div>
+    <div class="progress-bar">
+      <div class="progress-seg up" style="width:9.6%">533</div>
+      <div class="progress-seg flat" style="width:0.8%">43</div>
+      <div class="progress-seg down" style="width:89.6%">4994</div>
+    </div>
+  </div>
+
+  <h4 style="font-size:15px;margin:18px 0 10px;color:var(--text)">连板梯队</h4>
+  <div class="ladder">
+    <div class="ladder-step">
+      <div class="height">5板</div>
+      <div class="count hot">2</div>
+      <div class="desc">海洋王/大业股份<br>(均一字板)</div>
+    </div>
+    <div class="ladder-step">
+      <div class="height">4板</div>
+      <div class="count cold">0</div>
+      <div class="desc">3只冲击失败<br>全线断板</div>
+    </div>
+    <div class="ladder-step">
+      <div class="height">3板</div>
+      <div class="count hot">2</div>
+      <div class="desc">星光股份/三峡新材<br>12只断板</div>
+    </div>
+    <div class="ladder-step">
+      <div class="height">2板</div>
+      <div class="count hot">6</div>
+      <div class="desc">博汇股份等</div>
+    </div>
+    <div class="ladder-step">
+      <div class="height">首板</div>
+      <div class="count">27</div>
+      <div class="desc">低位首板为主</div>
+    </div>
+  </div>
+
+  <div class="detail-only" style="margin-top:14px">
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <span class="badge badge-warn">封板率 55.9%</span>
+      <span class="badge badge-down">炸板率 44.1%</span>
+      <span class="badge badge-neutral">炸板26只</span>
+      <span class="badge badge-down">最高连板5板</span>
+      <span class="badge badge-warn">4板梯队断层</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-top:10px;line-height:1.8">
+      市场情绪极度低迷，上涨家数仅占约9.6%，下跌个股接近5000只，呈现普跌格局。连板高度压制在5板，4板梯队全线断板，3板晋级率极低，短线接力情绪接近冰点。涨停股集中于机械设备（9只）、电力设备（8只）等低位防御方向，前期热门的AI算力、光模块方向出现大面积跌停和炸板。
+    </p>
+  </div>
+</div>
+
+<!-- 模块3: 板块轮动 -->
+<div class="card" id="sector">
+  <div class="card-title">板块轮动与资金流向 <span class="tag">数据来源：证券时报/申万行业/中证指数</span></div>
+
+  <h4 style="font-size:15px;margin-bottom:10px;color:var(--text)">申万一级行业涨跌幅（仅1个行业收涨）</h4>
+  
+  <div class="detail-only">
+  <p style="font-size:13px;color:var(--text3);margin-bottom:8px">▲ 涨幅榜</p>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-name">家用电器</div>
+      <div class="bar-track"><div class="bar-fill up" style="width:3%">+0.08%</div></div>
+      <div class="bar-val up-c">+0.08%</div>
+    </div>
+  </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text3);margin:12px 0 8px">▼ 跌幅榜 TOP8</p>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-name">通信</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:100%">-6.17%</div></div>
+      <div class="bar-val down-c">-6.17%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">传媒</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:77%">-4.78%</div></div>
+      <div class="bar-val down-c">-4.78%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">综合</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:75%">-4.66%</div></div>
+      <div class="bar-val down-c">-4.66%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">电子</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:55%">-3.40%</div></div>
+      <div class="bar-val down-c">-3.40%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">计算机</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:48%">-2.95%</div></div>
+      <div class="bar-val down-c">-2.95%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">医药生物</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:34%">-2.12%</div></div>
+      <div class="bar-val down-c">-2.12%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">原材料</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:47%">-2.89%</div></div>
+      <div class="bar-val down-c">-2.89%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">电力设备</div>
+      <div class="bar-track"><div class="bar-fill down" style="width:30%">-1.85%</div></div>
+      <div class="bar-val down-c">-1.85%</div>
+    </div>
+  </div>
+
+  <div class="detail-only">
+  <h4 style="font-size:15px;margin:18px 0 10px;color:var(--text)">概念板块涨跌亮点</h4>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+    <span class="badge badge-up">冰雪旅游</span>
+    <span class="badge badge-up">挖掘机</span>
+    <span class="badge badge-up">宇树机器人</span>
+    <span class="badge badge-up">减速器</span>
+    <span class="badge badge-up">央企银行</span>
+    <span class="badge badge-neutral">逆势活跃</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px">
+    <span class="badge badge-down">覆铜板</span>
+    <span class="badge badge-down">光模块(CPO)</span>
+    <span class="badge badge-down">虚拟人</span>
+    <span class="badge badge-down">AI算力</span>
+    <span class="badge badge-down">半导体</span>
+    <span class="badge badge-neutral">领跌方向</span>
+  </div>
+  </div>
+
+  <h4 style="font-size:15px;margin:18px 0 10px;color:var(--text)">主力资金流向</h4>
+  <div class="fund-flow">
+    <div class="fund-box down-bg">
+      <div class="amt down-c">-540.55亿</div>
+      <div class="lbl">两市主力资金全天净流出</div>
+    </div>
+    <div class="fund-box" style="background:var(--bg)">
+      <div class="amt" style="color:var(--text2)">2 / 31</div>
+      <div class="lbl">净流入行业数 / 净流出行业数</div>
+    </div>
+  </div>
+  <div class="detail-only">
+  <table class="data-table">
+    <thead><tr><th>行业</th><th>主力资金流向</th><th>行业涨跌幅</th><th>核心驱动</th></tr></thead>
+    <tbody>
+      <tr><td>电子</td><td class="down-c">-137.02亿</td><td class="down-c">-3.40%</td><td>半导体/消费电子获利回吐</td></tr>
+      <tr><td>通信</td><td class="down-c">-83.08亿</td><td class="down-c">-6.17%</td><td>光模块龙头集体重挫</td></tr>
+      <tr><td>医药生物</td><td class="down-c">大幅净流出</td><td class="down-c">-2.12%</td><td>创新药/ CXO 回调</td></tr>
+      <tr><td>计算机</td><td class="down-c">大幅净流出</td><td class="down-c">-2.95%</td><td>AI应用/信创杀估值</td></tr>
+      <tr><td>美容护理</td><td class="up-c">+0.93亿</td><td class="down-c">小幅下跌</td><td>唯一显著净流入</td></tr>
+      <tr><td>家用电器</td><td class="up-c">+0.18亿</td><td class="up-c">+0.08%</td><td>唯一收涨行业</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--text2);margin-top:10px;line-height:1.8">
+    <strong>领跌核心逻辑：</strong>通信行业暴跌6.17%，光模块双龙头新易盛（-12.28%）、中际旭创（-8.76%）分别遭主力净卖出25.28亿、22.51亿元，天孚通信（-8.36%）净流出5.85亿，CPO/光模块板块成为空方主攻方向。传媒板块受AI应用退潮影响跌4.78%。前期强势的科技成长方向集体退潮，资金向低估值防御板块小幅迁移，但承接力度有限。
+  </p>
+  </div>
+</div>
+
+<!-- 模块4: 北向资金 -->
+<div class="card" id="northbound">
+  <div class="card-title">北向资金动向 <span class="tag">数据来源：东方财富Choice/交易所</span></div>
+  
+  <div class="big-stats">
+    <div class="big-stat">
+      <div class="num" style="color:var(--accent)">2326.22亿</div>
+      <div class="lbl">北向资金全天成交额</div>
+    </div>
+    <div class="big-stat">
+      <div class="num" style="color:var(--accent)">15.22%</div>
+      <div class="lbl">占两市总成交比重</div>
+    </div>
+    <div class="big-stat">
+      <div class="num">1133.27亿</div>
+      <div class="lbl">沪股通成交额</div>
+    </div>
+    <div class="big-stat">
+      <div class="num">1192.95亿</div>
+      <div class="lbl">深股通成交额</div>
+    </div>
+  </div>
+
+  <div class="detail-only">
+  <h4 style="font-size:15px;margin:14px 0 10px;color:var(--text)">十大成交股</h4>
+  <table class="data-table">
+    <thead><tr><th>通道</th><th>排名</th><th>个股</th><th>成交额</th><th>当日涨跌幅</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">沪股通</td><td>1</td><td>紫金矿业</td><td>30.29亿</td><td class="down-c">-3.57%</td></tr>
+      <tr><td>2</td><td>药明康德</td><td>28.64亿</td><td class="down-c">-4.10%</td></tr>
+      <tr><td>3</td><td>贵州茅台</td><td>17.18亿</td><td class="up-c">+0.67%</td></tr>
+      <tr><td rowspan="3">深股通</td><td>1</td><td>宁德时代</td><td>66.99亿</td><td class="down-c">-3.29%</td></tr>
+      <tr><td>2</td><td>中际旭创</td><td>51.46亿</td><td class="down-c">-8.76%</td></tr>
+      <tr><td>3</td><td>新易盛</td><td>32.55亿</td><td class="down-c">-12.28%</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px;padding:12px;background:#fff8e1;border-radius:8px;border:1px solid #ffe082">
+    <p style="font-size:13px;color:#e65100;line-height:1.8">
+      <strong>说明：</strong>北向资金单日净买入/净卖出精确数据暂未获取到权威披露值。从成交结构看，深股通成交略大于沪股通（1192.95亿 vs 1133.27亿），成交集中于新能源（宁德时代）和光模块（中际旭创、新易盛）等深市权重股，且上述个股当日均大幅下跌，北向资金在科技成长方向的博弈剧烈。ETF方面，北向资金ETF买卖成交额35.37亿元，较前一日增加6.56亿元。
+    </p>
+  </div>
+  </div>
+</div>
+
+<!-- 模块5: 全天走势 -->
+<div class="card" id="intraday">
+  <div class="card-title">指数全天运行节奏 <span class="tag">沪深300分时还原</span></div>
+  
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="time">09:30 开盘</div>
+      <div class="desc">沪深300低开于4110.65点，<strong>开盘即全天最高点</strong>，空头主导开盘。上证指数同步低开，科技成长板块集体低开，光模块、AI算力方向领跌。</div>
+    </div>
+    <div class="tl-item">
+      <div class="time">09:30-10:30 早盘下杀</div>
+      <div class="desc">开盘后快速下探，通信板块暴跌带动创业板指迅速跌超3%，新易盛、中际旭创等光模块龙头放量下挫。两市下跌个股快速突破4000只，市场恐慌情绪蔓延。</div>
+    </div>
+    <div class="tl-item">
+      <div class="time">10:30-11:30 低位震荡</div>
+      <div class="desc">指数在低位维持弱势震荡，沪深300最低触及4022.87点。午间收盘前略有企稳，但反弹力度极弱，成交额已突破万亿，较前一日同期缩量超100亿。</div>
+    </div>
+    <div class="tl-item">
+      <div class="time">13:00-14:00 午后救场</div>
+      <div class="desc">午后开盘后出现一波护盘力量，指数从低位回升，沪深300从4022点附近反弹。家用电器、银行等低估值板块逆势翻红，部分资金尝试抄底机器人、减速器等题材。</div>
+    </div>
+    <div class="tl-item">
+      <div class="time">14:00-15:00 尾盘回落</div>
+      <div class="desc">尾盘再度走弱，反弹未能持续，沪深300最终收于4036.30点，距最低点仅高13点。全天呈现"低开低走→午后弱反弹→尾盘回落"的典型弱势格局。</div>
+    </div>
+  </div>
+
+  <div class="detail-only" style="margin-top:14px">
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span class="badge badge-down">低开低走</span>
+      <span class="badge badge-warn">开盘即最高</span>
+      <span class="badge badge-neutral">午后弱反弹</span>
+      <span class="badge badge-down">尾盘回落</span>
+      <span class="badge badge-warn">放量下跌</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-top:10px;line-height:1.8">
+      全天走势特征：<strong>无明显抵抗式下跌</strong>。沪深300开盘价等于最高价，说明多头在开盘阶段即放弃抵抗。午后虽有护盘资金介入，但反弹幅度有限且未能守住，尾盘再度回落确认弱势。成交额放大至1.53万亿（放量993亿），属于放量下跌，表明抛压沉重而非缩量阴跌。
+    </p>
+  </div>
+</div>
+
+<!-- 模块6: 专业分析 -->
+<div class="card" id="analysis">
+  <div class="card-title">专业分析与行情研判 <span class="tag">综合研判</span></div>
+
+  <div class="analysis-section">
+    <h4>一、市场核心主线与风格</h4>
+    <p><strong>核心主线：</strong>当日无明确持续性主线，市场处于<strong>主线真空期</strong>。前期领涨的AI算力/光模块/CPO方向成为杀跌主力，通信行业暴跌6.17%，标志着科技成长主线阶段性退潮。</p>
+    <p><strong>活跃支线：</strong>机器人概念（宇树机器人、减速器）、冰雪旅游、挖掘机等低位题材逆势活跃，但涨停个股多为首板和低位板，缺乏高度和持续性，属于弱势中的轮动补涨而非新主线确立。</p>
+    <p><strong>弱势退潮方向：</strong>光模块/CPO（新易盛-12.28%、中际旭创-8.76%）、AI应用/传媒（-4.78%）、半导体/电子（-3.40%）、创新药/CXO。科技成长方向集体退潮是当日最核心的风险点。</p>
+    <p><strong>风格偏向：</strong>显著的<strong>防御风格</strong>。申万31个一级行业仅家用电器收涨（+0.08%），银行、食品饮料、公用事业等低估值板块相对抗跌，沪深300（-1.84%）跌幅小于创业板指（-4.37%），大盘价值显著跑赢小盘成长。</p>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <h4>二、技术面与量价关系</h4>
+    <ul>
+      <li><strong>关键位置：</strong>上证指数收盘3658点，已跌破前期震荡平台下沿。沪深300最低4022点，逼近4000点整数关口。创业板指2576点，创近期新低。</li>
+      <li><strong>均线系统：</strong>各主要指数均运行于多条关键均线之下，短期均线空头排列，技术形态偏弱。沪深300连续3日下跌（10-20 -0.54%、10-21 -0.97%、10-22 -1.84%），跌幅逐日扩大，呈加速下跌态势。</li>
+      <li><strong>量价关系：</strong>两市成交1.53万亿，较前一日放量993亿，<strong>放量下跌</strong>意味着恐慌盘涌出和止损盘集中释放，而非缩量阴跌。放量下跌后通常有技术性反抽需求，但需观察反抽力度。</li>
+      <li><strong>支撑压力：</strong>上证指数下方关注3600点整数关口及前低支撑，上方压力位于3700-3730点区间（5日/10日均线密集区）。沪深300下方4000点为关键心理支撑，上方4100点为短期压力。</li>
+    </ul>
+  </div>
+
+  <div class="analysis-section detail-only">
+    <h4>三、情绪周期判断</h4>
+    <p>当前市场处于<strong>情绪冰点期</strong>：</p>
+    <ul>
+      <li>上涨家数仅533只（占比9.6%），下跌4994只，普跌程度罕见</li>
+      <li>连板高度压制在5板，4板梯队全线断板，短线接力情绪接近冰点</li>
+      <li>炸板率高达44.1%，封板率仅55.9%，打板资金亏损效应显著</li>
+      <li>主力资金连续净流出，机构席位连续3日净卖出（当日净卖出4.90亿）</li>
+      <li>跌停8只虽不算极端，但光模块等核心资产出现10%+大跌，杀伤力集中</li>
+    </ul>
+    <p style="margin-top:8px">情绪冰点后通常伴随超跌反弹，但冰点之后可能还有冰点，需结合成交量和领涨板块持续性判断是否真正见底。</p>
+  </div>
+
+  <div class="analysis-section">
+    <h4>四、核心驱动因素与矛盾</h4>
+    <p><strong>核心驱动（下跌原因）：</strong></p>
+    <ul>
+      <li>科技成长板块获利盘集中兑现：光模块/AI算力前期涨幅巨大，在缺乏新增催化背景下引发机构调仓</li>
+      <li>北向资金在科技权重股上大额成交且方向偏空，加剧了深市成长股的波动</li>
+      <li>市场对高位科技股估值的担忧升温，资金从高估值成长向低估值价值迁移</li>
+    </ul>
+    <p><strong>核心矛盾：</strong>科技成长主线退潮后，<strong>新主线尚未形成</strong>。市场在"旧主线退潮"与"新主线孕育"之间出现真空期，导致资金无序流动、板块快速轮动、指数缺乏方向。与此同时，低估值防御板块虽有资金流入，但体量不足以支撑大盘企稳。</p>
+  </div>
+
+  <div class="analysis-section">
+    <h4>五、短期推演与关注方向</h4>
+    <p><strong>短期推演：</strong>连续放量下跌后，技术面存在超跌反弹需求。关注3600点（上证）/4000点（沪深300）关键支撑位的防守力度。若能在支撑位缩量企稳并出现领涨板块，则可能迎来技术性反抽；若支撑位失守，则需警惕进一步下探风险。</p>
+    <p><strong>关注方向：</strong></p>
+    <ul>
+      <li><strong>超跌反弹方向：</strong>光模块/AI算力等急跌板块的技术性反抽机会，但需控制仓位、快进快出</li>
+      <li><strong>防御配置方向：</strong>高股息（银行、公用事业）、消费（家用电器、食品饮料）等低估值板块的相对收益</li>
+      <li><strong>新主线观察：</strong>机器人/减速器、商业航天、卫星通信等题材是否能从轮动补涨升级为持续性主线</li>
+      <li><strong>资金面信号：</strong>北向资金流向、主力资金净流入行业数变化、成交额是否萎缩至地量水平</li>
+    </ul>
+    <div style="margin-top:12px;padding:12px;background:var(--up-light);border-radius:8px">
+      <p style="font-size:13px;color:var(--up);font-weight:600">⚠ 以上分析仅为行情复盘与研究讨论，不构成任何投资建议。严禁推荐具体个股，投资者应独立判断并承担风险。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div class="risk">
+    <strong>风险提示：</strong>本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。文中数据来源于公开权威渠道（同花顺、Wind、中证指数、证券时报、东方财富等），可能存在时效性不足或统计口径差异，仅供参考。北向资金净流向等部分数据因未获取到权威精确值，已在文中标注说明。
+  </div>
+  <div>A股大盘全景复盘 | 2026-10-22 | 数据截至当日收盘</div>
+</div>
+
+</div>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle('concise');
+  var btn=document.querySelector('.mode-btn');
+  if(document.body.classList.contains('concise')){
+    btn.textContent='切换详细';
+  }else{
+    btn.textContent='切换精简';
+  }
+}
+// 平滑滚动
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target){
+      var offset=target.offsetTop-60;
+      window.scrollTo({top:offset,behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
