@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股大盘全景复盘 | 2026-11-16</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --up:#e53935;--up-light:#ffebee;--up-bg:#fdecea;
+  --down:#43a047;--down-light:#e8f5e9;--down-bg:#eaf5ea;
+  --bg:#f4f5f7;--card:#ffffff;--text:#1a1a2e;--text2:#555;--text3:#888;
+  --border:#e8e8ec;--accent:#1565c0;--accent-light:#e3f2fd;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;font-size:17px;color:var(--text);white-space:nowrap}
+.nav-logo span{color:var(--up)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:13px;padding:6px 10px;border-radius:6px;white-space:nowrap;transition:all .2s}
+.nav-links a:hover{background:var(--accent-light);color:var(--accent)}
+.mode-btn{background:var(--up);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap;transition:opacity .2s;margin-left:10px;flex-shrink:0}
+.mode-btn:hover{opacity:.85}
+.container{max-width:1100px;margin:0 auto;padding:72px 16px 40px}
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#12263f 50%,#0d3b2e 100%);color:#fff;border-radius:14px;padding:28px 24px;margin-bottom:20px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;bottom:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(67,160,71,.18),transparent 70%);border-radius:50%}
+.header h1{font-size:24px;margin-bottom:6px;position:relative}
+.header .date{font-size:14px;color:#a5d6a7;margin-bottom:16px;position:relative}
+.header-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;position:relative}
+.header-item{background:rgba(255,255,255,.1);border-radius:10px;padding:12px 14px}
+.header-item .label{font-size:12px;color:#a5d6a7;margin-bottom:4px}
+.header-item .value{font-size:20px;font-weight:700}
+.header-item .sub{font-size:12px;margin-top:2px}
+.up-c{color:var(--up)!important}.down-c{color:var(--down)!important}
+.up-bg{background:var(--up-bg)!important}.down-bg{background:var(--down-bg)!important}
+.card{background:var(--card);border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow);border:1px solid var(--border);scroll-margin-top:72px}
+.card-title{font-size:18px;font-weight:700;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card-title::before{content:"";width:4px;height:20px;background:var(--up);border-radius:2px;flex-shrink:0}
+.card-title .tag{font-size:11px;font-weight:400;background:var(--accent-light);color:var(--accent);padding:2px 8px;border-radius:4px;margin-left:auto}
+.idx-table{width:100%;border-collapse:collapse;font-size:14px}
+.idx-table th{background:#f8f9fb;padding:10px 8px;text-align:right;font-weight:600;color:var(--text2);font-size:13px;border-bottom:2px solid var(--border)}
+.idx-table th:first-child{text-align:left}
+.idx-table td{padding:12px 8px;text-align:right;border-bottom:1px solid var(--border)}
+.idx-table td:first-child{text-align:left;font-weight:600}
+.idx-table tr:last-child td{border-bottom:none}
+.idx-table .price{font-size:16px;font-weight:700}
+.idx-table .chg{font-weight:700;font-size:15px}
+.big-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px}
+.big-stat{background:var(--bg);border-radius:10px;padding:16px;text-align:center}
+.big-stat .num{font-size:26px;font-weight:800;line-height:1.2}
+.big-stat .lbl{font-size:12px;color:var(--text3);margin-top:4px}
+.progress-wrap{margin:14px 0}
+.progress-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:var(--text2)}
+.progress-bar{height:28px;background:var(--border);border-radius:6px;overflow:hidden;display:flex}
+.progress-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;white-space:nowrap}
+.progress-seg.up{background:var(--up)}.progress-seg.down{background:var(--down)}.progress-seg.flat{background:#9e9e9e}
+.bar-chart{margin:10px 0}
+.bar-row{display:flex;align-items:center;margin-bottom:8px;font-size:13px}
+.bar-name{width:110px;flex-shrink:0;text-align:right;padding-right:10px;color:var(--text2);font-size:12px}
+.bar-track{flex:1;height:24px;background:var(--bg);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:600;color:#fff;min-width:44px}
+.bar-fill.up{background:var(--up)}.bar-fill.down{background:var(--down)}
+.bar-val{width:55px;flex-shrink:0;text-align:right;padding-left:8px;font-weight:600;font-size:12px}
+.ladder{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.ladder-step{flex:1;min-width:70px;text-align:center}
+.ladder-step .height{font-size:11px;color:var(--text3);margin-bottom:4px}
+.ladder-step .count{font-size:22px;font-weight:800;padding:8px 0;border-radius:8px;background:var(--bg)}
+.ladder-step .count.hot{background:var(--up-light);color:var(--up)}
+.ladder-step .count.warm{background:#fff3e0;color:#e65100}
+.ladder-step .count.cool{background:var(--down-light);color:var(--down)}
+.ladder-step .desc{font-size:11px;color:var(--text3);margin-top:4px;line-height:1.4}
+.flow-block{border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.flow-in{background:var(--up-bg);border-left:4px solid var(--up)}
+.flow-out{background:var(--down-bg);border-left:4px solid var(--down)}
+.flow-block h5{font-size:14px;font-weight:700;margin-bottom:8px}
+.flow-item{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed rgba(0,0,0,.06);gap:10px}
+.flow-item:last-child{border-bottom:none}
+.flow-item .nm{color:var(--text2)}
+.flow-item .vl{font-weight:700;white-space:nowrap}
+.timeline{position:relative;padding-left:28px;margin:14px 0}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-item::before{content:"";position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--up);border:2px solid #fff;box-shadow:0 0 0 2px var(--up)}
+.tl-item.hot::before{background:var(--down);box-shadow:0 0 0 2px var(--down)}
+.tl-item .time{font-size:12px;color:var(--up);font-weight:600}
+.tl-item.hot .time{color:var(--down)}
+.tl-item .desc{font-size:14px;color:var(--text);margin-top:2px;line-height:1.7}
+.analysis-section{margin-bottom:18px}
+.analysis-section h4{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--text);display:flex;align-items:center;gap:6px}
+.analysis-section h4::before{content:"";width:3px;height:14px;background:var(--up);border-radius:2px}
+.analysis-section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:6px}
+.analysis-section ul{padding-left:20px;font-size:14px;color:var(--text2);line-height:1.8}
+.analysis-section li{margin-bottom:4px}
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;margin:2px 4px 2px 0}
+.badge-up{background:var(--up-light);color:var(--up)}
+.badge-down{background:var(--down-light);color:var(--down)}
+.badge-neutral{background:#f0f0f0;color:var(--text2)}
+.badge-warn{background:#fff3e0;color:#e65100}
+.lead{border-left:4px solid var(--up);background:#fafbfc;padding:14px 18px;border-radius:8px;font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:16px}
+body.concise .detail-only{display:none!important}
+body.concise .card{padding:16px 20px}
+body.concise .card-title{font-size:16px;margin-bottom:10px;padding-bottom:8px}
+.footer{text-align:center;padding:24px 16px 40px;color:var(--text3);font-size:12px;line-height:1.8}
+.footer .risk{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:14px 18px;margin-bottom:12px;color:#e65100;font-size:13px;max-width:820px;margin-left:auto;margin-right:auto;text-align:left}
+.src-note{font-size:12px;color:var(--text3);line-height:1.9;margin-bottom:14px}
+.cite-ref{color:var(--accent);text-decoration:none;font-size:10px;vertical-align:super;margin-left:1px;font-weight:600}
+.cite-ref:hover{text-decoration:underline}
+@media(max-width:768px){
+  .nav{padding:0 10px;height:50px}
+  .nav-logo{font-size:14px}
+  .nav-links a{font-size:11px;padding:5px 7px}
+  .mode-btn{padding:5px 10px;font-size:11px;margin-left:6px}
+  .container{padding:64px 10px 30px}
+  .header{padding:20px 16px}
+  .header h1{font-size:19px}
+  .header-summary{grid-template-columns:repeat(2,1fr);gap:10px}
+  .header-item .value{font-size:17px}
+  .card{padding:16px;scroll-margin-top:60px}
+  .card-title{font-size:16px}
+  .card-title .tag{display:none}
+  .big-stats{grid-template-columns:repeat(2,1fr)}
+  .big-stat .num{font-size:20px}
+  .idx-table{font-size:11px}
+  .idx-table th,.idx-table td{padding:8px 3px}
+  .idx-table .price{font-size:13px}
+  .idx-table .chg{font-size:12px}
+  .bar-name{width:78px;font-size:11px}
+  .bar-val{width:48px}
+  .ladder-step{min-width:55px}
+  .ladder-step .count{font-size:18px}
+  .lead{font-size:13px;padding:12px 14px}
+  .progress-seg{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">A股<span>全景复盘</span></div>
+  <div class="nav-links">
+    <a href="#index">指数</a>
+    <a href="#sentiment">情绪</a>
+    <a href="#sector">板块</a>
+    <a href="#fund">资金</a>
+    <a href="#intraday">节奏</a>
+    <a href="#analysis">研判</a>
+    <a href="#risk">风险</a>
+    <button class="mode-btn" onclick="toggleMode()" id="modeBtn">精简模式</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <h1>A股大盘全景复盘</h1>
+    <div class="date">2026年11月16日（周一）· 数据截至 15:00 收盘</div>
+    <div class="header-summary">
+      <div class="header-item">
+        <div class="label">上证指数</div>
+        <div class="value down-c">3602.57</div>
+        <div class="sub down-c">-0.87%</div>
+      </div>
+      <div class="header-item">
+        <div class="label">创业板指</div>
+        <div class="value down-c">2320.02</div>
+        <div class="sub down-c">-4.37%</div>
+      </div>
+      <div class="header-item">
+        <div class="label">两市成交额</div>
+        <div class="value">1.48 万亿</div>
+        <div class="sub down-c">缩量 1712 亿（-10.34%）</div>
+      </div>
+      <div class="header-item">
+        <div class="label">涨停家数 / 封板率</div>
+        <div class="value down-c">32 家</div>
+        <div class="sub down-c">封板率 67%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lead">
+    <strong>今日是一次全线低开低走、成长大幅跑输的缩量普跌。</strong>早盘五指数集体低开，盘中在 AI 硬件链集中抛售与亚太科技股大跌共振下持续走弱，创业板指、科创50 双双创年内新低；收盘五指数全线收跌，超 4300 只个股下跌。资金从 CPO、PCB、存储、消费电子、半导体等海外映射方向集中撤出，局部抱团银行、煤炭、交运、家电、食品饮料与高股息防御方向；情绪连续第三个交易日走弱，跌停增至 60 余家，跌超 9% 个股超 250 家。沪指盘中一度击穿 3600 点，尾盘在宽基 ETF 放量与权重股回勾下勉强收复整数关。
+  </div>
+
+  <!-- ===== 模块一：指数全景 ===== -->
+  <div class="card" id="index">
+    <div class="card-title">一、指数全景：五指数全线收跌，双创跌幅显著大于主板<span class="tag">Wind 万得收盘口径</span></div>
+
+    <table class="idx-table">
+      <thead>
+        <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>涨跌额</th><th>今开</th><th>最高</th><th>最低</th><th>成交额</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上证指数</td><td class="price">3602.57</td><td class="chg down-c">-0.87%</td><td class="down-c">-31.78</td><td>3611.54</td><td>3623.12</td><td>3586.57</td><td>7062.14 亿</td></tr>
+        <tr><td>深证成指</td><td class="price">10690.78</td><td class="chg down-c">-2.53%</td><td class="down-c">-278.01</td><td>10881.91</td><td>10881.91</td><td>10642.37</td><td>7782.76 亿</td></tr>
+        <tr><td>创业板指</td><td class="price">2320.02</td><td class="chg down-c">-4.37%</td><td class="down-c">-106.06</td><td>2395.52</td><td>2398.19</td><td>2308.90</td><td>3693.16 亿</td></tr>
+        <tr><td>科创50</td><td class="price">1213.68</td><td class="chg down-c">-5.16%</td><td class="down-c">-65.98</td><td>1254.48</td><td>1266.61</td><td>1200.55</td><td>851.16 亿</td></tr>
+        <tr><td>沪深300</td><td class="price">3979.80</td><td class="chg down-c">-0.91%</td><td class="down-c">-36.49</td><td>3984.77</td><td>3997.40</td><td>3959.93</td><td>4305.54 亿</td></tr>
+      </tbody>
+    </table>
+
+    <div class="big-stats" style="margin-top:18px">
+      <div class="big-stat">
+        <div class="num down-c">5 / 5</div>
+        <div class="lbl">收跌指数（全线低开低走）</div>
+      </div>
+      <div class="big-stat">
+        <div class="num down-c">14844.90 亿</div>
+        <div class="lbl">沪深两市合计成交（-10.34%）</div>
+      </div>
+      <div class="big-stat">
+        <div class="num down-c">5.16%</div>
+        <div class="lbl">科创50 盘中振幅（五指数最大）</div>
+      </div>
+      <div class="big-stat">
+        <div class="num down-c">跌破 5 日线</div>
+        <div class="lbl">上证收于 MA5 3647.42 下方 44.85 点</div>
+      </div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>低开幅度与振幅：五指数全线低开，双创与科创振幅显著放大</h4>
+      <p>按今开相对昨收计算（自行计算）：上证开 3611.54（-0.63%）、深成指开 10881.91（-0.79%）、创业板开 2395.52（-1.26%）、科创50 开 1254.48（-1.97%）、沪深300 开 3984.77（-0.78%）。振幅方面（自行计算：(最高-最低)/昨收）：上证 1.01%、深成指 2.18%、创业板 3.68%、科创50 5.16%、沪深300 0.93%。<strong>双创与科创的振幅明显大于主板</strong>，高弹性方向经历了更剧烈的多空交换。<span class="cite-ref">[1][31][32]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>收盘位置：均收在日内偏低区域，尾盘靠权重与 ETF 小幅回勾</h4>
+      <p>上证收 3602.57，距日内高点 3623.12 回落 20.55 点；深成指收 10690.78，距高点 10881.91 回落 191.13 点；创业板收 2320.02，距高点 2398.19 回落 78.17 点；科创50 收 1213.68，距高点 1266.61 回落 52.93 点；沪深300 收 3979.80，距高点 3997.40 回落 17.60 点。<strong>五个指数全部收在日内次低位附近</strong>，创业板指、科创50 收盘创年内新低。从指数内部成分结构看，上证 1718 跌 / 589 涨 / 53 平，深成指 2354 跌 / 537 涨 / 50 平，创业板 1199 跌 / 159 涨 / 12 平，科创50 573 跌 / 39 涨 / 7 平，沪深300 132 跌 / 163 涨 / 5 平——大盘价值成分相对抗跌，成长方向广度更弱。<span class="cite-ref">[1]</span></p>
+    </div>
+
+    <div class="analysis-section detail-only">
+      <h4>估值与换手（Wind 收盘口径）</h4>
+      <p>上证指数 PE TTM 15.79 倍、换手率 0.96%、总市值 75.26 万亿；深成指 PE 24.13 倍、换手 2.11%、总市值 23.77 万亿；创业板 PE 26.38 倍、换手 2.81%、总市值 7.05 万亿；科创50 PE 88.52 倍（同花顺口径 89.13 倍）、换手 1.37%、总市值 5.41 万亿；沪深300 PE 13.43 倍、换手 0.55%、总市值 64.24 万亿。<span class="cite-ref">[1][31][32]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 模块二：市场情绪 ===== -->
+  <div class="card" id="sentiment">
+    <div class="card-title">二、市场情绪：跌停扩散至 60 余家，高位题材批量退潮<span class="tag">财联社 / 数据宝 / 21财经</span></div>
+
+    <div class="big-stats">
+      <div class="big-stat down-bg">
+        <div class="num down-c">32</div>
+        <div class="lbl">涨停（财联社口径，不含 ST、退市）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">60 余家</div>
+        <div class="lbl">跌停家数（数据宝口径 68，见注）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">67%</div>
+        <div class="lbl">封板率（昨日 64%）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">33.33%</div>
+        <div class="lbl">炸板率（自行计算 16/48）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">4 板</div>
+        <div class="lbl">最高连板（北纬科技）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">42.86%</div>
+        <div class="lbl">连板晋级率（昨日 27.27%）</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label"><span>上涨 1136 只</span><span>下跌 4344 只</span></div>
+      <div class="progress-bar">
+        <div class="progress-seg up" style="width:20.36%">20.36%</div>
+        <div class="progress-seg down" style="width:77.86%"></div>
+        <div class="progress-seg flat" style="width:1.78%"></div>
+      </div>
+      <div class="src-note" style="margin-top:6px">上涨占比 20.36%、下跌 77.86%、平盘 1.77%（证券时报·数据宝口径，分母 5579 只可交易 A 股，自行计算占比）；21财经另一口径为 1109 涨 / 4019 跌。<span class="cite-ref">[2][3]</span></div>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder-step">
+        <div class="height">4 板</div>
+        <div class="count hot">1</div>
+        <div class="desc">北纬科技<br>通信 / 高位股</div>
+      </div>
+      <div class="ladder-step">
+        <div class="height">3 板</div>
+        <div class="count warm">2</div>
+        <div class="desc">广百股份<br>国统股份</div>
+      </div>
+      <div class="ladder-step">
+        <div class="height">天数板</div>
+        <div class="count warm">3</div>
+        <div class="desc">文投控股 19 天 11 板<br>龙江交通 13 天 7 板<br>凯撒文化 5 天 4 板</div>
+      </div>
+      <div class="ladder-step">
+        <div class="height">5 天 3 板</div>
+        <div class="count cool">2</div>
+        <div class="desc">瀛通通讯<br>金逸影视</div>
+      </div>
+      <div class="ladder-step">
+        <div class="height">晋级情况</div>
+        <div class="count cool">3 只</div>
+        <div class="desc">昨日连板仅 3 只晋级<br>晋级率 42.86%</div>
+      </div>
+    </div>
+
+    <p>全市场 32 股涨停、16 股封板未遂，封板率 67%（不含 ST、退市股）。按「封板 32 / 触板 48」计算，炸板率为 <strong>33.33%</strong>（自行计算）。对比上一交易日（11-13）：涨停 37→32（-5）、跌停 34→60 余家（显著扩大）、封板率 64%→67%（+3pct），晋级率 27.27%→42.86%（+15.59pct，但昨日连板基数小、仅 3 只晋级）。全市场跌超 9% 个股超 250 家。<span class="cite-ref">[2][4]</span></p>
+
+    <div class="analysis-section">
+      <h4>高位股图谱：梯队高度压至 4 板，前期人气股批量跌停</h4>
+      <p>仍在高位的个股以「天数板」为主：文投控股 19 天 11 板（短剧漫剧，收 3.74 元 +10.00%，换手 37.82%，成交 39.57 亿）、龙江交通 13 天 7 板、凯撒文化 5 天 4 板、瀛通通讯与金逸影视 5 天 3 板。高位退潮方向：大东方、百洋股份、襄阳轴承、青岛食品、澳洋健康、闽发铝业 2 连跌停；东方环宇、日出东方、锋龙股份、金辰股份封死跌停；人气核心九阳股份尾盘炸板，分歧显著加大。昨日 4 板天普股份今日停牌核查。<span class="cite-ref">[4][25][27]</span></p>
+    </div>
+
+    <div class="analysis-section detail-only">
+      <h4>三日情绪周期对照：退潮延续，跌停扩散是主要恶化信号</h4>
+      <table class="idx-table">
+        <thead>
+          <tr><th>日期</th><th>涨停</th><th>跌停</th><th>上涨家数</th><th>成交额</th><th>封板率</th><th>最高板</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>11-12</td><td>37</td><td>5</td><td>875</td><td>1.93 万亿</td><td>51%</td><td>5 板</td></tr>
+          <tr><td>11-13</td><td>37</td><td>34</td><td>765</td><td>1.66 万亿</td><td>64%</td><td>4 板</td></tr>
+          <tr><td>11-16</td><td class="down-c">32</td><td class="down-c">60 余家</td><td class="down-c">1136</td><td>1.48 万亿</td><td>67%</td><td>4 板</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px">三日路径：11-12 退潮确认（放量普跌，封板率腰斩）→ 11-13 弱势延续（涨停持平但跌停扩散、连板变薄）→ 11-16 <strong>弱势探底</strong>（成交跌破 1.5 万亿，跌停继续翻倍，跌超 9% 个股超 250 家）。封板率与晋级率较昨日回升，主要来自炸板个股减少与低位题材局部抱团，而非整体涨停意愿增强；最高板连续两日压在 4 板，中位梯队继续收缩。<span class="cite-ref">[2][4]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 模块三：板块轮动 ===== -->
+  <div class="card" id="sector">
+    <div class="card-title">三、板块轮动：31 个行业仅 9 涨，红利防御逆势收红<span class="tag">申万一级 / 概念板块</span></div>
+
+    <div class="analysis-section">
+      <h4>申万一级行业：今日收涨的主要方向</h4>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-name">银行</div><div class="bar-track"><div class="bar-fill up" style="width:100%"></div></div><div class="bar-val up-c">+1.91%</div></div>
+        <div class="bar-row"><div class="bar-name">煤炭</div><div class="bar-track"><div class="bar-fill up" style="width:99.0%"></div></div><div class="bar-val up-c">+1.89%</div></div>
+        <div class="bar-row"><div class="bar-name">交通运输</div><div class="bar-track"><div class="bar-fill up" style="width:64.4%"></div></div><div class="bar-val up-c">+1.23%</div></div>
+        <div class="bar-row"><div class="bar-name">食品饮料</div><div class="bar-track"><div class="bar-fill up" style="width:62.3%"></div></div><div class="bar-val up-c">+1.19%</div></div>
+      </div>
+      <p>申万 31 个一级行业今日共 9 个收涨、22 个收跌；除上述四个方向外，其余收涨行业未取到完整涨跌幅，不逐一列示。银行板块内多只城商行与大行创历史新高，交运、煤炭、食品饮料同步获资金避险配置。<span class="cite-ref">[5][22][34]</span></p>
+
+      <h4 style="margin-top:20px">申万一级行业跌幅前列（已核验口径）</h4>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-name">通信</div><div class="bar-track"><div class="bar-fill down" style="width:100%"></div></div><div class="bar-val down-c">-7.06%</div></div>
+        <div class="bar-row"><div class="bar-name">电子</div><div class="bar-track"><div class="bar-fill down" style="width:84.8%"></div></div><div class="bar-val down-c">-5.99%</div></div>
+        <div class="bar-row"><div class="bar-name">综合</div><div class="bar-track"><div class="bar-fill down" style="width:60.6%"></div></div><div class="bar-val down-c">-4.28%</div></div>
+        <div class="bar-row"><div class="bar-name">有色金属</div><div class="bar-track"><div class="bar-fill down" style="width:46.6%"></div></div><div class="bar-val down-c">-3.29%</div></div>
+      </div>
+      <div class="src-note">条形长度以各自方向的最大值为 100% 等比映射，仅示相对强弱，不代表绝对幅度。其余下跌行业中，机械设备、计算机主力资金流出较多；未取到完整行业涨跌幅的方向不强行补列。<span class="cite-ref">[5][6]</span></div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>概念板块：高股息、啤酒、猪肉局部收红，海外硬件链集体重挫</h4>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-name">高股息精选</div><div class="bar-track"><div class="bar-fill up" style="width:100%"></div></div><div class="bar-val up-c">+1.03%</div></div>
+        <div class="bar-row"><div class="bar-name">啤酒</div><div class="bar-track"><div class="bar-fill up" style="width:71.8%"></div></div><div class="bar-val up-c">+0.74%</div></div>
+        <div class="bar-row"><div class="bar-name">猪肉</div><div class="bar-track"><div class="bar-fill up" style="width:61.2%"></div></div><div class="bar-val up-c">+0.63%</div></div>
+        <div class="bar-row"><div class="bar-name">芬太尼</div><div class="bar-track"><div class="bar-fill up" style="width:60.2%"></div></div><div class="bar-val up-c">+0.62%</div></div>
+        <div class="bar-row"><div class="bar-name">超级品牌</div><div class="bar-track"><div class="bar-fill up" style="width:38.8%"></div></div><div class="bar-val up-c">+0.40%</div></div>
+        <div class="bar-row"><div class="bar-name">免税店</div><div class="bar-track"><div class="bar-fill up" style="width:26.2%"></div></div><div class="bar-val up-c">+0.27%</div></div>
+        <div class="bar-row"><div class="bar-name">冰雪产业</div><div class="bar-track"><div class="bar-fill up" style="width:6.8%"></div></div><div class="bar-val up-c">+0.07%</div></div>
+        <div class="bar-row"><div class="bar-name">航运概念</div><div class="bar-track"><div class="bar-fill up" style="width:2.9%"></div></div><div class="bar-val up-c">+0.03%</div></div>
+      </div>
+      <p>其余概念多数收跌，相对抗跌的有自由贸易港 -0.12%、白酒 -0.18%。<span class="cite-ref">[5][7]</span></p>
+
+      <h4 style="margin-top:20px">概念板块跌幅 TOP10</h4>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-name">CPO</div><div class="bar-track"><div class="bar-fill down" style="width:100%"></div></div><div class="bar-val down-c">-6.40%</div></div>
+        <div class="bar-row"><div class="bar-name">富士康概念</div><div class="bar-track"><div class="bar-fill down" style="width:90.9%"></div></div><div class="bar-val down-c">-5.82%</div></div>
+        <div class="bar-row"><div class="bar-name">存储芯片</div><div class="bar-track"><div class="bar-fill down" style="width:90.8%"></div></div><div class="bar-val down-c">-5.81%</div></div>
+        <div class="bar-row"><div class="bar-name">先进封装</div><div class="bar-track"><div class="bar-fill down" style="width:88.1%"></div></div><div class="bar-val down-c">-5.64%</div></div>
+        <div class="bar-row"><div class="bar-name">光刻机</div><div class="bar-track"><div class="bar-fill down" style="width:86.6%"></div></div><div class="bar-val down-c">-5.54%</div></div>
+        <div class="bar-row"><div class="bar-name">英伟达概念</div><div class="bar-track"><div class="bar-fill down" style="width:86.3%"></div></div><div class="bar-val down-c">-5.52%</div></div>
+        <div class="bar-row"><div class="bar-name">PCB</div><div class="bar-track"><div class="bar-fill down" style="width:85.5%"></div></div><div class="bar-val down-c">-5.47%</div></div>
+        <div class="bar-row"><div class="bar-name">玻璃基板</div><div class="bar-track"><div class="bar-fill down" style="width:85.3%"></div></div><div class="bar-val down-c">-5.46%</div></div>
+        <div class="bar-row"><div class="bar-name">MLCC</div><div class="bar-track"><div class="bar-fill down" style="width:84.2%"></div></div><div class="bar-val down-c">-5.39%</div></div>
+        <div class="bar-row"><div class="bar-name">铜缆高速连接</div><div class="bar-track"><div class="bar-fill down" style="width:83.3%"></div></div><div class="bar-val down-c">-5.33%</div></div>
+      </div>
+      <div class="src-note">概念涨跌幅取证券时报·数据宝同一榜单；CPO 概念主力净流出 184.49 亿元，184 只成分股流出、43 只流出超亿元。<span class="cite-ref">[7]</span></div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>逆势方向：红利抱团、家电出海与低位消费局部活跃</h4>
+      <ul>
+        <li><span class="badge badge-up">防御主线</span><strong>银行 / 高股息</strong>：银行 +1.91% 领涨行业，中证银行指数续刷年内高点；42 家上市银行仍全线破净，板块股息率约 4.5%，与 10 年期国债收益率利差约 296 个基点。苏州银行、南京银行、青岛银行、成都银行、杭州银行、江苏银行、工商银行、中国银行、建设银行、长江电力等 21 只个股盘中创历史新高。<span class="cite-ref">[5][22][34]</span></li>
+        <li><span class="badge badge-up">逆势支线</span><strong>家电出海链</strong>：10 月我国家用电器出口金额 89.56 亿美元、同比 +20.9%（出口量 4.02 亿台、+14.1%；1-10 月累计 893.65 亿美元、+10.4%）；美的集团 +2.35% 收 92.68 元创历史新高（时隔 5 年 9 个月），北鼎股份 20CM 涨停，小熊电器、华帝股份、长虹美菱涨停。<span class="cite-ref">[23][34]</span></li>
+        <li><span class="badge badge-up">逆势支线</span><strong>AI 漫剧 / 短剧院线</strong>：2026 百度世界大会推出短漫剧 Studio（一站式产出、一键转绘、面向出海）；前 10 个月上线微短剧近 55 万部，为 2025 全年近 17 倍，超 94% 为 AI 短剧。文投控股 19 天 11 板、凯撒文化 5 天 4 板、金逸影视 5 天 3 板，吉视传媒、华数传媒封板。<span class="cite-ref">[4][23]</span></li>
+        <li><span class="badge badge-neutral">政策支线</span><strong>固态电池 / 新型储能</strong>：上周五发改委、能源局印发《"十五五"新型储能实施方案》，支持固态电池、热泵储电、热储能、氢储能；领湃科技 20CM 涨停、紫竹高科涨停，力王股份、盟固利、双杰电气涨幅靠前。<span class="cite-ref">[4][23]</span></li>
+        <li><span class="badge badge-neutral">消费防御</span><strong>猪肉 / 啤酒 / 超级品牌 / 免税</strong>：猪肉 +0.63%、啤酒 +0.74%、超级品牌 +0.40%；农业农村部数据猪肉批发价 14.85 元/公斤（较上周五 +0.4%）。<span class="cite-ref">[5][23]</span></li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <h4>弱势方向：海外算力硬件链集体重挫，半导体与消费电子同步走弱</h4>
+      <ul>
+        <li><span class="badge badge-down">最弱</span><strong>CPO / 光通信</strong>：CPO -6.40%、通信行业 -7.06%、主力净流出 66.18 亿元；中际旭创 -12.28%、新易盛 -11.08%、天孚通信 -11.83%、亨通光电 -7.43%、光迅科技 -9.49%、剑桥科技 -10.00%、长飞光纤 -9.99% 批量重挫；板块内仅共进股份 +10.02%、深圳华强 +3.06%、威胜信息 +0.80% 收红。<span class="cite-ref">[7][8][26][28][30]</span></li>
+        <li><span class="badge badge-down">硬件扩散</span><strong>PCB / 存储 / 先进封装 / 消费电子</strong>：PCB -5.47%、存储芯片 -5.81%、先进封装 -5.64%、富士康概念 -5.82%、MLCC -5.39%、玻璃基板 -5.46%；东山精密 -10.00%、工业富联 -9.68%、兆易创新 -9.27%、生益科技 -9.99%、沪电股份 -10.00%、胜宏科技 -11.54%、长川科技 -10.11% 跌停或跌超 10%；电子行业 -5.99%、主力净流出 223.19 亿元居首（14:23 盘中口径电子净流出 180.23 亿）。<span class="cite-ref">[5][7][20][21]</span></li>
+        <li><span class="badge badge-down">资源品</span><strong>有色金属 / 稀土永磁 / 贵金属</strong>：有色 -3.29%、主力净流出 47.15 亿元，141 只成分股 136 只下跌、5 只跌停；中国稀土 +4.64% 但主力净流出 7.13 亿，云南锗业 -8.90%、北方稀土 -4.50%、中钨高新 -7.44%、兴业银锡 -8.54% 走弱；伦敦现货黄金盘中最低 3832.23 美元/盎司（2025 年 9 月以来低点），现货白银 -3.63%。<span class="cite-ref">[6][23]</span></li>
+        <li><span class="badge badge-down">高位题材</span><strong>前期人气股退潮</strong>：玄学炒作、机器人、军工等前期活跃方向批量回调；多只高位股 2 连跌停，短线资金兑现意愿强烈。<span class="cite-ref">[4]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 模块四：资金流向 ===== -->
+  <div class="card" id="fund">
+    <div class="card-title">四、资金流向：主力净流出 563 亿，电子通信合计流出约 289 亿<span class="tag">证券时报·数据宝 / 新浪 Level2</span></div>
+
+    <div class="big-stats">
+      <div class="big-stat down-bg">
+        <div class="num down-c">-562.83 亿</div>
+        <div class="lbl">申万行业主力资金净额</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">-289.37 亿</div>
+        <div class="lbl">电子 + 通信合计净流出（自行计算）</div>
+      </div>
+      <div class="big-stat down-bg">
+        <div class="num down-c">-184.49 亿</div>
+        <div class="lbl">CPO 概念主力净流出</div>
+      </div>
+      <div class="big-stat">
+        <div class="num">2202.40 亿</div>
+        <div class="lbl">沪深股通合计成交（占两市 14.84%）</div>
+      </div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>行业资金：7 个净流入、24 个净流出，流出高度集中在电子与通信</h4>
+      <div class="flow-block flow-in">
+        <h5>净流入前列（亿元）</h5>
+        <div class="flow-item"><span class="nm">交通运输（+1.23%）</span><span class="vl up-c">+6.87</span></div>
+        <div class="flow-item"><span class="nm">食品饮料（+1.19%）</span><span class="vl up-c">+4.30</span></div>
+      </div>
+      <div class="flow-block flow-out">
+        <h5>净流出前列（亿元）</h5>
+        <div class="flow-item"><span class="nm">电子（-5.99%）</span><span class="vl down-c">-223.19</span></div>
+        <div class="flow-item"><span class="nm">通信（-7.06%）</span><span class="vl down-c">-66.18</span></div>
+        <div class="flow-item"><span class="nm">有色金属（-3.29%）</span><span class="vl down-c">-47.15</span></div>
+        <div class="flow-item"><span class="nm">机械设备、计算机等</span><span class="vl down-c">流出较多（金额暂无）</span></div>
+      </div>
+      <p>两市主力资金全天净流出 562.83 亿元；7 个行业净流入、24 个行业净流出。通信行业 122 只成分股中 10 只上涨、2 只涨停，112 只下跌、2 只跌停；有色金属 141 只成分股中 5 只上涨、136 只下跌、5 只跌停。<span class="cite-ref">[5][6][8]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>个股层面：流入集中在设备龙头与消费权重，流出集中在光模块与算力硬件</h4>
+      <div class="flow-block flow-in">
+        <h5>主力净流入居前（亿元，新浪 Level2 TOP20）</h5>
+        <div class="flow-item"><span class="nm">北方华创（-1.20%，546.39 元）</span><span class="vl up-c">+5.14</span></div>
+        <div class="flow-item"><span class="nm">宁德时代（+1.18%，240.50 元）</span><span class="vl up-c">+4.91</span></div>
+        <div class="flow-item"><span class="nm">贵州茅台（+1.30%，1453.90 元）</span><span class="vl up-c">+4.70</span></div>
+      </div>
+      <div class="flow-block flow-out">
+        <h5>主力净流出居前（亿元，新浪 Level2 TOP20）</h5>
+        <div class="flow-item"><span class="nm">长鑫科技（-4.10%，38.34 元）</span><span class="vl down-c">-21.40</span></div>
+        <div class="flow-item"><span class="nm">中际旭创（-12.28%，408.97 元）</span><span class="vl down-c">-17.06</span></div>
+        <div class="flow-item"><span class="nm">东山精密（-10.00%，75.93 元）</span><span class="vl down-c">-14.65</span></div>
+        <div class="flow-item"><span class="nm">工业富联（-9.68%，36.22 元）</span><span class="vl down-c">-11.81</span></div>
+        <div class="flow-item"><span class="nm">兆易创新（-9.27%，223.22 元）</span><span class="vl down-c">-10.77</span></div>
+        <div class="flow-item"><span class="nm">新易盛（-11.08%，166.80 元）</span><span class="vl down-c">-9.64</span></div>
+        <div class="flow-item"><span class="nm">寒武纪（-8.27%，897.97 元）</span><span class="vl down-c">-7.16</span></div>
+        <div class="flow-item"><span class="nm">天孚通信（-11.83%，110.20 元）</span><span class="vl down-c">-7.00</span></div>
+      </div>
+      <p>TOP20 个股合计成交 1646 亿元，其中仅 3 只主力净流入。成交前五为中际旭创 235.39 亿、新易盛 156.07 亿、寒武纪 128.22 亿、东山精密 109.84 亿、长鑫科技 104.68 亿。CPO 概念内部，东山精密 -14.77 亿、工业富联 -12.50 亿、生益科技 -5.48 亿、华胜天成 -5.51 亿、协创数据 -3.65 亿；流入端共进股份 +4.44 亿、华丰科技 +1.05 亿、锐捷网络 +0.43 亿。<span class="cite-ref">[7][20][21]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>北向资金：净买卖额仍不披露，成交结构显示交易盘集中在算力硬件</h4>
+      <p><strong>净流入/流出、沪股通与深股通净买卖：暂无。</strong>自 2024 年 8 月 19 日起，北向资金取消单日实时净买入额披露，本报告沿用此前口径，不做估算。可确认的成交活跃度：沪深股通今日合计成交 <strong>2202.40 亿元</strong>，占两市成交 14.84%。<span class="cite-ref">[9]</span></p>
+      <p>十大成交股结构：沪股通成交前三为寒武纪（22.95 亿）、贵州茅台（16.04 亿）、药明康德（14.80 亿）；深股通成交前三为中际旭创（38.72 亿）、新易盛（25.86 亿）、宁德时代（18.21 亿）。外资交易盘的行业重心仍在算力硬件与消费权重，海外映射标的集中位于成交前列。<span class="cite-ref">[9]</span></p>
+    </div>
+
+    <div class="analysis-section detail-only">
+      <h4>跨市场对照：港股红盘、转债重挫，龙虎榜机构净卖出约 4.35 亿</h4>
+      <p>同日港股相对强硬：恒生指数 +0.49% 报 23753.84 点（+116.24），主板成交 1741.08 亿港元；国企指数 +0.55% 报 7981.54 点；恒生科技 -0.30% 报 3801.64 点。腾讯 +0.98% 收 390.4 港元，阿里-W -0.4% 收 90.15 港元，中芯国际 -5.0% 收 46.08 港元。南向资金净卖出 42.26 亿港元（财联社口径 42.27 亿），成交 690.52 亿；沪市 -13.33 亿、深市 -28.93 亿；盈富基金 -6.69 亿、阿里-W -6.46 亿，MINIMAX-W +4.60 亿。<span class="cite-ref">[10][11][12][24]</span></p>
+      <p>跨资产方面：中证转债指数 -3.23% 报 433.24 点，成交 788.97 亿元，跟随正股大幅走弱，惠城转债 -20.00%、华懋转债 -13.39%、睿创转债 -12.95%；国债期货主力集体收跌，30 年期 -0.79% 报 116.65、10 年期 -0.27% 报 109.755、5 年期 -0.10% 报 106.66、2 年期 -0.01% 报 102.632。公开市场方面，央行开展 4600 亿元隔夜逆回购（利率 1.25%），当日 3640 亿元到期，逆回购口径单日净投放 960 亿元；另有 2000 亿元 6 个月期买断式逆回购操作、当日 3000 亿元买断式到期，含买断式轧差的公开市场合计口径为净回笼 40 亿元。Shibor 隔夜 1.304%（+0.7bp）、7 天 1.39%（+0.9bp）；10 年期国债活跃券收益率 1.615%（+0.75bp，16:30 口径）。<span class="cite-ref">[13][14][15]</span></p>
+      <p>龙虎榜（21财经口径）：53 只个股因异动上榜，27 只净买入、26 只净卖出；29 只个股有机构身影，机构合计净卖出 4.35 亿元（10 股净买、19 股净卖）。机构净买前三为沪电股份 +2.68 亿、杰华特 +1.40 亿、襄阳轴承 +0.95 亿；机构净卖前三为杰普特 -4.10 亿、东山精密 -3.60 亿、冰山冷热 -0.83 亿。北向资金参与 24 只上榜个股、合计净买入 3.96 亿；麦格米特遭北向净卖出 1.00 亿。另一财媒口径为 36 只个股有机构身影（15 净买、21 净卖），两口径统计范围不同，并列注明。<span class="cite-ref">[16][17][27]</span></p>
+      <p>ETF 方面：尾盘 15 分钟三只宽基 ETF 显著放量，沪深300ETF 华泰柏瑞全天成交 81.01 亿（末 15 分 47.04 亿）、沪深300ETF 嘉实 34.45 亿（末 15 分 22.59 亿），科创50ETF 易方达临近收盘放量、收跌 5.26%。11-10 至 11-13 股票型 ETF 连续四个交易日净流出；9 月 28 日至 11 月 13 日累计净流入 5790.83 亿元。全市场 ETF 单日成交总额暂无权威值。<span class="cite-ref">[18]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 模块五：全天节奏 ===== -->
+  <div class="card" id="intraday">
+    <div class="card-title">五、全天节奏：低开低走午后下探，尾盘权重与 ETF 回勾收复 3600<span class="tag">分时还原</span></div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="time">盘前 · 外围偏弱</div>
+        <div class="desc">上周五美股收盘道指 +0.10%、纳指综指 -0.91%、标普500 -0.40%，英伟达 -2.01%、AMD -8.8%、博通 -4.8%；今日亚太开盘后日经225 -2.42%、韩国 KOSPI -3.59%，SK 海力士 -7.89%、三星电子 -4.47%。18:11 北京时间美股盘前纳指期货 -0.94%、标普期货 -0.33%、道指期货 +0.03%，存储、光通信、芯片股盘前普跌。<span class="cite-ref">[23][35][36]</span></div>
+      </div>
+      <div class="tl-item hot">
+        <div class="time">9:30 · 集体低开</div>
+        <div class="desc">五指数全线低开：上证 -0.63%、深成指 -0.79%、创业板 -1.26%、科创50 -1.97%、沪深300 -0.78%。AI 硬件相关方向开盘即承压，银行、煤炭等红利方向相对强势。<span class="cite-ref">[1][19]</span></div>
+      </div>
+      <div class="tl-item hot">
+        <div class="time">上午盘 · 低位震荡抛压释放</div>
+        <div class="desc">开盘后指数在低位区间震荡，CPO、PCB、存储等方向持续走弱，银行板块逆势走高。11:30 午评：沪指 3620.00（-0.39%）、深成指 10825.37（-1.31%）、创业板 2369.33（-2.34%）、科创50 1242.47（-2.91%）、北证50 853.88（-2.56%）；半日成交 9006 亿（另一口径 9066 亿），缩量 788 亿；1787 涨 / 3561 跌 / 228 平；42 只涨超 9%、36 只跌超 9%。<span class="cite-ref">[19][29]</span></div>
+      </div>
+      <div class="tl-item hot">
+        <div class="time">午后 · 延续下探，双创创年内新低</div>
+        <div class="desc">午后抛压未止，深成指、创业板盘中创年内新低；14:23 盘中口径电子板块净流出 180.23 亿元，长鑫科技 -19.36 亿居首；高位题材股批量跌停，跌超 9% 个股扩散至 250 多家。上证盘中最低 3586.57，一度击穿 3600 点整数关。<span class="cite-ref">[1][21][4]</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="time">尾盘 · 宽基放量、权重回勾，险守 3600</div>
+        <div class="desc">尾盘 15 分钟沪深300、科创50 等宽基 ETF 显著放量，银行、电力等权重股拉升，沪指收复 3600 点整数关，收 3602.57；但尾盘修复力度有限，五个指数均收在日内偏低区域，科创50 收跌 5.16%、创业板收跌 4.37%。<span class="cite-ref">[18][1]</span></div>
+      </div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>节奏定性：弱势探底为主，尾盘护盘属被动回勾</h4>
+      <p>全天路径为<strong>「低开 → 低位震荡 → 午后下探 → 尾盘权重/ETF 回勾」</strong>。午后下探阶段成长方向领跌，尾盘修复主要由宽基 ETF 放量与权重蓝筹拉升带动，并未带动个股广度明显改善——收盘仍有超 4300 只个股下跌。分指数看，主板凭借红利权重相对抗跌，双创与科创在午后下探段创出年内新低，尾盘回勾未能改变当日弱势结构。<span class="cite-ref">[1][4][18]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 模块六：策略研判 ===== -->
+  <div class="card" id="analysis">
+    <div class="card-title">六、策略研判：退潮探底期，红利防御占优，成长等待止跌信号<span class="tag">研究视角，不构成投资建议</span></div>
+
+    <div class="analysis-section">
+      <h4>1. 市场风格：价值显著占优，成长大幅跑输，大小盘分化延续</h4>
+      <p>今日风格断层明显：沪深300 -0.91%、上证 -0.87%，显著抗跌；创业板 -4.37%、科创50 -5.16% 大幅跑输。资金从高弹性、高估值的海外映射成长方向撤出，局部抱团低估值、高股息、低波动的价值权重。板块层面银行 +1.91%、煤炭 +1.89% 领涨，通信 -7.06%、电子 -5.99% 领跌；个股层面 21 只创新高新股集中在银行与交运。<strong>今日属于典型的「避险防御 + 高位成长出清」结构</strong>，而非全面系统性做多。<span class="cite-ref">[5][22][34]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>2. 技术形态：上证跌破 5 日线，双创破前低，关键支撑逐级下移</h4>
+      <p>上证 5 日均线（MA5）约 3647.42 点，今日收 3602.57，跌破 44.85 点；日线 KDJ 率先死叉，MACD 临近死叉。沪指前低 3574 点，今日最低 3586.57 点，距离前低仅 12.57 点。<span class="cite-ref">[1][4]</span></p>
+      <table class="idx-table" style="margin-top:10px">
+        <thead><tr><th>指数</th><th>上方压力位</th><th>下方支撑位</th></tr></thead>
+        <tbody>
+          <tr><td>上证指数</td><td>3611.54（今开）→ 3623.12（今高）→ 3634.35（昨收）</td><td>3586.57（今低）→ 3574（前低）</td></tr>
+          <tr><td>深证成指</td><td>10881.91（今开/今高）→ 10968.79（昨收）</td><td>10642.37（今低）</td></tr>
+          <tr><td>创业板指</td><td>2395.52（今开）→ 2426.08（昨收）</td><td>2308.90（今低）→ 2300 整数关</td></tr>
+          <tr><td>科创50</td><td>1254.48（今开）→ 1279.66（昨收）</td><td>1200.55（今低）→ 1200 整数关</td></tr>
+          <tr><td>沪深300</td><td>3984.77（今开）→ 4016.29（昨收）</td><td>3959.93（今低）→ 3950 附近</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px">关键位置均由今日开盘、最高、最低、昨收等已核验行情数据推导（自行计算或直接引用），不构成点位承诺。<span class="cite-ref">[1]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>3. 量价关系：缩量普跌，高位方向放量换手，承接力量不足</h4>
+      <p>沪深两市合计成交 14844.90 亿元，较昨日 16556.68 亿缩量 1711.78 亿（-10.34%，自行计算），成交跌破 1.5 万亿。普跌背景下成交收缩，说明买盘承接意愿偏弱；但流出集中在电子、通信、CPO 等前期高位方向，TOP20 成交前五仍被光模块、算力硬件占据，高位筹码在放量换手。红利权重方向则以相对缩量的方式获资金配置，尚未形成增量主攻的量能基础。<span class="cite-ref">[2][20]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>4. 情绪周期：退潮延续、弱势探底，局部晋级率回升未改高度压制</h4>
+      <p>对照三日情绪：涨停 37→37→32，跌停 5→34→60 余家，最高板 5→4→4，成交 1.93 万亿→1.66 万亿→1.48 万亿。今日封板率 67%、晋级率 42.86% 较昨日回升，但主要源于炸板减少与低位题材抱团，连板高度连续两日压在 4 板，中位梯队收缩，跌停与跌超 9% 个股扩散。<strong>情绪周期仍处退潮阶段，今日更接近退潮中的探底节点，尚未出现明确的冰点反转信号。</strong><span class="cite-ref">[2][4]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>5. 核心驱动因素与核心矛盾</h4>
+      <ul>
+        <li><strong>外部流动性与 AI 交易降温：</strong>美元指数站上 103，10 年期美债收益率 5.141%；海外 AI 链交易情绪收缩，英伟达盘前再跌近 2%，台积电被传拟按客户信用额度供应产能，引发 AI 循环融资疑虑；亚太半导体股大跌，A 股海外映射方向同步承压。<span class="cite-ref">[23][33][35]</span></li>
+        <li><strong>高位筹码集中出清：</strong>CPO、PCB、存储、先进封装、消费电子、半导体连续重挫，电子 + 通信主力合计流出约 289.37 亿，CPO 概念流出 184.49 亿；前期获利盘兑现与杠杆资金降仓叠加，放大了成长方向波动。<span class="cite-ref">[5][7]</span></li>
+        <li><strong>内部避险与政策局部托底：</strong>资金抱团银行、煤炭、交运、家电、食饮与高股息；10 月家电出口 +20.9% 提供基本面支撑；《"十五五"新型储能实施方案》落地带动固态电池局部活跃；央行逆回购口径净投放 960 亿，对冲月末资金面。<span class="cite-ref">[5][15][23]</span></li>
+        <li><strong>核心矛盾：</strong>一是<strong>缩量普跌与防御抱团并存</strong>——存量资金在红利与成长间再平衡，缺少增量主攻方向；二是<strong>海外链情绪冲击与国产产业趋势的拉锯</strong>——短期受外部风险偏好压制，中期产业逻辑未被否定；三是<strong>政策与流动性托底，与高位筹码出清尚未完成</strong>之间的矛盾。<span class="cite-ref">[15][23][33]</span></li>
+      </ul>
+    </div>
+
+    <div class="analysis-section">
+      <h4>6. 短期推演与关注方向（研究视角，不含具体个股建议）</h4>
+      <p><strong>基准情景（谨慎震荡）：</strong>指数在当前位置附近反复消化高位筹码，红利方向提供下方缓冲，成长方向等待缩量止跌；上证需观察 3574 前低与 3600 整数关得失，双创关注年内新低后的企稳结构。</p>
+      <p><strong>偏强情景（超跌反抽）：</strong>若海外风险偏好修复、AI 硬件链放量止跌，叠加宽基 ETF 持续净流入，超跌成长方向可能出现技术性反抽；反抽质量需由涨停广度、成交额回升与主力资金回流共同确认。</p>
+      <p><strong>偏弱情景（继续探底）：</strong>若外围继续走弱、量能进一步收缩且跌停扩散，上证前低 3574 面临考验，红利抱团也可能在流动性收紧后补跌。</p>
+      <ul>
+        <li>关注海外映射链（光通信、PCB、存储、半导体、消费电子）能否出现缩量止跌与资金回流信号；</li>
+        <li>关注红利防御方向的持续性与拥挤度，以及高位红利股的波动风险；</li>
+        <li>关注成交额能否重回 1.6 万亿上方，宽基 ETF 申赎与尾盘资金行为；</li>
+        <li>跟踪外围：美债利率、美元指数、英伟达及海外半导体走势、亚太科技股联动；</li>
+        <li>跟踪国内政策与产业催化：新型储能落地进度、家电出口链景气、AI 内容应用方向的题材延续性。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 模块七：风险提示 ===== -->
+  <div class="card" id="risk">
+    <div class="card-title">七、风险提示：情绪扩散、高位筹码出清与外部传导三重压力<span class="tag">客观列示，不作预判承诺</span></div>
+
+    <div class="analysis-section">
+      <h4>1. 情绪扩散风险</h4>
+      <p>跌停增至 60 余家（数据宝口径 68 家），跌超 9% 个股超 250 家；多只高位人气股 2 连跌停，部分个股尾盘炸板。若跌停家数继续扩大、连板高度进一步下移，短线情绪存在从局部退潮演变为普遍冰点的风险。<span class="cite-ref">[2][4]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>2. 高位筹码出清风险</h4>
+      <p>电子、通信主力合计净流出约 289.37 亿元，CPO 概念净流出 184.49 亿元，光模块、PCB、存储、先进封装方向多股跌超 10%。前期累计涨幅较大的海外映射标的，获利盘兑现与资金降仓可能尚未出清完毕，波动仍可能放大。<span class="cite-ref">[5][7][20]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>3. 外部传导风险</h4>
+      <p>美元指数站上 103，10 年期美债收益率 5.141%；亚太半导体股大跌，美股盘前科技期货走弱；台积电产能信用额度传闻与英伟达相关预期变化，可能继续通过海外映射链条影响 A 股科技方向。海外流动性与风险偏好的反复是近期主要外部变量。<span class="cite-ref">[23][33][35]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>4. 量能与承接风险</h4>
+      <p>两市成交 1.48 万亿元，环比缩量 10.34%，普跌背景下买盘承接偏弱；若后续量能继续收缩，指数与个股的反弹力度可能受限。尾盘宽基 ETF 放量护盘能否延续，需观察后续申赎与成交持续性。<span class="cite-ref">[2][18]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>5. 跨市场联动风险</h4>
+      <p>中证转债 -3.23% 跟随正股重挫，国债期货主力全线收跌，有色、贵金属等资源品走弱。股、债、转债与商品的同步弱势，反映风险偏好整体回落；防御方向若出现拥挤，也存在阶段性补跌的可能。<span class="cite-ref">[13][14][6]</span></p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>6. 题材兑现与政策落地节奏风险</h4>
+      <p>新型储能、AI 漫剧等政策或事件驱动方向局部活跃，存在题材一日游与高位分歧加大的风险；家电出口链的景气数据需后续月度数据持续验证。政策催化与基本面兑现之间的节奏差，可能带来相关题材的波动。<span class="cite-ref">[4][23]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 数据口径说明 ===== -->
+  <div class="card detail-only" id="caliber">
+    <div class="card-title">附：数据口径与分歧说明</div>
+    <div class="src-note">
+      <p>1. <strong>涨跌家数：</strong>证券时报·数据宝口径为 1136 涨 / 4344 跌 / 99 平；21财经口径为 1109 涨 / 4019 跌。两口径统计范围与样本时点略有差异，本报告正文进度条采用数据宝口径。<span class="cite-ref">[2][3]</span></p>
+      <p>2. <strong>涨停 / 跌停：</strong>财联社口径 32 股涨停、60 多家跌停；数据宝口径 33 股涨停、68 股跌停。本报告情绪卡片主用财联社口径，并列注明数据宝口径。<span class="cite-ref">[2][4]</span></p>
+      <p>3. <strong>成交额：</strong>沪深两市合计 14844.90 亿元（Wind，沪市 7062.14 亿 + 深市 7782.76 亿）；另一含北交所的全市场口径约 14942 亿元。<span class="cite-ref">[1][2]</span></p>
+      <p>4. <strong>南向资金：</strong>净卖出 42.26 亿港元（数据宝），财联社口径 42.27 亿港元，差异为四舍五入。<span class="cite-ref">[10]</span></p>
+      <p>5. <strong>公开市场操作：</strong>逆回购口径单日净投放 960 亿元；含 6 个月期买断式逆回购轧差后，公开市场合计口径为净回笼 40 亿元。<span class="cite-ref">[15]</span></p>
+      <p>6. <strong>龙虎榜机构：</strong>一财/36氪口径 36 只个股有机构身影（15 净买、21 净卖）；21财经口径 29 只个股有机构身影、机构合计净卖出 4.35 亿元（10 净买、19 净卖）。两口径上榜范围不同，并列注明。<span class="cite-ref">[16][17]</span></p>
+      <p>7. <strong>口径不可混用：</strong>CPO 概念资金流（-184.49 亿，概念成分股口径）与电子、通信行业资金流（申万一级行业口径）分属不同统计体系，不直接相加；正文合计仅为电子 + 通信两个申万行业。<span class="cite-ref">[5][7]</span></p>
+      <p>8. <strong>北向资金：</strong>自 2024-08-19 起取消单日实时净买入额披露，本报告仅列示成交总额与十大成交结构，净买卖额标注「暂无」，不做估算。<span class="cite-ref">[9]</span></p>
+      <p>9. <strong>10 年期国债收益率：</strong>1.615% 为 16:30 财联社盘中活跃券口径，与收盘后估值口径可能存在时点差异。<span class="cite-ref">[14]</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 信息来源 ===== -->
+  <div class="card" id="sources">
+    <div class="card-title">信息来源</div>
+    <div class="src-note">
+      <p>[1] Wind 万得行情终端：五大指数收盘点位、开高低、成交额、换手率、总市值、PE TTM（2026-11-16 15:00 收盘口径）。</p>
+      <p>[2] 新浪财经收评汇总（证券时报·数据宝）：涨跌家数、涨停跌停、两市成交额与缩量幅度。<a href="https://cj.sina.com.cn/articles/view/7857201856/1d45362c001908v1wc?froms=ttmp">链接</a></p>
+      <p>[3] 21财经盘面雷达：涨跌家数交叉口径。<a href="http://finance.sina.com.cn/wm/2026-11-16/doc-iniyxirf6004066.shtml">链接</a></p>
+      <p>[4] 财联社焦点复盘：涨停炸板、封板率、晋级率、连板梯队、高位退潮个股、关键技术位。<a href="http://m.163.com/dy/article/LBSHHKQL05198CJN.html">链接</a></p>
+      <p>[5] 证券时报·数据宝：申万一级行业涨跌幅与主力资金流向日报。<a href="https://www.stcn.com/article/detail/4338581.html">链接</a></p>
+      <p>[6] 证券时报·数据宝：有色金属行业资金流出榜。<a href="https://www.stcn.com/article/detail/4338582.html">链接</a></p>
+      <p>[7] 证券时报·数据宝：CPO 概念主力资金榜与成分股流向。<a href="http://m.toutiao.com/group/7708690739344998953/">链接</a></p>
+      <p>[8] 证券时报·数据宝：通信行业资金流出榜。<a href="http://m.toutiao.com/group/7708698486077735424/">链接</a></p>
+      <p>[9] 东方财富 Choice：沪深股通十大成交股与成交占比。<a href="https://finance.eastmoney.com/a/202611163931875538.html">链接</a></p>
+      <p>[10] 凤凰网财经 / 数据宝：南向资金净卖出与成交。<a href="https://finance.ifeng.com/c/8y6TjB1fUVp?ch=ttsearch">链接</a></p>
+      <p>[11] 新华社 / 凤凰网：港股收盘指数与成交。<a href="https://news.ifeng.com/c/8y6S3zEhaYK">链接</a></p>
+      <p>[12] KGI 凯基：港股蓝筹成交与个股表现。<a href="https://www.kgi.com.hk/en/market-news-and-analysis/market-news/market-news-feed?id=6095741&iid=6c7889a28a4d4e238aae64f447146057&type=scnews">链接</a></p>
+      <p>[13] 新华财经：债市日报与国债期货收盘。<a href="http://m.toutiao.com/group/7708677623030891049/">链接</a></p>
+      <p>[14] 财联社：债市收盘与转债表现、10 年国债活跃券收益率。<a href="http://m.163.com/dy/article/LBSH5T4J05198CJN.html">链接</a></p>
+      <p>[15] 东方财富全球快讯：公开市场逆回购与买断式操作、外汇存准率。<a href="https://kuaixun.eastmoney.com/qqyh_zgyh.html">链接</a></p>
+      <p>[16] 36氪 / 第一财经：龙虎榜机构席位口径。<a href="https://36kr.com/newsflashes/4072258735690883">链接</a></p>
+      <p>[17] 21财经：龙虎榜上榜家数、机构与北向资金净额。<a href="http://m.toutiao.com/group/7708710393094357514/">链接</a></p>
+      <p>[18] 上海证券报：尾盘宽基 ETF 放量与成交数据。<a href="http://m.toutiao.com/group/7708687013293097487/">链接</a></p>
+      <p>[19] 澎湃 / 第一财经 / 每日经济新闻 / 36氪：午评汇总与半日成交、涨跌家数。<a href="https://cj.sina.com.cn/articles/view/7857201856/1d45362c001908v0xg">链接</a></p>
+      <p>[20] 新浪财经红岸：个股主力资金 TOP20 与成交额。<a href="https://finance.sina.com.cn/stock/aiassist/zjzd/2026-11-16/doc-iniyxirc2388966.shtml.md">链接</a></p>
+      <p>[21] 财联社盘中资金监控：14:23 电子板块净流出与个股流向。<a href="http://m.toutiao.com/group/7708651052303712778/">链接</a></p>
+      <p>[22] 证券时报·数据宝：盘中创历史新高个股名单。<a href="https://finance.ifeng.com/c/8y6TjB1fUVq">链接</a></p>
+      <p>[23] 每日经济新闻牛眼：银行 / 家电 / CPO / 亚太股市 / 台积电 / 猪肉与机构观点汇总。<a href="http://m.toutiao.com/group/7708664552962916927/">链接</a></p>
+      <p>[24] 财联社：南向资金个股成交与加减仓方向。<a href="http://m.163.com/dy/article/LBSHHI1O05198CJN.html">链接</a></p>
+      <p>[25] 证券时报·数据宝：文投控股龙虎榜。<a href="http://m.toutiao.com/group/7708708732972040719/">链接</a></p>
+      <p>[26] 证券时报·数据宝：共进股份龙虎榜。<a href="http://m.toutiao.com/group/7708708720980574755/">链接</a></p>
+      <p>[27] 证券之星：麦格米特龙虎榜机构与北向席位。<a href="http://m.toutiao.com/group/7708709543731085887/">链接</a></p>
+      <p>[28] 36氪：CPO 概念盘中走弱快讯。<a href="https://36kr.com/newsflashes/4071999910483078">链接</a></p>
+      <p>[29] 36氪：午间休盘指数与涨跌家数。<a href="https://36kr.com/newsflashes/4071882611381124">链接</a></p>
+      <p>[30] 新浪财经 / 第一财经：收盘 CPO 领跌与板块表现。<a href="https://k.sina.com.cn/article_1733360754_6750fc7202001lftc.html">链接</a></p>
+      <p>[31] 同花顺：上证指数日 K 行情交叉核验。<a href="https://aka.doubaocdn.com/l/XGEgVS0FrR">链接</a></p>
+      <p>[32] 同花顺：科创50 日 K 行情交叉核验。<a href="https://aka.doubaocdn.com/l/8DQB2EPa8I">链接</a></p>
+      <p>[33] 澎湃新闻 / 搜狐：AI 交易降温、资金转向传统资产、美元指数走势。<a href="https://m.sohu.com/a/1102323657_260616/">链接</a></p>
+      <p>[34] 界面新闻 / 网易：银行板块批量新高、中信证券与中信建投配置观点。<a href="http://m.163.com/dy/article/LBSHN5160534A4SC.html">链接</a></p>
+      <p>[35] 每日经济新闻：11-16 美股盘前期指、英伟达与大宗商品。<a href="http://m.toutiao.com/group/7708709965548913152/">链接</a></p>
+      <p>[36] 同花顺美股指数日 K：11-13 道指、纳指综指、标普500 收盘点位（工具返回，无外部链接）。</p>
+    </div>
+
+    <div class="analysis-section">
+      <h4>免责声明</h4>
+      <p>以上内容为AI自动生成或AI辅助生成，仅用于信息整理、投研辅助、教育交流或一般性分析参考，不构成对任何金融产品、交易策略或投资行为的推荐、邀约、承诺或保证，也不构成投资、法律、税务、会计等专业意见。</p>
+      <p>以上内容可能基于公开信息、历史数据或用户提供材料进行总结、归纳、推演与情景分析，但相关内容可能存在时效性不足、信息缺漏、事实误差、模型偏差或生成性错误，历史数据、历史业绩、回测结果及情景假设均不代表未来表现。</p>
+      <p>用户应基于自身风险承受能力、投资目标、财务状况及适用法律法规独立作出判断，必要时咨询持牌专业机构或顾问。任何因依赖以上内容而作出的决策及其后果，由用户自行承担。</p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="risk">本文仅为行情复盘参考，不构成任何投资建议。股市有风险，投资需谨慎。</div>
+  <div>A股大盘全景复盘 · 2026年11月16日（周一）</div>
+  <div>数据截至当日 15:00 收盘 · 共引用 36 项公开信源</div>
+</footer>
+
+<script>
+function toggleMode(){
+  var b=document.body,btn=document.getElementById('modeBtn');
+  b.classList.toggle('concise');
+  btn.textContent = b.classList.contains('concise') ? '详细模式' : '精简模式';
+}
+</script>
+</body>
+</html>
